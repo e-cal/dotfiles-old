@@ -1,0 +1,7 @@
+
+xmonad.hs:3:5: warning: [-Wtabs]
+    Tab character found here, and in six further locations.
+    Please use spaces instead.
+  |
+3 | main    = xmonad def
+  |     ^^^^
