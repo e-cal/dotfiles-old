@@ -17,6 +17,9 @@ import qualified Data.Map        as M
 -- Terminal
 myTerminal = "alacritty"
 
+-- Editor
+myEditor = "nvim"
+
 -- Modkey
 -- mod1Mask: left alt
 -- mod3Mask: right alt
