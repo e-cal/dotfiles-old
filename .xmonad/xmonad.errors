@@ -1,0 +1,7 @@
+
+xmonad.hs:35:21: warning: [-Wtabs]
+    Tab character found here, and in four further locations.
+    Please use spaces instead.
+   |
+35 | myModMask = mod4Mask    -- Windows key
+   |                     ^^^^

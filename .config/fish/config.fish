@@ -13,6 +13,13 @@ function fish_user_key_bindings
   fish_vi_key_bindings
 end
 
+# Cursor
+# not supported in alacritty
+set fish_cursor_default block blink
+set fish_cursor_insert line blink
+set fish_cursor_replace_one underscore blink
+set fish_cursor_visual block
+
 # Autocomplete and Highlight Colors
 set fish_color_normal brcyan
 set fish_color_autosuggestion '#7d7d7d'

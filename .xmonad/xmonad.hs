@@ -1,37 +1,63 @@
---  ______     ______     ______     __         
--- /\  ___\   /\  ___\   /\  __ \   /\ \        
--- \ \  __\   \ \ \____  \ \  __ \  \ \ \____   
---  \ \_____\  \ \_____\  \ \_\ \_\  \ \_____\  
---   \/_____/   \/_____/   \/_/\/_/   \/_____/ 
+-- =========================================== --
+--  ______     ______     ______     __        --  
+-- /\  ___\   /\  ___\   /\  __ \   /\ \       --  
+-- \ \  __\   \ \ \____  \ \  __ \  \ \ \____  -- 
+--  \ \_____\  \ \_____\  \ \_\ \_\  \ \_____\ --  
+--   \/_____/   \/_____/   \/_/\/_/   \/_____/ --
+--					       --
+-- =========================================== --
 
--- Imports
+    --- Imports ---
+
+  -- Base
 import XMonad
-import Data.Monoid
 import System.Exit
-import XMonad.Util.SpawnOnce
+import qualified XMonad.StackSet as W
+
+  -- Data
+import Data.Monoid
+import qualified Data.Map as M
+
+  -- Hooks
 import XMonad.Hooks.FadeInactive
 
-import qualified XMonad.StackSet as W
-import qualified Data.Map        as M
+  -- Layouts
+import XMonad.Layout.Spacing
 
--- Terminal
-myTerminal = "alacritty"
+  -- Utils
+import XMonad.Util.EZConfig (additionalKeysP)
+import XMonad.Util.SpawnOnce
 
--- Editor
+    --- Variables ---
+
+  -- Modkey
+myModMask :: KeyMask
+myModMask = mod4Mask	-- Windows key
+
+  -- Alt Mask
+altMask :: KeyMask
+altMask = mod1Mask
+
+  -- Terminal
+myTerminal :: String
+myTerminal = "alacritty"	-- Only works if fish is installed
+
+  -- Editor
+myEditor :: String
 myEditor = "nvim"
 
--- Modkey
--- mod1Mask: left alt
--- mod3Mask: right alt
--- mod4Mask: windows key
-myModMask = mod4Mask
+  -- Border
+myBorderWidth :: Dimension
+myBorderWidth = 2
+
+myFocusedBorderColor :: String
+myFocusedBorderColor = "#4ec9b0" -- turquoise
+
+myNormalBorderColor :: String
+myNormalBorderColor = "#dddddd" -- grey
 
 -- Workspaces
 myWorkspaces = ["main","alt1","alt2"]
-
--- Borders
-myFocusedBorderColor = "#4ec9b0" -- turquoise
-myNormalBorderColor  = "#dddddd" -- grey
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
@@ -40,9 +66,6 @@ myFocusFollowsMouse = False
 -- Whether clicking on a window to focus also passes the click to the window
 myClickJustFocuses :: Bool
 myClickJustFocuses = False
-
--- Width of the window border (px)
-myBorderWidth   = 2
 
 -- Opacity
 myLogHook :: X ()
@@ -123,7 +146,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_r     ), spawn "xmonad --recompile; xmonad --restart")
 
     -- Run xmessage with a summary of the default keybindings (useful for beginners)
-    , ((modm .|. shiftMask, xK_slash ), spawn ("echo \"" ++ help ++ "\" | xmessage -file -"))
+--    , ((modm .|. shiftMask, xK_slash ), spawn ("echo \"" ++ help ++ "\" | xmessage -file -"))
     ]
 
     --
@@ -176,7 +199,10 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 myLayout = tiled ||| Mirror tiled ||| Full
   where
      -- default tiling algorithm partitions the screen into two panes
-     tiled   = Tall nmaster delta ratio
+     tiled   = 
+     	--gaps [(U,10), (D,10), (L,10), (R,10)] $ 
+     	spacingRaw True (Border 5 5 5 5) True (Border 5 5 5 5) True$
+     	Tall nmaster delta ratio
 
      -- The default number of windows in the master pane
      nmaster = 1
@@ -263,6 +289,3 @@ defaults = def {
         startupHook        = myStartupHook
     }
 
--- | Finally, a copy of the default bindings in simple textual tabular format.
-help :: String
-help = "No help for you"
