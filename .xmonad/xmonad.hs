@@ -80,10 +80,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [ ((modm, xK_Return), spawn $ XMonad.terminal conf)
 
     -- dmenu
-    , ((modm, xK_space), spawn "dmenu_run")
+    , ((modm, xK_r), spawn "dmenu_run")
 
     -- chromium
-    , ((modm, xK_slash), spawn "chromium")
+    , ((modm, xK_c), spawn "chromium")
 
     -- close focused window
     , ((modm, xK_q), kill)

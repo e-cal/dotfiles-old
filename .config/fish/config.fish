@@ -27,26 +27,18 @@ set fish_color_command brcyan
 set fish_color_error '#ff6c6b'
 set fish_color_param brcyan
 
-# !! and !$
-function __history_previous_command
-  switch (commandline -t)
-  case "!"
-    commandline -t $history[1]; commandline -f repaint
-  case "*"
-    commandline -i !
-  end
-end
+# Aliases
+alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
+alias cdiv="yes 9999 | head -n (tput cols) | spark"
+alias clear="clear; echo; echo; cdiv; cdiv; cdiv; echo; echo"
+alias vim=nvim
+alias bs="br --sizes"
+alias la="exa -la --color=always --group-directories-first"
+alias battery="acpi"
+alias battery-stat="sudo tlp-stat"
+alias temp="sudo tlp-stat | grep 'Temperatures' -A 3"
 
-function __history_previous_command_arguments
-  switch (commandline -t)
-  case "!"
-    commandline -t ""
-    commandline -f history-token-search-backward
-  case "*"
-    commandline -i '$'
-  end
-end
-# Bindings for !! and !$
+# Key Bindings for !! and !$
 if [ $fish_key_bindings = fish_vi_key_bindings ];
   bind -Minsert ! __history_previous_command
   bind -Minsert '$' __history_previous_command_arguments
@@ -54,11 +46,3 @@ else
   bind ! __history_previous_command
   bind '$' __history_previous_command_arguments
 end
-
-# Aliases
-alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
-alias cdiv="yes 9999 | head -n (tput cols) | spark | lolcat"
-alias clear="clear; echo; echo; cdiv; cdiv; cdiv; echo; echo"
-alias vim=nvim
-alias bs="br --sizes"
-alias la="exa -la --color=always --group-directories-first"
