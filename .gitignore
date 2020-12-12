@@ -1,0 +1,33 @@
+#	_________ _______  _        _______  _______  _______ 
+#	\__   __/(  ____ \( (    /|(  ___  )(  ____ )(  ____ \
+#	   ) (   | (    \/|  \  ( || (   ) || (    )|| (    \/
+#	   | |   | |      |   \ | || |   | || (____)|| (__    
+#	   | |   | | ____ | (\ \) || |   | ||     __)|  __)   
+#	   | |   | | \_  )| | \   || |   | || (\ (   | (      
+#	___) (___| (___) || )  \  || (___) || ) \ \__| (____/\
+#	\_______/(_______)|/    )_)(_______)|/   \__/(_______/
+#
+# https://www.atlassian.com/git/tutorials/saving-changes/gitignore
+#
+
+# Home Directory
+.local
+.cfg
+README.md
+.cache
+.pki
+Downloads
+yay-git
+.bash_history
+.bash_logout
+.git-credentials
+.gitconfig
+
+# .config/
+.config/broot
+.config/chromium
+.config/dconf
+.config/nitrogen/
+
+# Exceptions
+
