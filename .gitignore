@@ -13,7 +13,6 @@
 # Home Directory
 .local
 .cfg
-README.md
 .cache
 .pki
 Downloads

@@ -34,8 +34,8 @@ alias clear="clear; echo; echo; cdiv; cdiv; cdiv; echo; echo"
 alias vim=nvim
 alias bs="br --sizes"
 alias la="exa -la --color=always --group-directories-first"
-alias battery="acpi"
-alias battery-stat="sudo tlp-stat"
+alias bat="acpi"
+alias bat-stat="sudo tlp-stat"
 alias temp="sudo tlp-stat | grep 'Temperatures' -A 3"
 
 # Key Bindings for !! and !$

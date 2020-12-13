@@ -82,8 +82,11 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- dmenu
     , ((modm, xK_r), spawn "dmenu_run")
 
-    -- chromium
-    , ((modm, xK_c), spawn "chromium")
+    -- chromium ethan_callanan
+    , ((modm, xK_c), spawn "chromium --profile-directory='Default'")
+
+    -- chromium eaten
+    , ((modm .|. shiftMask , xK_c), spawn "chromium --profile-directory='Profile 1'")
 
     -- close focused window
     , ((modm, xK_q), kill)
