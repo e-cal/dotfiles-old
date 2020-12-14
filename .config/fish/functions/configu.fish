@@ -3,6 +3,6 @@ function configu
 	config add -A
 	config commit -m "$argv"
 	and config push
-	and echo "config repo updated" | cowsay -f meeseeks
+	and echo "config repo updated" | cowsay -f bobross
 	or echo "config repo not changed. aborting..."
 end
