@@ -22,11 +22,17 @@ yay-git
 .git-credentials
 .gitconfig
 
-# .config/
+# Irrelevant Configs
 .config/broot
 .config/chromium
 .config/dconf
 .config/nitrogen/
+.config/pulse
+.config/pavucontrol.ini
+.config/Slack
+
+# Directories
+code/
 
 # Exceptions
 

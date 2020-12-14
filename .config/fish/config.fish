@@ -6,6 +6,8 @@ echo "brrrrrrrrr" | cowthink -f kirby # Kirby go brrr
 set fish_greeting # Disable default welcome message
 set -Ux EDITOR /usr/bin/nvim
 set -Ux VISUAL /usr/bin/nvim
+set -Ux LC_ALL en_US.UTF-8
+set -Ux LC_CTYPE en_US.UTF-8
 
 # Shell Mode
 function fish_user_key_bindings

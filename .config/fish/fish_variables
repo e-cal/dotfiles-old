@@ -1,6 +1,9 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
 SETUVAR --export EDITOR:/usr/bin/nvim
+SETUVAR --export LC_ALL:en_US\x2eUTF\x2d8
+SETUVAR --export LC_CTYPE:en_US\x2eUTF\x2d8
+SETUVAR --export VIRTUALFISH_HOME:/home/ecal/python/\x2evirtualenvs
 SETUVAR --export VISUAL:/usr/bin/nvim
 SETUVAR __fish_initialized:3100
 SETUVAR _fish_abbr_br:br\x20\x2dhp
