@@ -4,7 +4,7 @@
 -- \ \  __\   \ \ \____  \ \  __ \  \ \ \____  -- 
 --  \ \_____\  \ \_____\  \ \_\ \_\  \ \_____\ --  
 --   \/_____/   \/_____/   \/_/\/_/   \/_____/ --
---					       --
+--																			       --
 -- =========================================== --
 
 
@@ -17,6 +17,7 @@ import qualified XMonad.StackSet as W
 
     -- Actions
 import XMonad.Actions.WithAll (killAll)
+import XMonad.Actions.WindowNavigation
 import qualified XMonad.Actions.Search as S
 
     -- Data
@@ -27,9 +28,13 @@ import qualified Data.Map as M
 import XMonad.Hooks.FadeInactive
 
     -- Layouts
+import XMonad.Layout.Spiral
 import XMonad.Layout.Spacing
 import XMonad.Layout.NoBorders
 import XMonad.Layout.WindowArranger
+import XMonad.Layout.ResizableTile
+import XMonad.Layout.LayoutModifier
+import XMonad.Layout.Renamed
 
     -- Utils
 import XMonad.Util.EZConfig (additionalKeysP)
@@ -91,7 +96,7 @@ myKeys :: [(String, X ())]
 myKeys = [
     -- Launch Programs
     ("M-<Return>", spawn myTerminal), -- Terminal
-    ("M-r", spawn "dmenu_run"), -- Run Prompt
+    ("M-r", spawn "rofi -show run"), -- Run Prompt
     ("M-c", spawn "chromium --profile-directory='Default'"), -- Chromium (main)
     ("M-S-c", spawn "chromium --profile-directory='Profile 1'"), -- Chromium (alt)
 
@@ -101,34 +106,40 @@ myKeys = [
 
     -- Layout
     ("M-<Tab>", sendMessage NextLayout), -- Next Layout
-    ("M-C-<Up>", sendMessage Arrange),
-    ("M-C-<Down>", sendMessage DeArrange),
-    ("M-<Up>", sendMessage (MoveUp 5)),
-    ("M-<Down>", sendMessage (MoveDown 5)),
-    ("M-<Left>", sendMessage (MoveLeft 5)),
-    ("M-<Right>", sendMessage (MoveRight 5)),
-    ("M-S-<Up>", sendMessage (IncreaseUp 5)),
-    ("M-S-<Down>", sendMessage (IncreaseDown 5)),
-    ("M-S-<Left>", sendMessage (IncreaseLeft 5)),
-    ("M-S-<Right>", sendMessage (IncreaseRight 5)),
-    ("M-M1-<Up>", sendMessage (DecreaseUp 5)),
-    ("M-M1-<Down>", sendMessage (DecreaseDown 5)),
-    ("M-M1-<Left>", sendMessage (DecreaseLeft 5)),
-    ("M-M1-<Right>", sendMessage (DecreaseRight 5)),
+    ("M-C-<Down>", sendMessage DeArrange), -- Tile Mode
+    ("M-S-h", sendMessage Shrink), -- Shrink horizontal
+    ("M-S-l", sendMessage Expand), -- Expand horizontal
+    ("M-S-j", sendMessage MirrorShrink), -- Shrink vertical
+    ("M-S-k", sendMessage MirrorExpand), -- Expand vertical
+
+
+    -- Floating Layout
+    ("M-C-<Up>", sendMessage Arrange), -- Floating Mode
+    ("M-<Up>", sendMessage (MoveUp 10)),
+    ("M-<Down>", sendMessage (MoveDown 10)),
+    ("M-<Left>", sendMessage (MoveLeft 10)),
+    ("M-<Right>", sendMessage (MoveRight 10)),
+    ("M-S-<Up>", sendMessage (IncreaseUp 10)),
+    ("M-S-<Down>", sendMessage (DecreaseDown 10)),
+    ("M-S-<Left>", sendMessage (IncreaseLeft 10)),
+    ("M-S-<Right>", sendMessage (DecreaseRight 10)),
+    ("M-M1-<Up>", sendMessage (DecreaseUp 10)),
+    ("M-M1-<Down>", sendMessage (IncreaseDown 10)),
+    ("M-M1-<Left>", sendMessage (DecreaseLeft 10)),
+    ("M-M1-<Right>", sendMessage (IncreaseRight 10)),
 
     -- Focus
     ("M-m", windows W.focusMaster), -- Focus master window
-    ("M-j", windows W.focusDown), -- Move focus down
-    ("M-k", windows W.focusUp), -- Move focus up
-    ("M-S-m", windows W.swapMaster), -- Swap focused with master
-    ("M-S-j", windows W.swapDown), -- Swap focused down
-    ("M-S-k", windows W.swapUp), -- Swap focused up
+    ("M-C-m", windows W.swapMaster), -- Swap focused with master
+    -- ("M-k", sendMessage $ Go U), -- Move focus up
+    -- ("M-j", sendMessage $ Go D), -- Move focus down
+    -- ("M-l", sendMessage $ Go R), -- Move focus right
+    -- ("M-h", sendMessage $ Go L), -- Move focus left
+    -- ("M-C-k", sendMessage $ Swap U), -- Swap focused up
+    -- ("M-C-j", sendMessage $ Swap D), -- Swap focused down
+    -- ("M-C-l", sendMessage $ Swap R), -- Swap focused right
+    -- ("M-C-h", sendMessage $ Swap L), -- Swap focused left
 
-    -- Shrink the master area
-    ("M-h", sendMessage Shrink),
-
-    -- Expand the master area
-    ("M-l", sendMessage Expand),
 
     -- Push window back into tiling
     ("M-t", withFocused $ windows . W.sink),
@@ -141,10 +152,31 @@ myKeys = [
 
     -- XMonad
     ("M-S-<Escape>", io (exitWith ExitSuccess)), -- Quit
-    ("M-S-r", spawn "xmonad --recompile; xmonad --restart") -- Restart
+    ("M-S-r", spawn "xmonad --recompile; xmonad --restart"), -- Restart
 
+		-- Function Keys
+		("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ +2%"),
+    ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@  -2%"),
+    ("<XF86AudioMute>", spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle"),
+
+    ("<XF86AudioPlay>", spawn "playerctl play-pause"),
+    ("<XF86AudioPrev>", spawn "playerctl previous"),
+    ("<XF86AudioNext>", spawn "playerctl next"),
+
+    ("<XF86MonBrightnessUp>", spawn "xbacklight -inc 5"),
+    ("<XF86MonBrightnessDown>", spawn "xbacklight -dec 5")
     ]
 
+myWindowNavigation = withWindowNavigationKeys ([
+												((myModMask, xK_k), WNGo U),
+												((myModMask, xK_j), WNGo D),
+												((myModMask, xK_h), WNGo L),
+												((myModMask, xK_l), WNGo R),
+												((myModMask .|. controlMask, xK_k), WNSwap U),
+												((myModMask .|. controlMask, xK_j), WNSwap D),
+												((myModMask .|. controlMask, xK_h), WNSwap L),
+												((myModMask .|. controlMask, xK_l), WNSwap R)
+										])
 
 -- =================== Mouse Bindings =================== --
 
@@ -166,32 +198,25 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 
 
 -- =================== Layouts =================== --
+mySpacing :: Integer -> l a -> XMonad.Layout.LayoutModifier.ModifiedLayout Spacing l a
+mySpacing i = spacingRaw True (Border i i i i) True (Border i i i i) True
 
--- You can specify and transform your layouts by modifying these values.
--- If you change layout bindings be sure to use 'mod-shift-space' after
--- restarting (with 'mod-q') to reset your layout state to the new
--- defaults, as xmonad preserves your old layout settings by default.
---
--- The available layouts.  Note that each layout is separated by |||,
--- which denotes layout choice.
+tall		= renamed [Replace "tall"]
+						$ smartBorders
+						$ mySpacing 5
+						$ ResizableTall 1 (3/100) (1/2) [] -- Numbers: windows in master, increment on resize, proportion for master
+spirals	= renamed [Replace "spirals"]
+						$ smartBorders
+						$ mySpacing 5
+						$ spiral (6/7)
+full		= renamed [Replace "full"]
+						$ noBorders Full
 
-myLayout = smartBorders tiled ||| Mirror tiled ||| noBorders Full
-  where
-     -- default tiling algorithm partitions the screen into two panes
-     tiled   = 
-     	--gaps [(U,10), (D,10), (L,10), (R,10)] $ 
-     	spacingRaw True (Border 5 5 5 5) True (Border 5 5 5 5) True$
-     	Tall nmaster delta ratio 
-
-     -- The default number of windows in the master pane
-     nmaster = 1
-
-     -- Default proportion of screen occupied by master pane
-     ratio   = 1/2
-
-     -- Percent of screen to increment by when resizing panes
-     delta   = 3/100
-
+myLayoutHook = windowArrange myLayout
+								where
+										myLayout =			tall
+																|||	spirals
+																|||	full
 
 -- =================== Window Rules =================== --
 
@@ -237,15 +262,13 @@ myStartupHook = return ()
 
 -- =================== Startup =================== --
 
-main = xmonad defaults
--- Launch with xmobar
--- main = do
--- 	xmproc <- spawnPipe "xmobar -x 0 /home/ecal/.config/xmobar/xmobarrc"
--- 	xmonad defaults
 
--- Options for main
+main = do
+		config <- myWindowNavigation
+				$ defaults
+		xmonad config
+
 defaults = def {
-      -- simple stuff
         terminal           = myTerminal,
         focusFollowsMouse  = False,
         clickJustFocuses   = False,
@@ -254,13 +277,8 @@ defaults = def {
         workspaces         = myWorkspaces,
         normalBorderColor  = myNormalBorderColor,
         focusedBorderColor = myFocusedBorderColor,
-
-      -- key bindings
-        --keys               = myKeys,
         mouseBindings      = myMouseBindings,
-
-      -- hooks, layouts
-        layoutHook         = windowArrange myLayout,
+        layoutHook         = myLayoutHook,
         manageHook         = myManageHook,
         handleEventHook    = myEventHook,
         logHook            = myLogHook,
