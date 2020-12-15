@@ -1,0 +1,95 @@
+format = """
+$battery\
+$time\
+$hg_branch\
+$docker_context\
+$package\
+$cmake\
+$dart\
+$dotnet\
+$elixir\
+$elm\
+$erlang\
+$golang\
+$helm\
+$java\
+$julia\
+$nim\
+$nodejs\
+$ocaml\
+$perl\
+$php\
+$purescript\
+$python\
+$ruby\
+$rust\
+$swift\
+$terraform\
+$zig\
+$nix_shell\
+$conda\
+$memory_usage\
+$aws\
+$gcloud\
+$openstack\
+$env_var\
+$crystal\
+$custom\
+$cmd_duration\
+$line_break\
+$lua\
+$jobs\
+$username\
+$hostname\
+$shlvl\
+$kubernetes\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+$status\
+$character"""
+
+
+[character]
+success_symbol = "[](bold green)"
+vicmd_symbol = "[](bold yellow)"
+error_symbol = "[](bold red)"
+
+[battery]
+full_symbol = "🔋"
+charging_symbol = "⚡"
+discharging_symbol = "🔋"
+
+
+[[battery.display]]
+threshold = 20
+style = "bold red"
+
+
+[[battery.display]]
+threshold = 100
+style = "green"
+
+[cmd_duration]
+min_time = 10_000
+format = " took [$duration]($style)"
+
+[time]
+time_format = "%r"
+format = "🕙 $time($style) "
+style = "bright-white"
+disabled = false
+
+[python]
+format = ' [${symbol}${pyenv_prefix}${version} (\($virtualenv\))]($style) '
+
+[username]
+show_always = true
+style_user = "bold cyan"
+format = "[$user]($style)@"
+
+[hostname]
+ssh_only = false
+format = "[$hostname](blue) in "

@@ -1,7 +1,7 @@
 
-xmonad.hs:182:6: warning: [-Wtabs]
-    Tab character found here, and in two further locations.
+xmonad.hs:157:1: warning: [-Wtabs]
+    Tab character found here, and in 219 further locations.
     Please use spaces instead.
     |
-182 |         --gaps [(U,10), (D,10), (L,10), (R,10)] $ 
-    |      ^^^
+157 |                 -- Function Keys
+    | ^^^^^^^^

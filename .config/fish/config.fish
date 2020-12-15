@@ -32,7 +32,7 @@ set fish_color_param brcyan
 # Aliases
 alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 alias cdiv="yes 9999 | head -n (tput cols) | spark"
-alias clear="clear; echo; echo; cdiv; cdiv; cdiv; echo; echo"
+alias clear="clear; echo; echo"
 alias vim=nvim
 alias bs="br --sizes"
 alias la="exa -la --color=always --group-directories-first"
@@ -48,3 +48,6 @@ else
   bind ! __history_previous_command
   bind '$' __history_previous_command_arguments
 end
+
+# Starship prompt
+starship init fish | source

@@ -21,18 +21,21 @@ yay-git
 .bash_logout
 .git-credentials
 .gitconfig
+.python_history
 
 # Irrelevant Configs
 .config/broot
 .config/chromium
 .config/dconf
-.config/nitrogen/
+.config/nitrogen
 .config/pulse
 .config/pavucontrol.ini
 .config/Slack
 
 # Directories
 projects/
+snap/
+scripts/
 
 # Exceptions
 
