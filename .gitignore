@@ -38,6 +38,7 @@ projects/
 snap/
 scripts/
 .nv/
+.gnupg/
 
 # Exceptions
 
