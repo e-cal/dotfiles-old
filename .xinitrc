@@ -35,6 +35,4 @@ fi
 # xrandr --output Virtual-1 --mode 1920x1200
 # Remap caps lock to escape
 setxkbmap -option caps:escape
-nitrogen --restore &
-picom &
 exec xmonad
