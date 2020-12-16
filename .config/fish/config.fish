@@ -8,6 +8,7 @@ set -Ux EDITOR /usr/bin/nvim
 set -Ux VISUAL /usr/bin/nvim
 set -Ux LC_ALL en_US.UTF-8
 set -Ux LC_CTYPE en_US.UTF-8
+set PATH $HOME/scripts $PATH
 
 # Shell Mode
 function fish_user_key_bindings
@@ -39,7 +40,6 @@ alias la="exa -la --color=always --group-directories-first"
 alias bat="acpi"
 alias bat-stat="sudo tlp-stat"
 alias temp="sudo tlp-stat | grep 'Temperatures' -A 3"
-alias sp="$HOME/scripts/sp.sh"
 
 # Key Bindings for !! and !$
 if [ $fish_key_bindings = fish_vi_key_bindings ];
