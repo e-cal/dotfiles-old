@@ -39,6 +39,7 @@ alias la="exa -la --color=always --group-directories-first"
 alias bat="acpi"
 alias bat-stat="sudo tlp-stat"
 alias temp="sudo tlp-stat | grep 'Temperatures' -A 3"
+alias sp="$HOME/scripts/sp.sh"
 
 # Key Bindings for !! and !$
 if [ $fish_key_bindings = fish_vi_key_bindings ];

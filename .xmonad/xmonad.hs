@@ -99,6 +99,8 @@ myKeys = [
     ("M-r", spawn "rofi -show run"), -- Run Prompt
     ("M-c", spawn "chromium --profile-directory='Default'"), -- Chromium (main)
     ("M-S-c", spawn "chromium --profile-directory='Profile 1'"), -- Chromium (alt)
+		("M-o", spawn "chromium https://onq.queensu.ca/d2l/home"), -- OnQ
+		("M-n", spawn "chromium https://www.notion.so/ecall/"), -- Notion
 
     -- Kill Windows
     ("M-q", kill), -- Focused window
@@ -107,6 +109,7 @@ myKeys = [
     -- Layout
     ("M-<Tab>", sendMessage NextLayout), -- Next Layout
     ("M-C-<Down>", sendMessage DeArrange), -- Tile Mode
+    ("M-S-<Tab>", withFocused $ windows . W.sink), -- Push window back into tiling
     ("M-S-h", sendMessage Shrink), -- Shrink horizontal
     ("M-S-l", sendMessage Expand), -- Expand horizontal
     ("M-S-j", sendMessage MirrorShrink), -- Shrink vertical
@@ -141,8 +144,6 @@ myKeys = [
     -- ("M-C-h", sendMessage $ Swap L), -- Swap focused left
 
 
-    -- Push window back into tiling
-    ("M-t", withFocused $ windows . W.sink),
 
     -- Increment the number of windows in the master area
     ("M-,", sendMessage (IncMasterN 1)),
@@ -252,16 +253,13 @@ myEventHook = mempty
 
 -- =================== Startup =================== --
 
--- Perform an arbitrary action each time xmonad starts or is restarted
--- with mod-q.  Used by, e.g., XMonad.Layout.PerWorkspace to initialize
--- per-workspace layout choices.
---
--- By default, do nothing.
-myStartupHook = return ()
+myStartupHook :: X ()
+myStartupHook = do
+		spawnOnce "nitrogen --restore &"
+		spawnOnce "picom &"
 
 
--- =================== Startup =================== --
-
+-- =================== Main =================== --
 
 main = do
 		config <- myWindowNavigation
