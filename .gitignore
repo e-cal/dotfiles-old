@@ -37,6 +37,7 @@ yay-git
 projects/
 snap/
 scripts/
+.nv/
 
 # Exceptions
 
