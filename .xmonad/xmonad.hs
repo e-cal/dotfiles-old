@@ -96,7 +96,8 @@ myKeys :: [(String, X ())]
 myKeys = [
     -- Launch Programs
     ("M-<Return>", spawn myTerminal), -- Terminal
-    ("M-r", spawn "rofi -show run"), -- Run Prompt
+    ("M-r", spawn "rofi -show drun"), -- Run Prompt
+    ("M-<Space>", spawn "rofi -show drun"), -- Run Prompt
     ("M-c", spawn "chromium --profile-directory='Default'"), -- Chromium (main)
     ("M-S-c", spawn "chromium --profile-directory='Profile 1'"), -- Chromium (alt)
 		("M-o", spawn "chromium https://onq.queensu.ca/d2l/home"), -- OnQ
@@ -114,7 +115,8 @@ myKeys = [
     ("M-S-l", sendMessage Expand), -- Expand horizontal
     ("M-S-j", sendMessage MirrorShrink), -- Shrink vertical
     ("M-S-k", sendMessage MirrorExpand), -- Expand vertical
-
+    ("M-,", sendMessage (IncMasterN 1)), -- Add a window to master area
+    ("M-.", sendMessage (IncMasterN (-1))), -- Remove a window from master area
 
     -- Floating Layout
     ("M-C-<Up>", sendMessage Arrange), -- Floating Mode
@@ -134,22 +136,6 @@ myKeys = [
     -- Focus
     ("M-m", windows W.focusMaster), -- Focus master window
     ("M-C-m", windows W.swapMaster), -- Swap focused with master
-    -- ("M-k", sendMessage $ Go U), -- Move focus up
-    -- ("M-j", sendMessage $ Go D), -- Move focus down
-    -- ("M-l", sendMessage $ Go R), -- Move focus right
-    -- ("M-h", sendMessage $ Go L), -- Move focus left
-    -- ("M-C-k", sendMessage $ Swap U), -- Swap focused up
-    -- ("M-C-j", sendMessage $ Swap D), -- Swap focused down
-    -- ("M-C-l", sendMessage $ Swap R), -- Swap focused right
-    -- ("M-C-h", sendMessage $ Swap L), -- Swap focused left
-
-
-
-    -- Increment the number of windows in the master area
-    ("M-,", sendMessage (IncMasterN 1)),
-
-    -- Deincrement the number of windows in the master area
-    ("M-.", sendMessage (IncMasterN (-1))),
 
     -- XMonad
     ("M-S-<Escape>", io (exitWith ExitSuccess)), -- Quit
@@ -160,12 +146,12 @@ myKeys = [
     ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@  -2%"),
     ("<XF86AudioMute>", spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle"),
 
-    ("<XF86AudioPlay>", spawn "playerctl play-pause"),
-    ("<XF86AudioPrev>", spawn "playerctl previous"),
-    ("<XF86AudioNext>", spawn "playerctl next"),
+    ("<XF86AudioPlay>", spawn "$HOME/scripts/sp play"),
+    ("<XF86AudioPrev>", spawn "$HOME/scripts/sp prev"),
+    ("<XF86AudioNext>", spawn "$HOME/scripts/sp next"),
 
-    ("<XF86MonBrightnessUp>", spawn "xbacklight -inc 5"),
-    ("<XF86MonBrightnessDown>", spawn "xbacklight -dec 5")
+    ("<XF86MonBrightnessUp>", spawn "xbacklight -inc 2"),
+    ("<XF86MonBrightnessDown>", spawn "xbacklight -dec 2")
     ]
 
 myWindowNavigation = withWindowNavigationKeys ([
