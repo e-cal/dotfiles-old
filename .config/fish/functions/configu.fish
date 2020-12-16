@@ -1,8 +1,15 @@
 function configu
-	config fetch
-	config add -A
-	config commit -m "$argv"
-	and config push
-	and echo "config repo updated" | cowsay -f bobross
-	or echo "config repo not changed. aborting..."
+		config add -A
+		config commit -m "$argv"
+		and config push
+		switch $status
+				case 0
+						echo "Changes sucessfully pushed!" | cowsay -f bobross
+				case '*'
+						begin
+								set_color red
+								echo "An error occured"
+								set_color normal
+						end
+		end
 end
