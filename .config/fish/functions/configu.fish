@@ -8,7 +8,7 @@ function configu
 				case '*'
 						begin
 								set_color red
-								echo "An error occured"
+								echo "Changes not pushed."
 								set_color normal
 						end
 		end
