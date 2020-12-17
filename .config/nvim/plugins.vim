@@ -17,5 +17,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 
     "Themes
     Plug 'morhetz/gruvbox'
+		Plug 'phanviet/vim-monokai-pro'
 
 call plug#end()

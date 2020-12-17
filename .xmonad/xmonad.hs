@@ -138,7 +138,7 @@ myKeys = [
     ("M-C-m", windows W.swapMaster), -- Swap focused with master
 
     -- XMonad
-    ("M-S-<Escape>", io (exitWith ExitSuccess)), -- Quit
+    ("C-M1-<Delete>", io (exitWith ExitSuccess)), -- Quit
     ("M-S-r", spawn "xmonad --recompile; xmonad --restart"), -- Restart
 
 		-- Function Keys
@@ -243,6 +243,8 @@ myStartupHook :: X ()
 myStartupHook = do
 		spawnOnce "nitrogen --restore &"
 		spawnOnce "picom &"
+		spawnOnce "xsetroot -cursor_name left_ptr &"
+
 
 
 -- =================== Main =================== --

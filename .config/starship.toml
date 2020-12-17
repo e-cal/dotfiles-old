@@ -1,4 +1,5 @@
 format = """
+$custom\
 $battery\
 $time\
 $hg_branch\
@@ -34,7 +35,6 @@ $gcloud\
 $openstack\
 $env_var\
 $crystal\
-$custom\
 $cmd_duration\
 $lua\
 $jobs\
@@ -53,29 +53,53 @@ $status\
 $character\
 """
 
-
 [character]
 success_symbol = "[](bold green)"
 vicmd_symbol = "[](bold yellow)"
 error_symbol = "[](bold red)"
 
-[battery]
-full_symbol = ""
-charging_symbol = "⚡"
-discharging_symbol = "  "
-
-
-[[battery.display]]
-threshold = 25
-style = "bold red"
-
-[[battery.display]]
-threshold = 50
-style = "yellow"
-
-[[battery.display]]
-threshold = 100
+[custom.battery100]
+command = "acpi | awk '{print $4}' | sed 's/,//g'"
+symbol = "  "
 style = "green"
+format = "[$symbol$output]($style) "
+when = "battery100"
+shell = ["bash"]
+
+[custom.battery75]
+command = "acpi | awk '{print $4}' | sed 's/,//g'"
+symbol = "  "
+style = "green"
+format = "[$symbol$output]($style) "
+when = "battery75"
+shell = ["bash"]
+
+[custom.battery50]
+command = "echo hi"
+symbol = "  "
+style = "yellow"
+format = "[$symbol$output]($style) "
+when = "battery50"
+shell = ["bash"]
+
+[custom.battery25]
+command = "acpi | awk '{print $4}' | sed 's/,//g'"
+symbol = "  "
+style = "red"
+format = "[$symbol$output]($style) "
+when = "battery25"
+shell = ["bash"]
+
+[custom.battery10]
+command = "acpi | awk '{print $4}' | sed 's/,//g'"
+symbol = "  "
+style = "bold red"
+format = "[$symbol$output]($style) "
+when = "battery10"
+shell = ["bash"]
+
+[battery]
+disabled = true
 
 [cmd_duration]
 min_time = 10_000
@@ -92,6 +116,9 @@ format = '[${symbol}${pyenv_prefix}${version} (\($virtualenv\))]($style) '
 
 [package]
 disabled = true
+
+[jobs]
+symbol = ""
 
 [git_branch]
 format = "[$symbol$branch]($style) "
