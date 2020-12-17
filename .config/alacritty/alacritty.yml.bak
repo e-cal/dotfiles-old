@@ -19,57 +19,34 @@ font:
     style: Regular
 
 
-special:
-    background: "#212121"
-    foreground: "#EEFFFF"
-    cursor: "#EEFFFF"
-
-colors:
-    color0: "#212121"
-    color1: "#F07178"
-    color2: "#C3E88D"
-    color3: "#FFCB6B"
-    color4: "#82AAFF"
-    color5: "#C792EA"
-    color6: "#89DDFF"
-    color7: "#EEFFFF"
-    color8: "#4A4A4A"
-    color9: "#F07178"
-    color10: "#C3E88D"
-    color11: "#FFCB6B"
-    color12: "#82AAFF"
-    color13: "#C792EA"
-    color14: "#89DDFF"
-    color15: "#FFFFFF"
-
 # Colors (Monokai Pro)
-#colors:
-#  # Default colors
-#  primary:
-#    background: '#2D2A2E'
-#    foreground: '#FCFCFA'
-#
-#  # Normal colors
-#  normal:
-#    black:   '#403E41'
-#    red:     '#FF6188'
-#    green:   '#A9DC76'
-#    yellow:  '#FFD866'
-#    blue:    '#FC9867'
-#    magenta: '#AB9DF2'
-#    cyan:    '#78DCE8'
-#    white:   '#FCFCFA'
-#
-#  # Bright colors
-#  bright:
-#    black:   '#727072'
-#    red:     '#FF6188'
-#    green:   '#A9DC76'
-#    yellow:  '#FFD866'
-#    blue:    '#FC9867'
-#    magenta: '#AB9DF2'
-#    cyan:    '#78DCE8'
-#    white:   '#FCFCFA'
+colors:
+  # Default colors
+  primary:
+    background: '#2D2A2E'
+    foreground: '#FCFCFA'
+
+  # Normal colors
+  normal:
+    black:   '#403E41'
+    red:     '#FF6188'
+    green:   '#A9DC76'
+    yellow:  '#FFD866'
+    blue:    '#FC9867'
+    magenta: '#AB9DF2'
+    cyan:    '#78DCE8'
+    white:   '#FCFCFA'
+
+  # Bright colors
+  bright:
+    black:   '#727072'
+    red:     '#FF6188'
+    green:   '#A9DC76'
+    yellow:  '#FFD866'
+    blue:    '#FC9867'
+    magenta: '#AB9DF2'
+    cyan:    '#78DCE8'
+    white:   '#FCFCFA'
 
 
 ## My theme

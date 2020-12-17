@@ -11,6 +11,7 @@ PS1='[\u@\h \W]\$ '
 HISTSIZE=5000
 HISTFILESIZE=5000
 PATH=$HOME/scripts:$PATH
+BAT="acpi | awk '{print $4}' | sed 's/%,//g'"
 
 alias la='ls -la --color=auto'
 alias vim='nvim'
