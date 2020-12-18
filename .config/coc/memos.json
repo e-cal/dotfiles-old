@@ -962,7 +962,6 @@
       "sysPrefix": "/usr",
       "fileHash": "a4cadd4d6330bac6984be0ba19b062093107b776ab030a8e90a44333899d8ac5a23546328de2ebf77516e3e394599f5e46807bfe59f334652127ddb6f1de6487",
       "type": "Unknown",
-      "cachedEntry": true,
       "displayName": "Python 3.9.1 64-bit"
     },
     "ProposeLSBanner": false,

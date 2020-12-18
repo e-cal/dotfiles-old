@@ -22,23 +22,30 @@ yay-git
 .git-credentials
 .gitconfig
 .python_history
+.viminfo
 .Xauthority
 
+# Directories
+projects/
+scripts/
+
+# Hidden Directories
+.gnupg/
+.pylint.d/
+.npm/
+.nv/
+
 # Irrelevant Configs
-.config/broot
 .config/chromium
+.config/configstore
 .config/dconf
 .config/nitrogen
 .config/pulse
 .config/pavucontrol.ini
 .config/Slack
+.config/spicetify
+.config/spotify
 
-# Directories
-projects/
-snap/
-scripts/
-.nv/
-.gnupg/
-
-# Exceptions
+# Other
+.config/nvim/autoload/
 
