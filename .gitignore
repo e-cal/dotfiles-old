@@ -36,15 +36,16 @@ scripts/
 .nv/
 
 # Irrelevant Configs
-.config/chromium
-.config/configstore
-.config/dconf
-.config/nitrogen
-.config/pulse
+.config/chromium/
+.config/coc/
+.config/configstore/
+.config/dconf/
+.config/nitrogen/
+.config/pulse/
 .config/pavucontrol.ini
-.config/Slack
-.config/spicetify
-.config/spotify
+.config/Slack/
+.config/spicetify/
+.config/spotify/
 
 # Other
 .config/nvim/autoload/
