@@ -32,14 +32,17 @@ set fish_color_param brcyan
 
 # Aliases
 alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
-alias cdiv="yes 9999 | head -n (tput cols) | spark"
-alias clear="clear; echo; echo"
+alias clearpattern="yes '△▽' | head -n (math --scale=0 (tput cols) / 2) | tr '\n' ',' | sed 's/,//g' | lolcat -F 0.03"
+alias clear="clear;clearpattern"
 alias vim=nvim
-alias bs="br --sizes"
 alias la="exa -la --color=always --group-directories-first"
 alias bat="acpi"
 alias bat-stat="sudo tlp-stat"
 alias temp="sudo tlp-stat | grep 'Temperatures' -A 3"
+alias hist="history | fzf"
+alias pass="lpass show -c --password (lpass ls  | fzf | awk '{print (NF)}' | sed 's/\]//g')"
+alias pacsearch="pacman -Slq | fzf -m --preview 'cat <(pacman -Si {1}) <(pacman -Fl {1} | awk \"{print \$2}\")' | xargs -ro sudo pacman -S"
+alias aursearch="yay -Slq | fzf -m --preview 'cat <(yay -Si {1}) <(yay -Fl {1} | awk \"{print \$2}\")' | xargs -ro  yay -S"
 
 # Key Bindings for !! and !$
 if [ $fish_key_bindings = fish_vi_key_bindings ];

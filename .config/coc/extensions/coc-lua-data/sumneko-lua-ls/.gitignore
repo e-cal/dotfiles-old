@@ -1,0 +1,7 @@
+/log
+/build
+/bin
+!*.exe
+/test/temp.lua
+/meta/*
+!/meta/template

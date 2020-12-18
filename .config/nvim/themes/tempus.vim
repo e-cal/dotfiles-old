@@ -1,1 +1,0 @@
-colorscheme tempus_future

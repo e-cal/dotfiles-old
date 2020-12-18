@@ -1,6 +1,10 @@
 format = """
-$custom\
-$battery\
+${custom.battery100}\
+${custom.battery75}\
+${custom.battery50}\
+${custom.battery25}\
+${custom.battery10}\
+${custom.batterycharging}\
 $time\
 $hg_branch\
 $docker_context\
@@ -38,7 +42,6 @@ $crystal\
 $cmd_duration\
 $lua\
 $jobs\
-$git_branch\
 $git_commit\
 $git_state\
 $git_status\
@@ -48,6 +51,7 @@ $username\
 $hostname\
 $shlvl\
 $kubernetes\
+$git_branch\
 $directory\
 $status\
 $character\
@@ -75,7 +79,7 @@ when = "battery75"
 shell = ["bash"]
 
 [custom.battery50]
-command = "echo hi"
+command = "acpi | awk '{print $4}' | sed 's/,//g'"
 symbol = "  "
 style = "yellow"
 format = "[$symbol$output]($style) "
@@ -98,8 +102,14 @@ format = "[$symbol$output]($style) "
 when = "battery10"
 shell = ["bash"]
 
-[battery]
-disabled = true
+[custom.batterycharging]
+command = "acpi | awk '{print $4}' | sed 's/,//g'"
+symbol = " "
+style = "#FFA570"
+format = "[$symbol$output]($style) "
+when = "batterycharging"
+shell = ["bash"]
+
 
 [cmd_duration]
 min_time = 10_000
@@ -112,13 +122,21 @@ style = "bright-white"
 disabled = false
 
 [python]
-format = '[${symbol}${pyenv_prefix}${version} (\($virtualenv\))]($style) '
+symbol = " "
+format = '[${symbol}${pyenv_prefix}${version}(\($virtualenv\))]($style) '
+
+[nodejs]
+symbol = " "
+
+[lua]
+symbol = " "
 
 [package]
 disabled = true
 
 [jobs]
 symbol = ""
+format = "[$symbol]($style) "
 
 [git_branch]
 format = "[$symbol$branch]($style) "
@@ -141,10 +159,12 @@ deleted = " ×${count} "
 show_always = true
 style_user = "bold cyan"
 format = "[$user]($style)@"
+disabled = true
 
 [hostname]
 ssh_only = false
 format = "[$hostname](blue): "
+disabled = true
 
 [directory]
 fish_style_pwd_dir_length = 1

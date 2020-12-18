@@ -3,8 +3,8 @@ shell:
 
 window:
   padding:
-    x: 5
-    y: 5
+    x: 10
+    y: 10
 
 scrolling:
   history: 5000
@@ -36,110 +36,113 @@ colors:
     color8: "#4A4A4A"
     color9: "#F07178"
     color10: "#C3E88D"
-    color11: "#FFCB6B"
+    color11: "#FFA570"
     color12: "#82AAFF"
     color13: "#C792EA"
     color14: "#89DDFF"
     color15: "#FFFFFF"
 
-# Colors (Monokai Pro)
-#colors:
-#  # Default colors
-#  primary:
-#    background: '#2D2A2E'
-#    foreground: '#FCFCFA'
+# Key bindings
 #
-#  # Normal colors
-#  normal:
-#    black:   '#403E41'
-#    red:     '#FF6188'
-#    green:   '#A9DC76'
-#    yellow:  '#FFD866'
-#    blue:    '#FC9867'
-#    magenta: '#AB9DF2'
-#    cyan:    '#78DCE8'
-#    white:   '#FCFCFA'
+# Key bindings are specified as a list of objects. Each binding will specify a
+# key and modifiers required to trigger it, terminal modes where the binding is
+# applicable, and what should be done when the key binding fires. It can either
+# send a byte sequence to the running application (`chars`), execute a
+# predefined action (`action`) or fork and execute a specified command plus
+# arguments (`command`).
 #
-#  # Bright colors
-#  bright:
-#    black:   '#727072'
-#    red:     '#FF6188'
-#    green:   '#A9DC76'
-#    yellow:  '#FFD866'
-#    blue:    '#FC9867'
-#    magenta: '#AB9DF2'
-#    cyan:    '#78DCE8'
-#    white:   '#FCFCFA'
+# Bindings are always filled by default, but will be replaced when a new binding
+# with the same triggers is defined. To unset a default binding, it can be
+# mapped to the `None` action.
+#
+# Example:
+#   `- { key: V, mods: Control|Shift, action: Paste }`
+#
+# Available fields:
+#   - key
+#   - mods (optional)
+#   - chars | action | command (exactly one required)
+#   - mode (optional)
+#
+# Values for `key`:
+#   - `A` -> `Z`
+#   - `F1` -> `F12`
+#   - `Key1` -> `Key0`
+#
+#   A full list with available key codes can be found here:
+#   https://docs.rs/glutin/*/glutin/enum.VirtualKeyCode.html#variants
+#
+#   Instead of using the name of the keys, the `key` field also supports using
+#   the scancode of the desired key. Scancodes have to be specified as a
+#   decimal number.
+#   This command will allow you to display the hex scancodes for certain keys:
+#     `showkey --scancodes`
+#
+# Values for `mods`:
+#   - Command
+#   - Control
+#   - Option
+#   - Super
+#   - Shift
+#   - Alt
+#
+#   Multiple `mods` can be combined using `|` like this: `mods: Control|Shift`.
+#   Whitespace and capitalization is relevant and must match the example.
+#
+# Values for `chars`:
+#   The `chars` field writes the specified string to the terminal. This makes
+#   it possible to pass escape sequences.
+#   To find escape codes for bindings like `PageUp` ("\x1b[5~"), you can run
+#   the command `showkey -a` outside of tmux.
+#   Note that applications use terminfo to map escape sequences back to
+#   keys. It is therefore required to update the terminfo when
+#   changing an escape sequence.
+#
+# Values for `action`:
+#   - Paste
+#   - PasteSelection
+#   - Copy
+#   - IncreaseFontSize
+#   - DecreaseFontSize
+#   - ResetFontSize
+#   - ScrollPageUp
+#   - ScrollPageDown
+#   - ScrollLineUp
+#   - ScrollLineDown
+#   - ScrollToTop
+#   - ScrollToBottom
+#   - ClearHistory
+#   - Hide
+#   - Quit
+#   - ClearLogNotice
+#   - SpawnNewInstance
+#   - ToggleFullscreen
+#   - None
+#
+# Values for `action` (macOS only):
+#   - ToggleSimpleFullscreen: Enters fullscreen without occupying another space
+#
+# Values for `command`:
+#   The `command` field must be a map containing a `program` string and
+#   an `args` array of command line parameter strings.
+#
+#   Example:
+#       `command: { program: "alacritty", args: ["-e", "vttest"] }`
+#
+# Values for `mode`:
+#   - ~AppCursor
+#   - AppCursor
+#   - ~AppKeypad
+#   - AppKeypad
+key_bindings:
+  - { key: R, mods: Control, command: { program: "alacritty", args: ["history | fzf"] } }
+  # (Windows/Linux only)
+  #- { key: V,        mods: Control|Shift, action: Paste            }
+  #- { key: C,        mods: Control|Shift, action: Copy             }
+  #- { key: Insert,   mods: Shift,         action: PasteSelection   }
+  #- { key: Key0,     mods: Control,       action: ResetFontSize    }
+  #- { key: Equals,   mods: Control,       action: IncreaseFontSize }
+  #- { key: Add,      mods: Control,       action: IncreaseFontSize }
+  #- { key: Subtract, mods: Control,       action: DecreaseFontSize }
+  #- { key: Minus,    mods: Control,       action: DecreaseFontSize }
 
-
-## My theme
-#colors:
-#  # Default colors
-#  primary:
-#    background: '#2B272B' 
-#    foreground: '#EB7847'
-#
-#  # Selection colors
-#  selection:
-#    text:       '#F7D4C8'
-#    background: '#F7D4C8'
-#
-#  # Normal colors
-#  normal:
-#    black:   '#32394B'
-#    white:   '#F7D4C8'
-#    blue:    '#5495B6'
-#    red:     '#F74A36'
-#    orange:  '#EF936B'
-#    green:   '#33BE40'
-#    magenta: '#8E1DA5'
-#    cyan:    '#34BEB1'
-#    yellow:  '#d79921'
-#
-#  # Bright colors
-#  bright:
-#    black:   '#928374'
-#    red:     '#fb4934'
-#    green:   '#b8bb26'
-#    yellow:  '#fabd2f'
-#    blue:    '#83a598'
-#    magenta: '#d3869b'
-#    cyan:    '#8ec07c'
-#    white:   '#ebdbb2'
-
-# Gruvbox Dark
-#colors:
-#  # Default colors
-#  primary:
-#    background: '#1d2021' # hard contrast
-#    #background: '#282828' # normal contrast
-#    #background: '#32302f' # soft contrast
-#    foreground: '#ebdbb2'
-#
-#  # Selection colors
-#  selection:
-#    text:       '#b8bb26'
-#    background: '#b8bb26'
-#
-#  # Normal colors
-#  normal:
-#    black:   '#282828'
-#    red:     '#cc241d'
-#    green:   '#98971a'
-#    yellow:  '#d79921'
-#    blue:    '#458588'
-#    magenta: '#b16286'
-#    cyan:    '#689d6a'
-#    white:   '#a89984'
-#
-#  # Bright colors
-#  bright:
-#    black:   '#928374'
-#    red:     '#fb4934'
-#    green:   '#b8bb26'
-#    yellow:  '#fabd2f'
-#    blue:    '#83a598'
-#    magenta: '#d3869b'
-#    cyan:    '#8ec07c'
-#    white:   '#ebdbb2'
-  

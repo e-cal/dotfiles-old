@@ -1,10 +1,10 @@
 -- =========================================== --
---  ______     ______     ______     __        --  
--- /\  ___\   /\  ___\   /\  __ \   /\ \       --  
--- \ \  __\   \ \ \____  \ \  __ \  \ \ \____  -- 
---  \ \_____\  \ \_____\  \ \_\ \_\  \ \_____\ --  
+--  ______     ______     ______     __        --
+-- /\  ___\   /\  ___\   /\  __ \   /\ \       --
+-- \ \  __\   \ \ \____  \ \  __ \  \ \ \____  --
+--  \ \_____\  \ \_____\  \ \_\ \_\  \ \_____\ --
 --   \/_____/   \/_____/   \/_/\/_/   \/_____/ --
---																			       --
+--                                             --
 -- =========================================== --
 
 
@@ -100,8 +100,8 @@ myKeys = [
     ("M-<Space>", spawn "rofi -show drun"), -- Run Prompt
     ("M-c", spawn "chromium --profile-directory='Default'"), -- Chromium (main)
     ("M-S-c", spawn "chromium --profile-directory='Profile 1'"), -- Chromium (alt)
-		("M-o", spawn "chromium https://onq.queensu.ca/d2l/home"), -- OnQ
-		("M-n", spawn "chromium https://www.notion.so/ecall/"), -- Notion
+    ("M-o", spawn "chromium https://onq.queensu.ca/d2l/home"), -- OnQ
+    ("M-n", spawn "chromium https://www.notion.so/ecall/"), -- Notion
 
     -- Kill Windows
     ("M-q", kill), -- Focused window
@@ -120,18 +120,18 @@ myKeys = [
 
     -- Floating Layout
     ("M-C-<Up>", sendMessage Arrange), -- Floating Mode
-    ("M-<Up>", sendMessage (MoveUp 10)),
-    ("M-<Down>", sendMessage (MoveDown 10)),
-    ("M-<Left>", sendMessage (MoveLeft 10)),
-    ("M-<Right>", sendMessage (MoveRight 10)),
-    ("M-S-<Up>", sendMessage (IncreaseUp 10)),
-    ("M-S-<Down>", sendMessage (DecreaseDown 10)),
-    ("M-S-<Left>", sendMessage (IncreaseLeft 10)),
-    ("M-S-<Right>", sendMessage (DecreaseRight 10)),
-    ("M-M1-<Up>", sendMessage (DecreaseUp 10)),
-    ("M-M1-<Down>", sendMessage (IncreaseDown 10)),
-    ("M-M1-<Left>", sendMessage (DecreaseLeft 10)),
-    ("M-M1-<Right>", sendMessage (IncreaseRight 10)),
+    ("M-<Up>", sendMessage (MoveUp 20)),
+    ("M-<Down>", sendMessage (MoveDown 20)),
+    ("M-<Left>", sendMessage (MoveLeft 20)),
+    ("M-<Right>", sendMessage (MoveRight 20)),
+    ("M-S-<Up>", sendMessage (IncreaseUp 20)),
+    ("M-S-<Down>", sendMessage (DecreaseDown 20)),
+    ("M-S-<Left>", sendMessage (IncreaseLeft 20)),
+    ("M-S-<Right>", sendMessage (DecreaseRight 20)),
+    ("M-M1-<Up>", sendMessage (DecreaseUp 20)),
+    ("M-M1-<Down>", sendMessage (IncreaseDown 20)),
+    ("M-M1-<Left>", sendMessage (DecreaseLeft 20)),
+    ("M-M1-<Right>", sendMessage (IncreaseRight 20)),
 
     -- Focus
     ("M-m", windows W.focusMaster), -- Focus master window
@@ -141,10 +141,9 @@ myKeys = [
     ("C-M1-<Delete>", io (exitWith ExitSuccess)), -- Quit
     ("M-S-r", spawn "xmonad --recompile; xmonad --restart"), -- Restart
 
-		-- Function Keys
-		("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ +2%"),
-    ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@  -2%"),
-    ("<XF86AudioMute>", spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle"),
+    -- Function Keys
+    ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ +2%"),
+    ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@  -2%"), ("<XF86AudioMute>", spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle"),
 
     ("<XF86AudioPlay>", spawn "$HOME/scripts/sp play"),
     ("<XF86AudioPrev>", spawn "$HOME/scripts/sp prev"),
@@ -155,15 +154,15 @@ myKeys = [
     ]
 
 myWindowNavigation = withWindowNavigationKeys ([
-												((myModMask, xK_k), WNGo U),
-												((myModMask, xK_j), WNGo D),
-												((myModMask, xK_h), WNGo L),
-												((myModMask, xK_l), WNGo R),
-												((myModMask .|. controlMask, xK_k), WNSwap U),
-												((myModMask .|. controlMask, xK_j), WNSwap D),
-												((myModMask .|. controlMask, xK_h), WNSwap L),
-												((myModMask .|. controlMask, xK_l), WNSwap R)
-										])
+                        ((myModMask, xK_k), WNGo U),
+                        ((myModMask, xK_j), WNGo D),
+                        ((myModMask, xK_h), WNGo L),
+                        ((myModMask, xK_l), WNGo R),
+                        ((myModMask .|. controlMask, xK_k), WNSwap U),
+                        ((myModMask .|. controlMask, xK_j), WNSwap D),
+                        ((myModMask .|. controlMask, xK_h), WNSwap L),
+                        ((myModMask .|. controlMask, xK_l), WNSwap R)
+                    ])
 
 -- =================== Mouse Bindings =================== --
 
@@ -188,22 +187,20 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 mySpacing :: Integer -> l a -> XMonad.Layout.LayoutModifier.ModifiedLayout Spacing l a
 mySpacing i = spacingRaw True (Border i i i i) True (Border i i i i) True
 
-tall		= renamed [Replace "tall"]
-						$ smartBorders
-						$ mySpacing 5
-						$ ResizableTall 1 (3/100) (1/2) [] -- Numbers: windows in master, increment on resize, proportion for master
-spirals	= renamed [Replace "spirals"]
-						$ smartBorders
-						$ mySpacing 5
-						$ spiral (6/7)
-full		= renamed [Replace "full"]
-						$ noBorders Full
+tall    = renamed [Replace "tall"]
+            $ smartBorders
+            $ mySpacing 5
+            $ ResizableTall 1 (3/100) (1/2) [] -- Numbers: windows in master, increment on resize, proportion for master
+spirals = renamed [Replace "spirals"]
+            $ smartBorders
+            $ mySpacing 5
+            $ spiral (6/7)
+full    = renamed [Replace "full"]
+            $ noBorders Full
 
 myLayoutHook = windowArrange myLayout
-								where
-										myLayout =			tall
-																|||	spirals
-																|||	full
+                where
+                    myLayout = tall ||| spirals ||| full
 
 -- =================== Window Rules =================== --
 
@@ -241,18 +238,18 @@ myEventHook = mempty
 
 myStartupHook :: X ()
 myStartupHook = do
-		spawnOnce "nitrogen --restore &"
-		spawnOnce "picom &"
-		spawnOnce "xsetroot -cursor_name left_ptr &"
+    spawnOnce "nitrogen --restore &"
+    spawnOnce "picom &"
+    spawnOnce "xsetroot -cursor_name left_ptr &"
 
 
 
 -- =================== Main =================== --
 
 main = do
-		config <- myWindowNavigation
-				$ defaults
-		xmonad config
+    config <- myWindowNavigation
+        $ defaults
+    xmonad config
 
 defaults = def {
         terminal           = myTerminal,
