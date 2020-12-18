@@ -29,6 +29,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'mhinz/vim-signify'
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-rhubarb'
+    " Sneak
+    Plug 'justinmk/vim-sneak'
 
     "Themes
     Plug 'morhetz/gruvbox'
