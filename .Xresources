@@ -4,18 +4,6 @@
 *background:        #212121
 *.foreground:       #EEFFFF
 *.background:       #212121
-emacs*foreground:   #EEFFFF
-emacs*background:   #212121
-URxvt*foreground:   #EEFFFF
-XTerm*foreground:   #EEFFFF
-UXTerm*foreground:  #EEFFFF
-URxvt*background:   [100]#212121
-XTerm*background:   #212121
-UXTerm*background:  #212121
-URxvt*cursorColor:  #EEFFFF
-XTerm*cursorColor:  #EEFFFF
-UXTerm*cursorColor: #EEFFFF
-URxvt*borderColor:  [100]#212121
 
 ! Colors 0-15.
 *.color0: #212121
@@ -40,8 +28,8 @@ URxvt*borderColor:  [100]#212121
 *color9:  #F07178
 *.color10: #C3E88D
 *color10:  #C3E88D
-*.color11: #FFCB6B
-*color11:  #FFCB6B
+*.color11: #FFA570
+*color11:  #FFA570
 *.color12: #82AAFF
 *color12:  #82AAFF
 *.color13: #C792EA

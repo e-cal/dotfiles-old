@@ -11,6 +11,8 @@
 # hlsearch on (H) or off (h):
 ~h
 # Command Line History (newest to oldest):
+:wq
+|2,0,1608248721,,"wq"
 :q
 |2,0,1608066274,,"q"
 
@@ -23,22 +25,59 @@
 # Debug Line History (newest to oldest):
 
 # Registers:
+""-	CHAR	0
+	$
+|3,1,36,0,1,0,1608248719,"$"
 
 # File marks:
-'0  1  0  /tmp/K9RlJI_all_paths.py
-|4,48,1,0,1608066274,"/tmp/K9RlJI_all_paths.py"
-'1  1  0  /tmp/sEU5sP_.keep
-|4,49,1,0,1608066255,"/tmp/sEU5sP_.keep"
+'0  43  68  ~/.config/fish/config.fish
+|4,48,43,68,1608248722,"~/.config/fish/config.fish"
+'1  1  0  /tmp/K9RlJI_all_paths.py
+|4,49,1,0,1608066274,"/tmp/K9RlJI_all_paths.py"
+'2  1  0  /tmp/sEU5sP_.keep
+|4,50,1,0,1608066255,"/tmp/sEU5sP_.keep"
 
 # Jumplist (newest first):
+-'  43  68  ~/.config/fish/config.fish
+|4,39,43,68,1608248722,"~/.config/fish/config.fish"
+-'  53  0  ~/.config/fish/config.fish
+|4,39,53,0,1608248701,"~/.config/fish/config.fish"
+-'  55  26  ~/.config/fish/config.fish
+|4,39,55,26,1608248701,"~/.config/fish/config.fish"
+-'  44  0  ~/.config/fish/config.fish
+|4,39,44,0,1608248700,"~/.config/fish/config.fish"
+-'  32  0  ~/.config/fish/config.fish
+|4,39,32,0,1608248700,"~/.config/fish/config.fish"
+-'  25  0  ~/.config/fish/config.fish
+|4,39,25,0,1608248699,"~/.config/fish/config.fish"
+-'  18  0  ~/.config/fish/config.fish
+|4,39,18,0,1608248699,"~/.config/fish/config.fish"
+-'  12  0  ~/.config/fish/config.fish
+|4,39,12,0,1608248699,"~/.config/fish/config.fish"
+-'  4  0  ~/.config/fish/config.fish
+|4,39,4,0,1608248699,"~/.config/fish/config.fish"
+-'  1  0  ~/.config/fish/config.fish
+|4,39,1,0,1608248699,"~/.config/fish/config.fish"
+-'  1  0  /tmp/K9RlJI_all_paths.py
+|4,39,1,0,1608066274,"/tmp/K9RlJI_all_paths.py"
 -'  1  0  /tmp/K9RlJI_all_paths.py
 |4,39,1,0,1608066274,"/tmp/K9RlJI_all_paths.py"
 -'  1  0  /tmp/sEU5sP_.keep
 |4,39,1,0,1608066255,"/tmp/sEU5sP_.keep"
 -'  1  0  /tmp/sEU5sP_.keep
 |4,39,1,0,1608066255,"/tmp/sEU5sP_.keep"
+-'  1  0  /tmp/sEU5sP_.keep
+|4,39,1,0,1608066255,"/tmp/sEU5sP_.keep"
+-'  1  0  /tmp/sEU5sP_.keep
+|4,39,1,0,1608066255,"/tmp/sEU5sP_.keep"
 
 # History of marks within files (newest to oldest):
+
+> ~/.config/fish/config.fish
+	*	1608248719	0
+	"	43	68
+	.	43	68
+	+	43	68
 
 > /tmp/K9RlJI_all_paths.py
 	*	1608066270	0
