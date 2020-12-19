@@ -43,6 +43,8 @@ alias hist="history | fzf"
 alias pass="lpass show -c --password (lpass ls  | fzf | awk '{print (NF)}' | sed 's/\]//g')"
 alias pacsearch="pacman -Slq | fzf -m --preview 'cat <(pacman -Si {1}) <(pacman -Fl {1} | awk \"{print \$2}\")' | xargs -ro sudo pacman -S"
 alias aursearch="yay -Slq | fzf -m --preview 'cat <(yay -Si {1}) <(yay -Fl {1} | awk \"{print \$2}\")' | xargs -ro  yay -S"
+alias launchbar="~/.config/polybar/launch.sh"
+alias killbar="kill (ps -e | rg poly | awk '{print \$1}')"
 
 # Key Bindings for !! and !$
 if [ $fish_key_bindings = fish_vi_key_bindings ];
