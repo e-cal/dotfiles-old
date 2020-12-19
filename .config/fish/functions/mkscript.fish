@@ -1,4 +1,4 @@
 function mkscript
-		echo "#!/usr/bin/bash" > $HOME/scripts/$argv
-		chmod a+x $HOME/scripts/$argv
+		echo "#!/bin/bash" > ./$argv
+		chmod a+x ./$argv
 end

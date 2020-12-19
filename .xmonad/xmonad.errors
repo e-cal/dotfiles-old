@@ -1,7 +1,0 @@
-
-xmonad.hs:103:1: warning: [-Wtabs]
-    Tab character found here, and in 229 further locations.
-    Please use spaces instead.
-    |
-103 |                 ("M-o", spawn "chromium https://onq.queensu.ca/d2l/home"), -- OnQ
-    | ^^^^^^^^

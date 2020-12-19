@@ -7,8 +7,9 @@
 --                                             --
 -- =========================================== --
 
-
--- =================== Imports =================== --
+--------------------------------------------------------------------------------
+-- Imports
+--------------------------------------------------------------------------------
 
     -- Base
 import XMonad
@@ -26,6 +27,12 @@ import qualified Data.Map as M
 
     -- Hooks
 import XMonad.Hooks.FadeInactive
+import XMonad.Hooks.Place
+import XMonad.Hooks.ManageHelpers
+import XMonad.Hooks.Minimize
+import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.EwmhDesktops
+import XMonad.Hooks.ManageDocks
 
     -- Layouts
 import XMonad.Layout.Spiral
@@ -35,13 +42,20 @@ import XMonad.Layout.WindowArranger
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.LayoutModifier
 import XMonad.Layout.Renamed
+import XMonad.Layout.Minimize
 
     -- Utils
 import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Util.SpawnOnce
 
+    -- DBus
+import qualified DBus as D
+import qualified DBus.Client as D
+import qualified Codec.Binary.UTF8.String as UTF8
 
--- =================== Variables =================== --
+--------------------------------------------------------------------------------
+-- Variables
+--------------------------------------------------------------------------------
 
     -- Modkey
 myModMask :: KeyMask
@@ -63,20 +77,22 @@ myEditor = "nvim"
 myBorderWidth :: Dimension
 myBorderWidth = 4
 
-myFocusedBorderColor :: String
-myFocusedBorderColor = "#4ec9b0" -- turquoise
+--------------------------------------------------------------------------------
+-- Workspaces
+--------------------------------------------------------------------------------
 
-myNormalBorderColor :: String
-myNormalBorderColor = "#dddddd" -- grey
+wsMain = "\xf015"
+ws2 = "\xfcc1"
+ws3 = "\xf718"
+wsMusic = "\xf001"
 
-    -- Workspaces
-myWorkspaces = ["main","alt1","alt2"]
+myWorkspaces :: [String]
+myWorkspaces = [wsMain, ws2, ws3, wsMusic]
 
-    -- Opacity
-myLogHook :: X ()
-myLogHook = fadeInactiveLogHook 0.9
+--------------------------------------------------------------------------------
+-- Search Engines
+--------------------------------------------------------------------------------
 
-    -- Search Engines
 archwiki = S.searchEngine "archwiki" "https://wiki.archlinux.org/index.php?search="
 searchList :: [(String, S.SearchEngine)]
 searchList = [
@@ -89,82 +105,125 @@ searchList = [
     ("w", S.wikipedia)
     ]
 
+--------------------------------------------------------------------------------
+-- Layouts
+--------------------------------------------------------------------------------
+mySpacing :: Integer -> l a -> XMonad.Layout.LayoutModifier.ModifiedLayout Spacing l a
+mySpacing i = spacingRaw True (Border i i i i) True (Border i i i i) True
 
--- =================== Key bindings =================== --
+tall    = renamed [Replace "Main"]
+            $ avoidStruts
+            $ smartBorders
+            $ mySpacing 5
+            $ ResizableTall 1 (3/100) (1/2) [] -- Numbers: windows in master, increment on resize, proportion for master
+full    = renamed [Replace "Fullscreen"]
+            $ noBorders Full
 
-myKeys :: [(String, X ())]
-myKeys = [
-    -- Launch Programs
-    ("M-<Return>", spawn myTerminal), -- Terminal
-    ("M-r", spawn "rofi -show drun"), -- Run Prompt
-    ("M-<Space>", spawn "rofi -show drun"), -- Run Prompt
-    ("M-c", spawn "chromium --profile-directory='Default'"), -- Chromium (main)
-    ("M-S-c", spawn "chromium --profile-directory='Profile 1'"), -- Chromium (alt)
-    ("M-o", spawn "chromium https://onq.queensu.ca/d2l/home"), -- OnQ
-    ("M-n", spawn "chromium https://www.notion.so/ecall/"), -- Notion
+myLayoutHook = windowArrange myLayout
+                where
+                    myLayout = tall ||| full
 
-    -- Kill Windows
-    ("M-q", kill), -- Focused window
-    ("M-S-q", killAll), -- Kill all windows
+--------------------------------------------------------------------------------
+-- Manage Hook
+--------------------------------------------------------------------------------
+myManageHook = composeAll
+    [ className =? "MPlayer"          --> doFloat
+    , className =? "Gimp"             --> doFloat
+    , resource  =? "desktop_window"   --> doIgnore
+    , className =? "feh"              --> doFloat
+    , className =? "Gpick"            --> doFloat
+    , role      =? "pop-up"           --> doFloat ]
+  where
+    role = stringProperty "WM_WINDOW_ROLE"
+myManageHook' = composeOne [ isFullscreen -?> doFullFloat ]
 
-    -- Layout
-    ("M-<Tab>", sendMessage NextLayout), -- Next Layout
-    ("M-C-<Down>", sendMessage DeArrange), -- Tile Mode
-    ("M-S-<Tab>", withFocused $ windows . W.sink), -- Push window back into tiling
-    ("M-S-h", sendMessage Shrink), -- Shrink horizontal
-    ("M-S-l", sendMessage Expand), -- Expand horizontal
-    ("M-S-j", sendMessage MirrorShrink), -- Shrink vertical
-    ("M-S-k", sendMessage MirrorExpand), -- Expand vertical
-    ("M-,", sendMessage (IncMasterN 1)), -- Add a window to master area
-    ("M-.", sendMessage (IncMasterN (-1))), -- Remove a window from master area
+--------------------------------------------------------------------------------
+-- Startup Hook
+--------------------------------------------------------------------------------
 
-    -- Floating Layout
-    ("M-C-<Up>", sendMessage Arrange), -- Floating Mode
-    ("M-<Up>", sendMessage (MoveUp 20)),
-    ("M-<Down>", sendMessage (MoveDown 20)),
-    ("M-<Left>", sendMessage (MoveLeft 20)),
-    ("M-<Right>", sendMessage (MoveRight 20)),
-    ("M-S-<Up>", sendMessage (IncreaseUp 20)),
-    ("M-S-<Down>", sendMessage (DecreaseDown 20)),
-    ("M-S-<Left>", sendMessage (IncreaseLeft 20)),
-    ("M-S-<Right>", sendMessage (DecreaseRight 20)),
-    ("M-M1-<Up>", sendMessage (DecreaseUp 20)),
-    ("M-M1-<Down>", sendMessage (IncreaseDown 20)),
-    ("M-M1-<Left>", sendMessage (DecreaseLeft 20)),
-    ("M-M1-<Right>", sendMessage (IncreaseRight 20)),
+myStartupHook :: X ()
+myStartupHook = do
+    spawn "$HOME/.config/polybar/launch.sh"
+    -- spawnOnce "xsetroot -cursor_name left_ptr &"
 
-    -- Focus
-    ("M-m", windows W.focusMaster), -- Focus master window
-    ("M-C-m", windows W.swapMaster), -- Swap focused with master
 
-    -- XMonad
-    ("C-M1-<Delete>", io (exitWith ExitSuccess)), -- Quit
-    ("M-S-r", spawn "xmonad --recompile; xmonad --restart"), -- Restart
+--------------------------------------------------------------------------------
+-- Main
+--------------------------------------------------------------------------------
+main = do
+    dbus <- D.connectSession
+    -- Request access to the DBus name
+    D.requestName dbus (D.busName_ "org.xmonad.Log")
+        [D.nameAllowReplacement, D.nameReplaceExisting, D.nameDoNotQueue]
 
-    -- Function Keys
-    ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ +2%"),
-    ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@  -2%"), ("<XF86AudioMute>", spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle"),
+    mainConfig <- myWindowNavigation
+        $ ewmh
+        $ docks
+        $ myConfig {
+            logHook = dynamicLogWithPP (myLogHook dbus)
+                >> fadeInactiveLogHook 0.9
+        }
 
-    ("<XF86AudioPlay>", spawn "$HOME/scripts/sp play"),
-    ("<XF86AudioPrev>", spawn "$HOME/scripts/sp prev"),
-    ("<XF86AudioNext>", spawn "$HOME/scripts/sp next"),
+    xmonad mainConfig
 
-    ("<XF86MonBrightnessUp>", spawn "xbacklight -inc 2"),
-    ("<XF86MonBrightnessDown>", spawn "xbacklight -dec 2")
-    ]
+--------------------------------------------------------------------------------
+-- LogHook (xmonad-log output)
+--------------------------------------------------------------------------------
 
-myWindowNavigation = withWindowNavigationKeys ([
-                        ((myModMask, xK_k), WNGo U),
-                        ((myModMask, xK_j), WNGo D),
-                        ((myModMask, xK_h), WNGo L),
-                        ((myModMask, xK_l), WNGo R),
-                        ((myModMask .|. controlMask, xK_k), WNSwap U),
-                        ((myModMask .|. controlMask, xK_j), WNSwap D),
-                        ((myModMask .|. controlMask, xK_h), WNSwap L),
-                        ((myModMask .|. controlMask, xK_l), WNSwap R)
-                    ])
 
--- =================== Mouse Bindings =================== --
+-- Colours
+fg        = "#ebdbb2"
+bg        = "#282828"
+gray      = "#a89984"
+bg1       = "#3c3836"
+bg2       = "#505050"
+bg3       = "#665c54"
+bg4       = "#7c6f64"
+
+green     = "#b8bb26"
+darkgreen = "#98971a"
+red       = "#fb4934"
+darkred   = "#cc241d"
+yellow    = "#fabd2f"
+blue      = "#83a598"
+purple    = "#d3869b"
+cyan      = "#4ec9b0"
+white     = "#eeeeee"
+
+pur2      = "#5b51c9"
+blue2     = "#2266d0"
+
+myDisable :: String -> String
+myDisable str = ""
+
+myLogHook :: D.Client -> PP
+myLogHook dbus = def
+    { ppOutput = dbusOutput dbus
+    , ppCurrent = wrap ("%{F" ++ cyan ++ "} ") " %{F-}"
+    , ppVisible = wrap ("%{F" ++ blue2 ++ "} ") " %{F-}"
+    , ppUrgent = wrap ("%{F" ++ red ++ "} ") " %{F-}"
+    , ppHidden = wrap " " " "
+    , ppWsSep = ""
+    , ppSep = " | "
+    , ppTitle = myDisable
+    , ppLayout = myDisable
+    }
+
+dbusOutput :: D.Client -> String -> IO ()
+dbusOutput dbus str = do
+    let signal = (D.signal objectPath interfaceName memberName) {
+            D.signalBody = [D.toVariant $ UTF8.decodeString str]
+        }
+    D.emit dbus signal
+  where
+    objectPath = D.objectPath_ "/org/xmonad/Log"
+    interfaceName = D.interfaceName_ "org.xmonad.Log"
+    memberName = D.memberName_ "Update"
+
+
+--------------------------------------------------------------------------------
+-- Mouse Bindings
+--------------------------------------------------------------------------------
 
 myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 
@@ -182,89 +241,103 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
     -- you may also bind events to the mouse scroll wheel (button4 and button5)
     ]
 
+--------------------------------------------------------------------------------
+-- Config
+--------------------------------------------------------------------------------
 
--- =================== Layouts =================== --
-mySpacing :: Integer -> l a -> XMonad.Layout.LayoutModifier.ModifiedLayout Spacing l a
-mySpacing i = spacingRaw True (Border i i i i) True (Border i i i i) True
+myConfig = def
+    { terminal           = myTerminal
+    , layoutHook         = myLayoutHook
+    , manageHook         = placeHook(smart(0.5, 0.5))
+        <+> manageDocks
+        <+> myManageHook
+        <+> myManageHook'
+        <+> manageHook def
+    , handleEventHook    = docksEventHook
+        <+> minimizeEventHook
+        <+> fullscreenEventHook
+    , startupHook        = myStartupHook
+    , focusFollowsMouse  = False
+    , clickJustFocuses   = False
+    , borderWidth        = myBorderWidth
+    , modMask            = myModMask
+    , workspaces         = myWorkspaces
+    , normalBorderColor  = gray
+    , focusedBorderColor = cyan
+    , mouseBindings      = myMouseBindings
+    } `additionalKeysP` [
+--------------------------------------------------------------------------------
+-- Keybindings
+--------------------------------------------------------------------------------
 
-tall    = renamed [Replace "tall"]
-            $ smartBorders
-            $ mySpacing 5
-            $ ResizableTall 1 (3/100) (1/2) [] -- Numbers: windows in master, increment on resize, proportion for master
-spirals = renamed [Replace "spirals"]
-            $ smartBorders
-            $ mySpacing 5
-            $ spiral (6/7)
-full    = renamed [Replace "full"]
-            $ noBorders Full
+    -- Launch Programs
+        ("M-<Return>", spawn myTerminal) -- Terminal
+      , ("M-r", spawn "rofi -show drun") -- Run Prompt
+      , ("M-<Space>", spawn "rofi -show drun") -- Run Prompt
+      , ("M-c", spawn "chromium --profile-directory='Default'") -- Chromium (main)
+      , ("M-S-c", spawn "chromium --profile-directory='Profile 1'") -- Chromium (alt)
+      , ("M-o", spawn "chromium https://onq.queensu.ca/d2l/home") -- OnQ
+      , ("M-n", spawn "chromium https://www.notion.so/ecall/") -- Notion
+      , ("M-b", spawn "$HOME/.config/polybar/launch.sh")
 
-myLayoutHook = windowArrange myLayout
-                where
-                    myLayout = tall ||| spirals ||| full
+    -- Kill Windows
+      , ("M-q", kill) -- Focused window
+      , ("M-S-q", killAll) -- Kill all windows
 
--- =================== Window Rules =================== --
+    -- Layout
+      , ("M-S-<Tab>", sendMessage NextLayout) -- Next Layout
+      , ("M-C-<Down>", sendMessage DeArrange) -- Tile Mode
+      , ("M-C-<Tab>", withFocused $ windows . W.sink) -- Push window back into tiling
+      , ("M-S-h", sendMessage Shrink) -- Shrink horizontal
+      , ("M-S-l", sendMessage Expand) -- Expand horizontal
+      , ("M-S-j", sendMessage MirrorShrink) -- Shrink vertical
+      , ("M-S-k", sendMessage MirrorExpand) -- Expand vertical
+      , ("M-,", sendMessage (IncMasterN 1)) -- Add a window to master area
+      , ("M-.", sendMessage (IncMasterN (-1))) -- Remove a window from master area
+      -- , ("M-b", sendMessage ToggleStruts) -- Toggle avoiding the status bar
 
--- Execute arbitrary actions and WindowSet manipulations when managing
--- a new window. You can use this to, for example, always float a
--- particular program, or have a client always appear on a particular
--- workspace.
---
--- To find the property name associated with a program, use
--- > xprop | grep WM_CLASS
--- and click on the client you're interested in.
---
--- To match on the WM_NAME, you can use 'title' in the same way that
--- 'className' and 'resource' are used below.
---
-myManageHook = composeAll
-    [ className =? "MPlayer"        --> doFloat
-    , className =? "Gimp"           --> doFloat
-    , resource  =? "desktop_window" --> doIgnore
-    , resource  =? "kdesktop"       --> doIgnore ]
+    -- Floating Layout
+      , ("M-C-<Up>", sendMessage Arrange) -- Floating Mode
+      , ("M-<Up>", sendMessage (MoveUp 20))
+      , ("M-<Down>", sendMessage (MoveDown 20))
+      , ("M-<Left>", sendMessage (MoveLeft 20))
+      , ("M-<Right>", sendMessage (MoveRight 20))
+      , ("M-S-<Up>", sendMessage (IncreaseUp 20))
+      , ("M-S-<Down>", sendMessage (DecreaseDown 20))
+      , ("M-S-<Left>", sendMessage (IncreaseLeft 20))
+      , ("M-S-<Right>", sendMessage (DecreaseRight 20))
+      , ("M-M1-<Up>", sendMessage (DecreaseUp 20))
+      , ("M-M1-<Down>", sendMessage (IncreaseDown 20))
+      , ("M-M1-<Left>", sendMessage (DecreaseLeft 20))
+      , ("M-M1-<Right>", sendMessage (IncreaseRight 20))
 
+    -- Focus
+      , ("M-m", windows W.focusMaster) -- Focus master window
+      , ("M-C-m", windows W.swapMaster) -- Swap focused with master
+      , ("M-<Tab>", windows W.focusUp) -- Focus next
 
--- =================== Event Handling =================== --
+    -- XMonad
+      , ("C-M1-<Delete>", io (exitWith ExitSuccess)) -- Quit
+      , ("M-S-r", spawn "xmonad --recompile; xmonad --restart") -- Restart
 
--- * EwmhDesktops users should change this to ewmhDesktopsEventHook
---
--- Defines a custom handler function for X Events. The function should
--- return (All True) if the default handler is to be run afterwards. To
--- combine event hooks use mappend or mconcat from Data.Monoid.
---
-myEventHook = mempty
+    -- Function Keys
+      , ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ +2%")
+      , ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@  -2%")
+      , ("<XF86AudioMute>", spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
 
+      , ("<XF86AudioPlay>", spawn "playerctl play-pause")
+      , ("<XF86AudioPrev>", spawn "playerctl previous")
+      , ("<XF86AudioNext>", spawn "playerctl next")
 
--- =================== Startup =================== --
+      , ("<XF86MonBrightnessUp>", spawn "xbacklight -inc 2%")
+      , ("<XF86MonBrightnessDown>", spawn "xbacklight -dec 2%")]
 
-myStartupHook :: X ()
-myStartupHook = do
-    spawnOnce "nitrogen --restore &"
-    spawnOnce "picom &"
-    spawnOnce "xsetroot -cursor_name left_ptr &"
-
-
-
--- =================== Main =================== --
-
-main = do
-    config <- myWindowNavigation
-        $ defaults
-    xmonad config
-
-defaults = def {
-        terminal           = myTerminal,
-        focusFollowsMouse  = False,
-        clickJustFocuses   = False,
-        borderWidth        = myBorderWidth,
-        modMask            = myModMask,
-        workspaces         = myWorkspaces,
-        normalBorderColor  = myNormalBorderColor,
-        focusedBorderColor = myFocusedBorderColor,
-        mouseBindings      = myMouseBindings,
-        layoutHook         = myLayoutHook,
-        manageHook         = myManageHook,
-        handleEventHook    = myEventHook,
-        logHook            = myLogHook,
-        startupHook        = myStartupHook
-    } `additionalKeysP` myKeys
-
+myWindowNavigation = withWindowNavigationKeys ([
+    ((myModMask, xK_k), WNGo U),
+    ((myModMask, xK_j), WNGo D),
+    ((myModMask, xK_h), WNGo L),
+    ((myModMask, xK_l), WNGo R),
+    ((myModMask .|. controlMask, xK_k), WNSwap U),
+    ((myModMask .|. controlMask, xK_j), WNSwap D),
+    ((myModMask .|. controlMask, xK_h), WNSwap L),
+    ((myModMask .|. controlMask, xK_l), WNSwap R)])

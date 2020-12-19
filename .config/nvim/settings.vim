@@ -1,19 +1,19 @@
-" set leader key
-let g:mapleader = "\<Space>"
 
-syntax enable										" Syntax highlighing
+syntax enable					" Syntax highlighing
 set t_Co=256                    " Support 256 colors
-set termguicolors								" Enable termguicolors
+set termguicolors				" Enable termguicolors
 set background=dark             " Set background color
 set hidden                      " Allow multiple buffers to be open
 set nowrap                      " Don't wrap line
-set ruler              			    " Show the ruler
-set number relativenumber				" Relative line numbers
+set ruler              			" Show the ruler
+set number relativenumber		" Relative line numbers
 set cursorline                  " Highlight current line
 set splitbelow                  " Hsplit below
 set splitright                  " Vsplit to the right
+set colorcolumn=80              " Column at line 80
+highlight ColorColumn guibg=#3B4252
 
-set tabstop=4										" Tab = 4 spaces
+set tabstop=4					" Tab = 4 spaces
 set shiftwidth=4                " Indent = 4 space
 set smarttab                    " Makes tabbing smarter
 set expandtab										" Leave tabs as tabs

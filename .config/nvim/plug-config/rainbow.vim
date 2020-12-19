@@ -1,7 +1,7 @@
 let g:rainbow_active = 1
 
 let g:rainbow_conf = {
-\	'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
+\	'guifgs': ['lightblue', 'amber', 'lightcyan', 'lightmagenta'],
 \	'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
 \	'guis': [''],
 \	'cterms': [''],
