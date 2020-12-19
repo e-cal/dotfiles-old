@@ -31,10 +31,13 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'tpope/vim-rhubarb'
     " Sneak
     Plug 'justinmk/vim-sneak'
+    " Surround
+    Plug 'tpope/vim-surround'
 
     "Themes
     Plug 'morhetz/gruvbox'
     Plug 'phanviet/vim-monokai-pro'
+    Plug 'arcticicestudio/nord-vim'
 
 call plug#end()
 

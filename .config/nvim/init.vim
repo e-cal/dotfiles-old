@@ -1,7 +1,8 @@
 " Set themes 
-source $HOME/.config/nvim/themes/gruvbox.vim
 source $HOME/.config/nvim/themes/airline.vim
+"source $HOME/.config/nvim/themes/gruvbox.vim
 "source $HOME/.config/nvim/themes/monokai-pro.vim
+source $HOME/.config/nvim/themes/nord.vim
 
 " Source settings
 source $HOME/.config/nvim/plugins.vim
