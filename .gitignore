@@ -27,7 +27,6 @@ yay-git
 
 # Directories
 projects/
-scripts/
 
 # Hidden Directories
 .gnupg/
@@ -52,4 +51,3 @@ scripts/
 
 # Exception
 !.local/share/fonts/
-!.config/polybar
