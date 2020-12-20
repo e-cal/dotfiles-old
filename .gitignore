@@ -50,3 +50,5 @@ scripts/
 # Other
 .config/nvim/autoload/
 
+# Exception
+!.local/share/fonts/

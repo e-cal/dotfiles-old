@@ -119,7 +119,7 @@ format = "祥[$duration]($style) "
 time_format = "%I:%M%p"
 format = "🕙 $time($style) "
 style = "bright-white"
-disabled = false
+disabled = true
 
 [python]
 symbol = " "
