@@ -272,13 +272,15 @@ myConfig = def
 
     -- Launch Programs
         ("M-<Return>", spawn myTerminal) -- Terminal
-      , ("M-r", spawn "rofi -show drun") -- Run Prompt
-      , ("M-<Space>", spawn "rofi -show drun") -- Run Prompt
+      , ("M-r", spawn "rofi -show drun -config $HOME/.config/rofi/main.rasi") -- Run Prompt
+      , ("M-<Space>", spawn "rofi -show drun -config $HOME/.config/rofi/main.rasi") -- Run Prompt
       , ("M-c", spawn "chromium --profile-directory='Default'") -- Chromium (main)
       , ("M-S-c", spawn "chromium --profile-directory='Profile 1'") -- Chromium (alt)
       , ("M-o", spawn "chromium https://onq.queensu.ca/d2l/home") -- OnQ
       , ("M-n", spawn "chromium https://www.notion.so/ecall/") -- Notion
-      , ("M-b", spawn "$HOME/.config/polybar/launch.sh")
+      , ("M-g", spawn "chromium https://github.com") -- Github
+      , ("M-b", spawn "$HOME/.config/polybar/launch.sh") -- Polybar
+      , ("M-<XF86AudioPlay>", spawn "spotify --disable-gpu --disable-software-rasterizer") -- Spotify
 
     -- Kill Windows
       , ("M-q", kill) -- Focused window
