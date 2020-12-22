@@ -35,6 +35,7 @@ alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 alias clearpattern="yes '△▽' | head -n (math --scale=0 (tput cols) / 2) | tr '\n' ',' | sed 's/,//g' | lolcat -F 0.03"
 alias clear="clear;clearpattern"
 alias vim=nvim
+alias v=nvim
 alias la="exa -la --color=always --group-directories-first"
 alias bat="acpi"
 alias bat-stat="sudo tlp-stat"
@@ -45,6 +46,7 @@ alias pacsearch="pacman -Slq | fzf -m --preview 'cat <(pacman -Si {1}) <(pacman 
 alias aursearch="yay -Slq | fzf -m --preview 'cat <(yay -Si {1}) <(yay -Fl {1} | awk \"{print \$2}\")' | xargs -ro  yay -S"
 alias launchbar="~/.config/polybar/launch.sh"
 alias killbar="kill (ps -e | rg poly | awk '{print \$1}')"
+alias mdicons="xdg-open ~/Downloads/md-icons.html"
 
 # Key Bindings for !! and !$
 if [ $fish_key_bindings = fish_vi_key_bindings ];

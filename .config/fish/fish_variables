@@ -7,7 +7,6 @@ SETUVAR --export --path PATH:/home/ecal/scripts\x1e/usr/local/sbin\x1e/usr/local
 SETUVAR --export VIRTUALFISH_HOME:/home/ecal/python/\x2evirtualenvs
 SETUVAR --export VISUAL:/usr/bin/nvim
 SETUVAR __fish_initialized:3100
-SETUVAR _fish_abbr_cdiv:cdiv\x3b\x20echo
 SETUVAR fish_color_autosuggestion:\x237d7d7d
 SETUVAR fish_color_cancel:\x2dr
 SETUVAR fish_color_command:brcyan

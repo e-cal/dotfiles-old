@@ -10,7 +10,6 @@
 --------------------------------------------------------------------------------
 -- Imports
 --------------------------------------------------------------------------------
-
     -- Base
 import XMonad
 import System.Exit
@@ -33,6 +32,7 @@ import XMonad.Hooks.Minimize
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.DynamicProperty
 
     -- Layouts
 import XMonad.Layout.Spiral
@@ -56,7 +56,6 @@ import qualified Codec.Binary.UTF8.String as UTF8
 --------------------------------------------------------------------------------
 -- Variables
 --------------------------------------------------------------------------------
-
     -- Modkey
 myModMask :: KeyMask
 myModMask = mod4Mask -- Windows key
@@ -76,40 +75,20 @@ myEditor = "nvim"
     -- Border
 myBorderWidth :: Dimension
 myBorderWidth = 4
+myBorderColor = "#a89984"
+myFocusColor = "#4ec9b0"
 
 --------------------------------------------------------------------------------
 -- Workspaces
 --------------------------------------------------------------------------------
-
-wsMain = "\xf015"
-ws2 = "\xfcc1"
-ws3 = "\xf718"
-wsMusic = "\xf001"
-
 myWorkspaces :: [String]
-myWorkspaces = [wsMain, ws2, ws3, wsMusic]
-
---------------------------------------------------------------------------------
--- Search Engines
---------------------------------------------------------------------------------
-
-archwiki = S.searchEngine "archwiki" "https://wiki.archlinux.org/index.php?search="
-searchList :: [(String, S.SearchEngine)]
-searchList = [
-    ("a", archwiki),
-    ("d", S.vocabulary),
-    ("i", S.images),
-    ("g", S.google),
-    ("t", S.thesaurus),
-    ("v", S.youtube),
-    ("w", S.wikipedia)
-    ]
+myWorkspaces = ["1", "2", "3", "4", "5"]
 
 --------------------------------------------------------------------------------
 -- Layouts
 --------------------------------------------------------------------------------
 mySpacing :: Integer -> l a -> XMonad.Layout.LayoutModifier.ModifiedLayout Spacing l a
-mySpacing i = spacingRaw True (Border i i i i) True (Border i i i i) True
+mySpacing i = spacingRaw True (Border 0 i i i) True (Border 0 i i i) True
 
 tall    = renamed [Replace "Main"]
             $ avoidStruts
@@ -126,87 +105,53 @@ myLayoutHook = windowArrange myLayout
 --------------------------------------------------------------------------------
 -- Manage Hook
 --------------------------------------------------------------------------------
+myManageHook :: ManageHook
 myManageHook = composeAll
-    [ className =? "MPlayer"          --> doFloat
-    , className =? "Gimp"             --> doFloat
-    , resource  =? "desktop_window"   --> doIgnore
-    , className =? "feh"              --> doFloat
-    , className =? "Gpick"            --> doFloat
-    , role      =? "pop-up"           --> doFloat ]
+    [ resource  =? "desktop_window" --> doIgnore
+    , className =? "MPlayer"        --> doFloat
+    , className =? "Gimp"           --> doFloat
+    , className =? "feh"            --> doFloat
+    , className =? "Gpick"          --> doFloat
+    , role      =? "pop-up"         --> doFloat
+    , manageDocks]
   where
     role = stringProperty "WM_WINDOW_ROLE"
-myManageHook' = composeOne [ isFullscreen -?> doFullFloat ]
 
 --------------------------------------------------------------------------------
 -- Startup Hook
 --------------------------------------------------------------------------------
-
 myStartupHook :: X ()
 myStartupHook = do
     spawn "$HOME/.config/polybar/launch.sh"
     -- spawnOnce "xsetroot -cursor_name left_ptr &"
 
-
 --------------------------------------------------------------------------------
--- Main
+-- Search Engines
 --------------------------------------------------------------------------------
-main = do
-    dbus <- D.connectSession
-    -- Request access to the DBus name
-    D.requestName dbus (D.busName_ "org.xmonad.Log")
-        [D.nameAllowReplacement, D.nameReplaceExisting, D.nameDoNotQueue]
-
-    mainConfig <- myWindowNavigation
-        $ ewmh
-        $ docks
-        $ myConfig {
-            logHook = dynamicLogWithPP (myLogHook dbus)
-                >> fadeInactiveLogHook 0.9
-        }
-
-    xmonad mainConfig
+archwiki = S.searchEngine "archwiki" "https://wiki.archlinux.org/index.php?search="
+searchList :: [(String, S.SearchEngine)]
+searchList = [
+    ("a", archwiki),
+    ("d", S.vocabulary),
+    ("i", S.images),
+    ("g", S.google),
+    ("t", S.thesaurus),
+    ("v", S.youtube),
+    ("w", S.wikipedia)
+    ]
 
 --------------------------------------------------------------------------------
 -- LogHook (xmonad-log output)
 --------------------------------------------------------------------------------
-
-
--- Colours
-fg        = "#ebdbb2"
-bg        = "#282828"
-gray      = "#a89984"
-bg1       = "#3c3836"
-bg2       = "#505050"
-bg3       = "#665c54"
-bg4       = "#7c6f64"
-
-green     = "#b8bb26"
-darkgreen = "#98971a"
-red       = "#fb4934"
-darkred   = "#cc241d"
-yellow    = "#fabd2f"
-blue      = "#83a598"
-purple    = "#d3869b"
-cyan      = "#4ec9b0"
-white     = "#eeeeee"
-
-pur2      = "#5b51c9"
-blue2     = "#2266d0"
-
-myDisable :: String -> String
-myDisable str = ""
-
 myLogHook :: D.Client -> PP
 myLogHook dbus = def
     { ppOutput = dbusOutput dbus
-    , ppCurrent = wrap ("%{F" ++ cyan ++ "} ") " %{F-}"
-    , ppVisible = wrap ("%{F" ++ blue2 ++ "} ") " %{F-}"
-    , ppUrgent = wrap ("%{F" ++ red ++ "} ") " %{F-}"
+    , ppCurrent = wrap ("%{F" ++ "#4ec9b0" ++ "} ") " %{F-}"
+    , ppVisible = wrap ("%{F" ++ "#2266d0" ++ "} ") " %{F-}"
+    , ppUrgent = wrap ("%{F" ++ "#fb4934" ++ "} ") " %{F-}"
     , ppHidden = wrap " " " "
     , ppWsSep = ""
     , ppSep = " | "
-    , ppTitle = myDisable
-    , ppLayout = myDisable
     }
 
 dbusOutput :: D.Client -> String -> IO ()
@@ -220,56 +165,26 @@ dbusOutput dbus str = do
     interfaceName = D.interfaceName_ "org.xmonad.Log"
     memberName = D.memberName_ "Update"
 
-
 --------------------------------------------------------------------------------
 -- Mouse Bindings
 --------------------------------------------------------------------------------
-
 myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
-
     -- mod-button1, Set the window to floating mode and move by dragging
     [ ((modm, button1), (\w -> focus w >> mouseMoveWindow w
                                        >> windows W.shiftMaster))
-
     -- mod-button2, Raise the window to the top of the stack
     , ((modm, button2), (\w -> focus w >> windows W.shiftMaster))
-
     -- mod-button3, Set the window to floating mode and resize by dragging
     , ((modm, button3), (\w -> focus w >> mouseResizeWindow w
                                        >> windows W.shiftMaster))
-
     -- you may also bind events to the mouse scroll wheel (button4 and button5)
     ]
 
 --------------------------------------------------------------------------------
--- Config
---------------------------------------------------------------------------------
-
-myConfig = def
-    { terminal           = myTerminal
-    , layoutHook         = myLayoutHook
-    , manageHook         = placeHook(smart(0.5, 0.5))
-        <+> manageDocks
-        <+> myManageHook
-        <+> myManageHook'
-        <+> manageHook def
-    , handleEventHook    = docksEventHook
-        <+> minimizeEventHook
-        <+> fullscreenEventHook
-    , startupHook        = myStartupHook
-    , focusFollowsMouse  = False
-    , clickJustFocuses   = False
-    , borderWidth        = myBorderWidth
-    , modMask            = myModMask
-    , workspaces         = myWorkspaces
-    , normalBorderColor  = gray
-    , focusedBorderColor = cyan
-    , mouseBindings      = myMouseBindings
-    } `additionalKeysP` [
---------------------------------------------------------------------------------
 -- Keybindings
 --------------------------------------------------------------------------------
-
+myKeys :: [(String, X())]
+myKeys = [
     -- Launch Programs
         ("M-<Return>", spawn myTerminal) -- Terminal
       , ("M-r", spawn "rofi -show drun -config $HOME/.config/rofi/main.rasi") -- Run Prompt
@@ -289,14 +204,13 @@ myConfig = def
     -- Layout
       , ("M-S-<Tab>", sendMessage NextLayout) -- Next Layout
       , ("M-C-<Down>", sendMessage DeArrange) -- Tile Mode
-      , ("M-C-<Tab>", withFocused $ windows . W.sink) -- Push window back into tiling
+      , ("M-C-<Tab>", withFocused $ windows . W.sink) -- Reset Tiling
       , ("M-S-h", sendMessage Shrink) -- Shrink horizontal
       , ("M-S-l", sendMessage Expand) -- Expand horizontal
       , ("M-S-j", sendMessage MirrorShrink) -- Shrink vertical
       , ("M-S-k", sendMessage MirrorExpand) -- Expand vertical
       , ("M-,", sendMessage (IncMasterN 1)) -- Add a window to master area
       , ("M-.", sendMessage (IncMasterN (-1))) -- Remove a window from master area
-      -- , ("M-b", sendMessage ToggleStruts) -- Toggle avoiding the status bar
 
     -- Floating Layout
       , ("M-C-<Up>", sendMessage Arrange) -- Floating Mode
@@ -343,3 +257,48 @@ myWindowNavigation = withWindowNavigationKeys ([
     ((myModMask .|. controlMask, xK_j), WNSwap D),
     ((myModMask .|. controlMask, xK_h), WNSwap L),
     ((myModMask .|. controlMask, xK_l), WNSwap R)])
+
+--------------------------------------------------------------------------------
+-- Main
+--------------------------------------------------------------------------------
+main = do
+    dbus <- D.connectSession
+    -- Request access to the DBus name
+    D.requestName dbus (D.busName_ "org.xmonad.Log")
+        [D.nameAllowReplacement, D.nameReplaceExisting, D.nameDoNotQueue]
+
+    fullConfig <- myWindowNavigation
+        $ ewmh
+        $ docks
+        $ myConfig {
+            logHook = dynamicLogWithPP (myLogHook dbus)
+                >> fadeInactiveLogHook 0.9
+        }
+
+    xmonad fullConfig
+
+--------------------------------------------------------------------------------
+-- Config
+--------------------------------------------------------------------------------
+myConfig = def
+    { terminal           = myTerminal
+    , layoutHook         = myLayoutHook
+    , manageHook         = placeHook(smart(0.5, 0.5))
+        <+> manageDocks
+        <+> myManageHook
+        <+> manageHook def
+    , handleEventHook    = docksEventHook
+        <+> minimizeEventHook
+        <+> fullscreenEventHook
+    -- Move Spotify to workspace 5
+        <+> dynamicPropertyChange "WM_NAME" (className =? "Spotify" --> doShift "5")
+    , startupHook        = myStartupHook
+    , focusFollowsMouse  = False
+    , clickJustFocuses   = False
+    , borderWidth        = myBorderWidth
+    , modMask            = myModMask
+    , workspaces         = myWorkspaces
+    , normalBorderColor  = myBorderColor
+    , focusedBorderColor = myFocusColor
+    , mouseBindings      = myMouseBindings
+    } `additionalKeysP` myKeys

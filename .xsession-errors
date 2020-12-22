@@ -1,0 +1,56 @@
+XMonad is recompiling and replacing itself another XMonad process because the current process is called "xmonad" but the compiled configuration should be called "xmonad-x86_64-linux"
+XMonad will use ghc to recompile, because "/home/ecal/.xmonad/build" does not exist.
+XMonad skipping recompile because it is not forced (e.g. via --recompile), and neither xmonad.hs nor any *.hs / *.lhs / *.hsc files in lib/ have been changed.
+polybar|notice:  Parsing config file: /home/ecal/.config/polybar/config.ini
+polybar|error: Invalid value for "bar/main.border-color", using default value (reason: "" is an invalid color value.)
+polybar|error: Invalid value for "module/workspaces.format-background", using default value (reason: The reference ${color.shade2} does not exist (no fallback set))
+polybar|error: Invalid value for "module/battery.format-full-prefix-foreground", using default value (reason: The reference ${colors.fg} does not exist (no fallback set))
+polybar|error: Invalid value for "module/battery.animation-charging-foreground", using default value (reason: The reference ${colors.fg} does not exist (no fallback set))
+polybar|error: Invalid value for "module/battery.ramp-capacity-foreground", using default value (reason: The reference ${colors.fg} does not exist (no fallback set))
+polybar|notice:  pulseaudio: using default sink alsa_output.pci-0000_00_1f.3.analog-stereo
+polybar|error: Invalid value for "module/backlight.format-underline", using default value (reason: The reference ${colors.grey} does not exist (no fallback set))
+polybar|error: Invalid value for "module/internet.ramp-signal-foreground", using default value (reason: The reference ${colors.foreground-alt} does not exist (no fallback set))
+polybar|error: Invalid value for "module/powermenu.format-underline", using default value (reason: The reference ${colors.grey} does not exist (no fallback set))
+user error (Error in function getWindowAttributes)
+polybar|notice:  Loaded font "BreezeSans:pixelsize=12:style=Medium Condensed" (name=BreezeSans, offset=4, file=/home/ecal/.local/share/fonts/BreezeSans-MediumCondensed_20150728.ttf)
+polybar|notice:  Loaded font "Material Design Icons Desktop:pixelsize=18" (name=Material Design Icons Desktop, offset=5, file=/home/ecal/.local/share/fonts/MaterialDesignIconsDesktop.ttf)
+polybar|notice:  Loaded font "BreezeSans:pixelsize=10:style=Bold Condensed" (name=BreezeSans, offset=3, file=/home/ecal/.local/share/fonts/BreezeSans-BoldCondensed_20150728.ttf)
+polybar|notice:  Loaded font "Hack Nerd Font Mono:size=24:antialias=true" (name=Hack Nerd Font Mono, offset=7, file=/home/ecal/.local/share/fonts/Hack Regular Nerd Font Complete Mono.ttf)
+polybar|notice:  Loaded font "Hack Nerd Font Mono:size=14:antialias=true" (name=Hack Nerd Font Mono, offset=4, file=/home/ecal/.local/share/fonts/Hack Regular Nerd Font Complete Mono.ttf)
+polybar|notice:  Loaded font "Fira Code Nerd Font:size=14:style=Regular Condensed" (name=FiraCode Nerd Font, offset=3, file=/usr/share/fonts/OTF/Fira Code Regular Nerd Font Complete.otf)
+polybar|notice:  Termination signal received, shutting down...
+polybar|notice:  Parsing config file: /home/ecal/.config/polybar/config.ini
+polybar|error: Invalid value for "bar/main.border-color", using default value (reason: "" is an invalid color value.)
+polybar|error: Invalid value for "module/workspaces.format-background", using default value (reason: The reference ${color.shade2} does not exist (no fallback set))
+polybar|error: Invalid value for "module/battery.format-full-prefix-foreground", using default value (reason: The reference ${colors.fg} does not exist (no fallback set))
+polybar|error: Invalid value for "module/battery.animation-charging-foreground", using default value (reason: The reference ${colors.fg} does not exist (no fallback set))
+polybar|error: Invalid value for "module/battery.ramp-capacity-foreground", using default value (reason: The reference ${colors.fg} does not exist (no fallback set))
+polybar|notice:  pulseaudio: using default sink alsa_output.pci-0000_00_1f.3.analog-stereo
+polybar|error: Invalid value for "module/backlight.format-underline", using default value (reason: The reference ${colors.grey} does not exist (no fallback set))
+polybar|error: Invalid value for "module/internet.ramp-signal-foreground", using default value (reason: The reference ${colors.foreground-alt} does not exist (no fallback set))
+polybar|error: Invalid value for "module/powermenu.format-underline", using default value (reason: The reference ${colors.grey} does not exist (no fallback set))
+polybar|notice:  Loaded font "BreezeSans:pixelsize=12:style=Medium Condensed" (name=BreezeSans, offset=4, file=/home/ecal/.local/share/fonts/BreezeSans-MediumCondensed_20150728.ttf)
+polybar|notice:  Loaded font "Material Design Icons Desktop:pixelsize=18" (name=Material Design Icons Desktop, offset=5, file=/home/ecal/.local/share/fonts/MaterialDesignIconsDesktop.ttf)
+polybar|notice:  Loaded font "BreezeSans:pixelsize=10:style=Bold Condensed" (name=BreezeSans, offset=3, file=/home/ecal/.local/share/fonts/BreezeSans-BoldCondensed_20150728.ttf)
+polybar|notice:  Loaded font "Hack Nerd Font Mono:size=24:antialias=true" (name=Hack Nerd Font Mono, offset=7, file=/home/ecal/.local/share/fonts/Hack Regular Nerd Font Complete Mono.ttf)
+polybar|notice:  Loaded font "Hack Nerd Font Mono:size=14:antialias=true" (name=Hack Nerd Font Mono, offset=4, file=/home/ecal/.local/share/fonts/Hack Regular Nerd Font Complete Mono.ttf)
+polybar|notice:  Loaded font "Fira Code Nerd Font:size=14:style=Regular Condensed" (name=FiraCode Nerd Font, offset=3, file=/usr/share/fonts/OTF/Fira Code Regular Nerd Font Complete.otf)
+polybar|notice:  Termination signal received, shutting down...
+polybar|notice:  Parsing config file: /home/ecal/.config/polybar/config.ini
+polybar|error: Invalid value for "bar/main.border-color", using default value (reason: "" is an invalid color value.)
+polybar|error: Invalid value for "module/workspaces.format-background", using default value (reason: The reference ${color.shade2} does not exist (no fallback set))
+polybar|error: Invalid value for "module/battery.format-full-prefix-foreground", using default value (reason: The reference ${colors.fg} does not exist (no fallback set))
+polybar|error: Invalid value for "module/battery.animation-charging-foreground", using default value (reason: The reference ${colors.fg} does not exist (no fallback set))
+polybar|error: Invalid value for "module/battery.ramp-capacity-foreground", using default value (reason: The reference ${colors.fg} does not exist (no fallback set))
+polybar|notice:  pulseaudio: using default sink alsa_output.pci-0000_00_1f.3.analog-stereo
+polybar|error: Invalid value for "module/backlight.format-underline", using default value (reason: The reference ${colors.grey} does not exist (no fallback set))
+polybar|error: Invalid value for "module/internet.ramp-signal-foreground", using default value (reason: The reference ${colors.foreground-alt} does not exist (no fallback set))
+polybar|error: Invalid value for "module/powermenu.format-underline", using default value (reason: The reference ${colors.grey} does not exist (no fallback set))
+polybar|notice:  Loaded font "BreezeSans:pixelsize=12:style=Medium Condensed" (name=BreezeSans, offset=4, file=/home/ecal/.local/share/fonts/BreezeSans-MediumCondensed_20150728.ttf)
+polybar|notice:  Loaded font "Material Design Icons Desktop:pixelsize=18" (name=Material Design Icons Desktop, offset=5, file=/home/ecal/.local/share/fonts/MaterialDesignIconsDesktop.ttf)
+polybar|notice:  Loaded font "BreezeSans:pixelsize=10:style=Bold Condensed" (name=BreezeSans, offset=3, file=/home/ecal/.local/share/fonts/BreezeSans-BoldCondensed_20150728.ttf)
+polybar|notice:  Loaded font "Hack Nerd Font Mono:size=24:antialias=true" (name=Hack Nerd Font Mono, offset=7, file=/home/ecal/.local/share/fonts/Hack Regular Nerd Font Complete Mono.ttf)
+polybar|notice:  Loaded font "Hack Nerd Font Mono:size=14:antialias=true" (name=Hack Nerd Font Mono, offset=4, file=/home/ecal/.local/share/fonts/Hack Regular Nerd Font Complete Mono.ttf)
+polybar|notice:  Loaded font "Fira Code Nerd Font:size=14:style=Regular Condensed" (name=FiraCode Nerd Font, offset=3, file=/usr/share/fonts/OTF/Fira Code Regular Nerd Font Complete.otf)
+user error (Error in function getWindowAttributes)
+polybar|notice:  Termination signal received, shutting down...

@@ -110,7 +110,6 @@ format = "[$symbol$output]($style) "
 when = "batterycharging"
 shell = ["bash"]
 
-
 [cmd_duration]
 min_time = 10_000
 format = "祥[$duration]($style) "
@@ -123,7 +122,7 @@ disabled = true
 
 [python]
 symbol = " "
-format = '[${symbol}${pyenv_prefix}${version}( \($virtualenv\))]($style)'
+format = '[${symbol}${pyenv_prefix}${version}( \($virtualenv\))]($style) '
 
 [nodejs]
 symbol = " "

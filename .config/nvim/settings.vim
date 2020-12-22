@@ -40,3 +40,4 @@ au! BufWritePost $MYVIMRC source % " auto source when writing to init.vm alterna
 
 " Prevent automatic comment continuation
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
