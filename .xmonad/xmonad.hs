@@ -18,6 +18,7 @@ import qualified XMonad.StackSet as W
     -- Actions
 import XMonad.Actions.WithAll (killAll)
 import XMonad.Actions.WindowNavigation
+import XMonad.Actions.CycleWS
 import qualified XMonad.Actions.Search as S
 
     -- Data
@@ -186,67 +187,69 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 myKeys :: [(String, X())]
 myKeys = [
     -- Launch Programs
-        ("M-<Return>", spawn myTerminal) -- Terminal
-      , ("M-r", spawn "rofi -show drun -config $HOME/.config/rofi/main.rasi") -- Run Prompt
-      , ("M-<Space>", spawn "rofi -show drun -config $HOME/.config/rofi/main.rasi") -- Run Prompt
-      , ("M-c", spawn "chromium --profile-directory='Default'") -- Chromium (main)
-      , ("M-S-c", spawn "chromium --profile-directory='Profile 1'") -- Chromium (alt)
-      , ("M-o", spawn "chromium https://onq.queensu.ca/d2l/home") -- OnQ
-      , ("M-n", spawn "chromium https://www.notion.so/ecall/") -- Notion
-      , ("M-g", spawn "chromium https://github.com") -- Github
-      , ("M-b", spawn "$HOME/.config/polybar/launch.sh") -- Polybar
-      , ("M-<XF86AudioPlay>", spawn "spotify --disable-gpu --disable-software-rasterizer") -- Spotify
+    ("M-<Return>", spawn myTerminal) -- Terminal
+    , ("M-S-<Return>", spawn "rofi -show drun -config $HOME/.config/rofi/main.rasi") -- Run Prompt
+    , ("M-c", spawn "chromium --profile-directory='Default'") -- Chromium (main)
+    , ("M-S-c", spawn "chromium --profile-directory='Profile 1'") -- Chromium (alt)
+    , ("M-o", spawn "chromium https://onq.queensu.ca/d2l/home") -- OnQ
+    , ("M-n", spawn "chromium https://www.notion.so/ecall/") -- Notion
+    , ("M-g", spawn "chromium https://github.com") -- Github
+    , ("M-b", spawn "$HOME/.config/polybar/launch.sh") -- Polybar
+    , ("M-<XF86AudioPlay>", spawn "spotify --disable-gpu --disable-software-rasterizer") -- Spotify
 
     -- Kill Windows
-      , ("M-q", kill) -- Focused window
-      , ("M-S-q", killAll) -- Kill all windows
+    , ("M-q", kill) -- Focused window
+    , ("M-S-q", killAll) -- Kill all windows
 
     -- Layout
-      , ("M-S-<Tab>", sendMessage NextLayout) -- Next Layout
-      , ("M-C-<Down>", sendMessage DeArrange) -- Tile Mode
-      , ("M-C-<Tab>", withFocused $ windows . W.sink) -- Reset Tiling
-      , ("M-S-h", sendMessage Shrink) -- Shrink horizontal
-      , ("M-S-l", sendMessage Expand) -- Expand horizontal
-      , ("M-S-j", sendMessage MirrorShrink) -- Shrink vertical
-      , ("M-S-k", sendMessage MirrorExpand) -- Expand vertical
-      , ("M-,", sendMessage (IncMasterN 1)) -- Add a window to master area
-      , ("M-.", sendMessage (IncMasterN (-1))) -- Remove a window from master area
+    , ("M-S-<Tab>", sendMessage NextLayout) -- Next Layout
+    , ("M-C-<Down>", sendMessage DeArrange) -- Tile Mode
+    , ("M-C-<Tab>", withFocused $ windows . W.sink) -- Reset Tiling
+    , ("M-S-h", sendMessage Shrink) -- Shrink horizontal
+    , ("M-S-l", sendMessage Expand) -- Expand horizontal
+    , ("M-S-j", sendMessage MirrorShrink) -- Shrink vertical
+    , ("M-S-k", sendMessage MirrorExpand) -- Expand vertical
+    , ("M-,", sendMessage (IncMasterN 1)) -- Add a window to master area
+    , ("M-.", sendMessage (IncMasterN (-1))) -- Remove a window from master area
 
     -- Floating Layout
-      , ("M-C-<Up>", sendMessage Arrange) -- Floating Mode
-      , ("M-<Up>", sendMessage (MoveUp 20))
-      , ("M-<Down>", sendMessage (MoveDown 20))
-      , ("M-<Left>", sendMessage (MoveLeft 20))
-      , ("M-<Right>", sendMessage (MoveRight 20))
-      , ("M-S-<Up>", sendMessage (IncreaseUp 20))
-      , ("M-S-<Down>", sendMessage (DecreaseDown 20))
-      , ("M-S-<Left>", sendMessage (IncreaseLeft 20))
-      , ("M-S-<Right>", sendMessage (DecreaseRight 20))
-      , ("M-M1-<Up>", sendMessage (DecreaseUp 20))
-      , ("M-M1-<Down>", sendMessage (IncreaseDown 20))
-      , ("M-M1-<Left>", sendMessage (DecreaseLeft 20))
-      , ("M-M1-<Right>", sendMessage (IncreaseRight 20))
+    , ("M-C-<Up>", sendMessage Arrange) -- Floating Mode
+    , ("M-<Up>", sendMessage (MoveUp 20))
+    , ("M-<Down>", sendMessage (MoveDown 20))
+    , ("M-<Left>", sendMessage (MoveLeft 20))
+    , ("M-<Right>", sendMessage (MoveRight 20))
+    , ("M-S-<Up>", sendMessage (IncreaseUp 20))
+    , ("M-S-<Down>", sendMessage (DecreaseDown 20))
+    , ("M-S-<Left>", sendMessage (IncreaseLeft 20))
+    , ("M-S-<Right>", sendMessage (DecreaseRight 20))
+    , ("M-M1-<Up>", sendMessage (DecreaseUp 20))
+    , ("M-M1-<Down>", sendMessage (IncreaseDown 20))
+    , ("M-M1-<Left>", sendMessage (DecreaseLeft 20))
+    , ("M-M1-<Right>", sendMessage (IncreaseRight 20))
 
     -- Focus
-      , ("M-m", windows W.focusMaster) -- Focus master window
-      , ("M-C-m", windows W.swapMaster) -- Swap focused with master
-      , ("M-<Tab>", windows W.focusUp) -- Focus next
+    , ("M-m", windows W.focusMaster) -- Focus master window
+    , ("M-C-m", windows W.swapMaster) -- Swap focused with master
+    , ("M-<Tab>", windows W.focusUp) -- Focus next
+
+    -- Workspace
+    , ("M1-<Tab>", nextWS) -- Next workspace
 
     -- XMonad
-      , ("C-M1-<Delete>", io (exitWith ExitSuccess)) -- Quit
-      , ("M-S-r", spawn "xmonad --recompile; xmonad --restart") -- Restart
+    , ("C-M1-<Delete>", io (exitWith ExitSuccess)) -- Quit
+    , ("M-S-r", spawn "xmonad --recompile; xmonad --restart") -- Restart
 
     -- Function Keys
-      , ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ +2%")
-      , ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@  -2%")
-      , ("<XF86AudioMute>", spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
+    , ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ +2%")
+    , ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@  -2%")
+    , ("<XF86AudioMute>", spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
 
-      , ("<XF86AudioPlay>", spawn "playerctl play-pause")
-      , ("<XF86AudioPrev>", spawn "playerctl previous")
-      , ("<XF86AudioNext>", spawn "playerctl next")
+    , ("<XF86AudioPlay>", spawn "playerctl play-pause")
+    , ("<XF86AudioPrev>", spawn "playerctl previous")
+    , ("<XF86AudioNext>", spawn "playerctl next")
 
-      , ("<XF86MonBrightnessUp>", spawn "xbacklight -inc 2%")
-      , ("<XF86MonBrightnessDown>", spawn "xbacklight -dec 2%")]
+    , ("<XF86MonBrightnessUp>", spawn "xbacklight -inc 2%")
+    , ("<XF86MonBrightnessDown>", spawn "xbacklight -dec 2%")]
 
 myWindowNavigation = withWindowNavigationKeys ([
     ((myModMask, xK_k), WNGo U),

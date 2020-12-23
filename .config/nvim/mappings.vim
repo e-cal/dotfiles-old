@@ -7,6 +7,10 @@ let g:mapleader = "\<Space>"
 " NORMAL
 "===============================================================================
 
+" Reload settings
+nnoremap <M-r> :so $MYVIMRC <CR>
+
+" Resizing
 nnoremap <M-j>    :resize -2<CR>
 nnoremap <M-k>    :resize +2<CR>
 nnoremap <M-h>    :vertical resize -2<CR>
@@ -22,12 +26,9 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+" Other
 nnoremap <silent> <C-w> :bd <CR>
-nnoremap <C-r> :redo <CR>
-
-" Reload settings
-nnoremap <M-r> :so $MYVIMRC <CR>
-
+nnoremap <C-S-h> :noh <CR>
 
 "===============================================================================
 " INSERT

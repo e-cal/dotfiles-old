@@ -6,7 +6,7 @@
         "haskell"
     ],
     "python.linting.enabled": true,
-    "python.jediEnabled": true,
+    "python.jediEnabled": false,
     "python.linting.pylintEnabled": false,
     "snippets.ultisnips.directories": [
         "UltiSnips",

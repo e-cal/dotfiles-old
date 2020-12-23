@@ -21,6 +21,7 @@ yay-git
 .bash_logout
 .git-credentials
 .gitconfig
+.lesshst
 .python_history
 .viminfo
 .Xauthority
