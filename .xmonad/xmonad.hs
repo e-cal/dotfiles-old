@@ -89,12 +89,13 @@ myWorkspaces = ["1", "2", "3", "4", "5"]
 -- Layouts
 --------------------------------------------------------------------------------
 mySpacing :: Integer -> l a -> XMonad.Layout.LayoutModifier.ModifiedLayout Spacing l a
-mySpacing i = spacingRaw True (Border 0 i i i) True (Border 0 i i i) True
+-- spacingRaw parameters: disable gaps on one window, screen edges (top, bottom, left, right), screen edge gaps on, window gaps, window gaps on
+mySpacing i = spacingRaw True (Border 0 i i i) True (Border 0 i 0 i ) True
 
 tall    = renamed [Replace "Main"]
             $ avoidStruts
             $ smartBorders
-            $ mySpacing 5
+            $ mySpacing 2
             $ ResizableTall 1 (3/100) (1/2) [] -- Numbers: windows in master, increment on resize, proportion for master
 full    = renamed [Replace "Fullscreen"]
             $ noBorders Full
@@ -194,6 +195,7 @@ myKeys = [
     , ("M-o", spawn "chromium https://onq.queensu.ca/d2l/home") -- OnQ
     , ("M-n", spawn "chromium https://www.notion.so/ecall/") -- Notion
     , ("M-g", spawn "chromium https://github.com") -- Github
+    , ("M-y", spawn "chromium --profile-directory='Profile 1' https://youtube.com") -- Github
     , ("M-b", spawn "$HOME/.config/polybar/launch.sh") -- Polybar
     , ("M-<XF86AudioPlay>", spawn "spotify --disable-gpu --disable-software-rasterizer") -- Spotify
 
