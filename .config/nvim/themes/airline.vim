@@ -7,8 +7,8 @@ let g:airline_powerline_fonts = 1
 "let g:airline_right_sep = ''
 
 " Switch to your current theme
-" let g:airline_theme = 'base16_gruvbox_dark_hard'
-let g:airline_theme = 'base16_nord'
+let g:airline_theme = 'base16_gruvbox_dark_hard'
+"let g:airline_theme = 'base16_nord'
 let g:airline_section_z = '%#__accent_bold#%{g:airline_symbols.linenr}%#__restore__#%l:%v'
 
 let g:airline#extensions#whitespace#enabled = 0

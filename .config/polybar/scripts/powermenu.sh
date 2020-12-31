@@ -6,11 +6,10 @@ rofi_command="rofi -no-fixed-num-lines -theme $HOME/.config/rofi/powermenu.rasi"
 shutdown="󰐥"
 reboot="󰜉"
 suspend="󰒲"
-lock="󰌾"
 logout="󰿅"
 
 # Variable passed to rofi
-options="$shutdown\n$reboot\n$suspend\n$lock\n$logout"
+options="$shutdown\n$reboot\n$suspend\n$logout"
 
 # Remapping movement
 xmodmap -e "keycode 32 = Return"
@@ -31,10 +30,6 @@ case $chosen in
     $reboot)
 	    sudo reboot
         ;;
-    $lock)
-        #betterlockscreen -l &
-        echo impliment lock screen
-        ;;
     $suspend)
         amixer set Master mute
 	    #betterlockscreen -l & 
@@ -43,7 +38,7 @@ case $chosen in
         systemctl suspend
         ;;
     $logout)
-        #bspc quit
-        echo impliment logout
+        session=`loginctl session-status | head -n 1 | awk '{print $1}'`
+        loginctl terminate-session $session
         ;;
 esac

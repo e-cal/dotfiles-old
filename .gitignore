@@ -14,20 +14,25 @@
 .local
 .cfg
 .cache
+.dropbox
 .pki
-Downloads
-yay-git
 .bash_history
 .bash_logout
+.ipython
+.jupyter
 .git-credentials
 .gitconfig
 .lesshst
 .python_history
 .viminfo
 .Xauthority
+Downloads
+textbooks/
+yay-git
 
 # Directories
 projects/
+Dropbox/
 
 # Hidden Directories
 .gnupg/
@@ -40,6 +45,8 @@ projects/
 .config/coc/
 .config/configstore/
 .config/dconf/
+.config/discord/
+.config/Mailspring/
 .config/nitrogen/
 .config/pulse/
 .config/pavucontrol.ini

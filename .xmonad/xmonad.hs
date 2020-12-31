@@ -34,6 +34,7 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.DynamicProperty
+import XMonad.Hooks.SetWMName
 
     -- Layouts
 import XMonad.Layout.Spiral
@@ -76,7 +77,7 @@ myEditor = "nvim"
     -- Border
 myBorderWidth :: Dimension
 myBorderWidth = 4
-myBorderColor = "#a89984"
+myBorderColor = "#474747"
 myFocusColor = "#4ec9b0"
 
 --------------------------------------------------------------------------------
@@ -88,14 +89,14 @@ myWorkspaces = ["1", "2", "3", "4", "5"]
 --------------------------------------------------------------------------------
 -- Layouts
 --------------------------------------------------------------------------------
-mySpacing :: Integer -> l a -> XMonad.Layout.LayoutModifier.ModifiedLayout Spacing l a
+--mySpacing :: Integer -> l a -> XMonad.Layout.LayoutModifier.ModifiedLayout Spacing l a
 -- spacingRaw parameters: disable gaps on one window, screen edges (top, bottom, left, right), screen edge gaps on, window gaps, window gaps on
-mySpacing i = spacingRaw True (Border 0 i i i) True (Border 0 i 0 i ) True
+--mySpacing i = spacingRaw True (Border 0 i i i) False (Border 0 i 0 i ) False
 
 tall    = renamed [Replace "Main"]
             $ avoidStruts
             $ smartBorders
-            $ mySpacing 2
+            -- $ mySpacing 2
             $ ResizableTall 1 (3/100) (1/2) [] -- Numbers: windows in master, increment on resize, proportion for master
 full    = renamed [Replace "Fullscreen"]
             $ noBorders Full
@@ -109,12 +110,15 @@ myLayoutHook = windowArrange myLayout
 --------------------------------------------------------------------------------
 myManageHook :: ManageHook
 myManageHook = composeAll
-    [ resource  =? "desktop_window" --> doIgnore
+    [resource  =? "desktop_window"  --> doIgnore
     , className =? "MPlayer"        --> doFloat
     , className =? "Gimp"           --> doFloat
     , className =? "feh"            --> doFloat
     , className =? "Gpick"          --> doFloat
     , role      =? "pop-up"         --> doFloat
+    , className =? "Mailspring"     --> doShift "4"
+    , className =? "slack"          --> doShift "5"
+    , className =? "discord"        --> doShift "5"
     , manageDocks]
   where
     role = stringProperty "WM_WINDOW_ROLE"
@@ -125,7 +129,7 @@ myManageHook = composeAll
 myStartupHook :: X ()
 myStartupHook = do
     spawn "$HOME/.config/polybar/launch.sh"
-    -- spawnOnce "xsetroot -cursor_name left_ptr &"
+    setWMName "LG3D"
 
 --------------------------------------------------------------------------------
 -- Search Engines
@@ -197,6 +201,7 @@ myKeys = [
     , ("M-g", spawn "chromium https://github.com") -- Github
     , ("M-y", spawn "chromium --profile-directory='Profile 1' https://youtube.com") -- Github
     , ("M-b", spawn "$HOME/.config/polybar/launch.sh") -- Polybar
+    , ("M-S-b", spawn "nitrogen") -- Nitrogen
     , ("M-<XF86AudioPlay>", spawn "spotify --disable-gpu --disable-software-rasterizer") -- Spotify
 
     -- Kill Windows
@@ -232,26 +237,31 @@ myKeys = [
     -- Focus
     , ("M-m", windows W.focusMaster) -- Focus master window
     , ("M-C-m", windows W.swapMaster) -- Swap focused with master
-    , ("M-<Tab>", windows W.focusUp) -- Focus next
+    , ("M-S-<Tab>", windows W.focusUp) -- Focus next
 
     -- Workspace
-    , ("M1-<Tab>", nextWS) -- Next workspace
+    , ("M-<Tab>", nextWS) -- Next workspace
 
     -- XMonad
     , ("C-M1-<Delete>", io (exitWith ExitSuccess)) -- Quit
     , ("M-S-r", spawn "xmonad --recompile; xmonad --restart") -- Restart
 
     -- Function Keys
-    , ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ +2%")
-    , ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@  -2%")
-    , ("<XF86AudioMute>", spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
+    --, ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ +2%")
+    --, ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@  -2%")
+    --, ("<XF86AudioMute>", spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
+    , ("<XF86AudioRaiseVolume>", spawn "volumeControl up")
+    , ("<XF86AudioLowerVolume>", spawn "volumeControl down")
+    , ("<XF86AudioMute>", spawn "volumeControl mute")           
 
     , ("<XF86AudioPlay>", spawn "playerctl play-pause")
     , ("<XF86AudioPrev>", spawn "playerctl previous")
     , ("<XF86AudioNext>", spawn "playerctl next")
 
-    , ("<XF86MonBrightnessUp>", spawn "xbacklight -inc 2%")
-    , ("<XF86MonBrightnessDown>", spawn "xbacklight -dec 2%")]
+    --, ("<XF86MonBrightnessUp>", spawn "xbacklight -inc 2%")
+    --, ("<XF86MonBrightnessDown>", spawn "xbacklight -dec 2%")
+    , ("<XF86MonBrightnessUp>", spawn "brightnessControl up")
+    , ("<XF86MonBrightnessDown>", spawn "brightnessControl down")]
 
 myWindowNavigation = withWindowNavigationKeys ([
     ((myModMask, xK_k), WNGo U),
@@ -276,8 +286,8 @@ main = do
         $ ewmh
         $ docks
         $ myConfig {
-            logHook = dynamicLogWithPP (myLogHook dbus)
-                >> fadeInactiveLogHook 0.9
+         logHook = dynamicLogWithPP (myLogHook dbus)
+             >> fadeInactiveLogHook 0.9
         }
 
     xmonad fullConfig
@@ -296,7 +306,8 @@ myConfig = def
         <+> minimizeEventHook
         <+> fullscreenEventHook
     -- Move Spotify to workspace 5
-        <+> dynamicPropertyChange "WM_NAME" (className =? "Spotify" --> doShift "5")
+        <+> dynamicPropertyChange "WM_NAME" 
+            (className =? "Spotify" --> doShift "3")
     , startupHook        = myStartupHook
     , focusFollowsMouse  = False
     , clickJustFocuses   = False
