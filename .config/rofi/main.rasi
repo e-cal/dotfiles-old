@@ -17,7 +17,7 @@ configuration {
 		text: #F2F2F2;
 		search-bar: #111111DF;
 		results: #111111EF;
-		background-selected: #F2F2F245;
+		background-selected: #4EC9B045;
 		background-active: #F2F2F230;
 		background-white: #F2F2F211;
 		urgent: #E91E6366;

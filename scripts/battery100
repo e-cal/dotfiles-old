@@ -3,7 +3,7 @@
 p=`acpi | awk '{print $4}' | sed 's/%,//g'`
 c=`acpi | awk '{print $3}' | sed 's/,//g'`
 
-if [ $p -eq 100 -a $c != 'Charging' ]
+if [ $p -gt 80 -a $c != 'Charging' ]
 then
 		exit 0
 fi

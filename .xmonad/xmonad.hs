@@ -209,9 +209,9 @@ myKeys = [
     , ("M-S-q", killAll) -- Kill all windows
 
     -- Layout
-    , ("M-S-<Tab>", sendMessage NextLayout) -- Next Layout
+    --, ("M-S-<Tab>", sendMessage NextLayout) -- Next Layout
     , ("M-C-<Down>", sendMessage DeArrange) -- Tile Mode
-    , ("M-C-<Tab>", withFocused $ windows . W.sink) -- Reset Tiling
+    , ("M-S-<Space>", withFocused $ windows . W.sink) -- Reset Tiling
     , ("M-S-h", sendMessage Shrink) -- Shrink horizontal
     , ("M-S-l", sendMessage Expand) -- Expand horizontal
     , ("M-S-j", sendMessage MirrorShrink) -- Shrink vertical
@@ -237,10 +237,11 @@ myKeys = [
     -- Focus
     , ("M-m", windows W.focusMaster) -- Focus master window
     , ("M-C-m", windows W.swapMaster) -- Swap focused with master
-    , ("M-S-<Tab>", windows W.focusUp) -- Focus next
 
     -- Workspace
     , ("M-<Tab>", nextWS) -- Next workspace
+    , ("M-S-<Tab>", shiftToNext >> nextWS) -- Move window to next workspace
+    , ("M-C-<Tab>", shiftToPrev >> prevWS) -- Move window to prev workspace
 
     -- XMonad
     , ("C-M1-<Delete>", io (exitWith ExitSuccess)) -- Quit

@@ -26,9 +26,14 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+" File navigation
+nmap <leader>gd <Plug>(coc-definition)
+nmap <leader>gr <Plug>(coc-references)
+nnoremap <C-p> :GFiles<CR>
+
 " Other
 nnoremap <silent> <C-w> :bd <CR>
-nnoremap <C-S-h> :noh <CR>
+nnoremap <C-h> :noh <CR>
 
 "===============================================================================
 " INSERT

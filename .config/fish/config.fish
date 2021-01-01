@@ -32,6 +32,7 @@ set fish_color_param brcyan
 
 # Aliases
 alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
+alias configstat="config status -u"
 alias clearpattern="yes '△▽' | head -n (math --scale=0 (tput cols) / 2) | tr '\n' ',' | sed 's/,//g' | lolcat -F 0.03"
 alias clear="clear;clearpattern"
 alias vim=nvim

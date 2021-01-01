@@ -1,18 +1,26 @@
-" enable tabline
+" Show tabs
 let g:airline#extensions#tabline#enabled = 1
 
-" enable powerline fonts
 let g:airline_powerline_fonts = 1
-"let g:airline_left_sep = ''
-"let g:airline_right_sep = ''
 
 " Switch to your current theme
 let g:airline_theme = 'base16_gruvbox_dark_hard'
 "let g:airline_theme = 'base16_nord'
-let g:airline_section_z = '%#__accent_bold#%{g:airline_symbols.linenr}%#__restore__#%l:%v'
 
+" Section Y (encoding)
+
+" Section Z (file position)
+" Default: 
+"%p%% %#__accent_bold#%{g:airline_symbols.linenr}%l%#__restore__#
+"%#__accent_bold#/%L %{g:airline_symbols.maxlinenr}%#__restore__#:%v
+let g:airline_section_z = '%#__accent_bold#%{g:airline_symbols.linenr}%l/%L%#__restore__#:%v'
+
+" Disable whitespace warnings
 let g:airline#extensions#whitespace#enabled = 0
+" Hide empty sections
+let g:airline_skip_empty_sections = 1
 
+" Set the display for the vim mode
 let g:airline_mode_map = {
 		\ '__'     : '-',
     \ 'c'      : 'C',
