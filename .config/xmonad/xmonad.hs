@@ -76,7 +76,7 @@ myEditor = "nvim"
 
     -- Border
 myBorderWidth :: Dimension
-myBorderWidth = 4
+myBorderWidth = 3
 myBorderColor = "#474747"
 myFocusColor = "#4ec9b0"
 
@@ -89,15 +89,17 @@ myWorkspaces = ["1", "2", "3", "4", "5"]
 --------------------------------------------------------------------------------
 -- Layouts
 --------------------------------------------------------------------------------
---mySpacing :: Integer -> l a -> XMonad.Layout.LayoutModifier.ModifiedLayout Spacing l a
--- spacingRaw parameters: disable gaps on one window, screen edges (top, bottom, left, right), screen edge gaps on, window gaps, window gaps on
---mySpacing i = spacingRaw True (Border 0 i i i) False (Border 0 i 0 i ) False
+mySpacing :: Integer -> l a -> XMonad.Layout.LayoutModifier.ModifiedLayout Spacing l a
+-- params: disable gaps on one window, screen edges (top, bottom, left, right),
+        -- screen edge gaps on, window gaps, window gaps on
+mySpacing i = spacingRaw True (Border 0 i i i) True (Border 0 i i i ) True
 
 tall    = renamed [Replace "Main"]
             $ avoidStruts
             $ smartBorders
-            -- $ mySpacing 2
-            $ ResizableTall 1 (3/100) (1/2) [] -- Numbers: windows in master, increment on resize, proportion for master
+            $ mySpacing 2
+        -- params: windows in master, increment on resize, proportion for master
+            $ ResizableTall 1 (3/100) (1/2) [] 
 full    = renamed [Replace "Fullscreen"]
             $ noBorders Full
 
