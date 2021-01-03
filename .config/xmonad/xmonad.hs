@@ -117,7 +117,7 @@ myManageHook = composeAll
     , className =? "Gpick"          --> doFloat
     , role      =? "pop-up"         --> doFloat
     , className =? "Mailspring"     --> doShift "4"
-    , className =? "slack"          --> doShift "5"
+    , className =? "Slack"          --> doShift "5"
     , className =? "discord"        --> doShift "5"
     , manageDocks]
   where
@@ -203,6 +203,7 @@ myKeys = [
     , ("M-b", spawn "$HOME/.config/polybar/launch.sh") -- Polybar
     , ("M-S-b", spawn "nitrogen") -- Nitrogen
     , ("M-<XF86AudioPlay>", spawn "spotify --disable-gpu --disable-software-rasterizer") -- Spotify
+    , ("M-<Esc> <Return>", spawn "$HOME/.config/polybar/scripts/powermenu.sh") -- Powermenu
 
     -- Kill Windows
     , ("M-q", kill) -- Focused window

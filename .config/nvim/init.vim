@@ -17,3 +17,4 @@ source $HOME/.config/nvim/plug-config/vim-hexokinase.vim
 source $HOME/.config/nvim/plug-config/rainbow.vim
 source $HOME/.config/nvim/plug-config/signify.vim
 source $HOME/.config/nvim/plug-config/sneak.vim
+source $HOME/.config/nvim/plug-config/mkdp.vim

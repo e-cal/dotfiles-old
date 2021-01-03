@@ -9,6 +9,7 @@ set -Ux VISUAL /usr/bin/nvim
 set -Ux LC_ALL en_US.UTF-8
 set -Ux LC_CTYPE en_US.UTF-8
 set PATH $HOME/scripts $PATH
+#set FZF_DEFAULT_COMMAND = 'rg --files --hidden --no-ignore-vcs'
 
 # Shell Mode
 function fish_user_key_bindings
@@ -38,7 +39,7 @@ alias clear="clear;clearpattern"
 alias vim=nvim
 alias v=nvim
 alias la="exa -la --color=always --group-directories-first"
-alias bat="acpi"
+alias battery="acpi"
 alias bat-stat="sudo tlp-stat"
 alias temp="sudo tlp-stat | grep 'Temperatures' -A 3"
 alias hist="history | fzf"
@@ -48,6 +49,8 @@ alias aursearch="yay -Slq | fzf -m --preview 'cat <(yay -Si {1}) <(yay -Fl {1} |
 alias launchbar="~/.config/polybar/launch.sh"
 alias killbar="kill (ps -e | rg poly | awk '{print \$1}')"
 alias mdicons="xdg-open ~/Downloads/md-icons.html"
+alias vs="v (find . -type f | fzf --preview 'bat --theme=gruvbox --color=always {}')"
+alias cds="cd (find . -type d | fzf)"
 
 # Key Bindings for !! and !$
 if [ $fish_key_bindings = fish_vi_key_bindings ];

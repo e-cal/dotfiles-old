@@ -31,6 +31,11 @@ nmap <leader>gd <Plug>(coc-definition)
 nmap <leader>gr <Plug>(coc-references)
 nnoremap <C-p> :GFiles<CR>
 
+" Git
+nmap <leader>gh :diffget //3<CR>
+nmap <leader>gu :diffget //2<CR>
+nmap <leader>gs :G<CR>
+
 " Other
 nnoremap <silent> <C-w> :bd <CR>
 nnoremap <C-h> :noh <CR>

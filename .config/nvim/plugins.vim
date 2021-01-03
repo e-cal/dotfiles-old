@@ -8,9 +8,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 
     " Better Syntax Support
     Plug 'sheerun/vim-polyglot'
-    " File Explorer
-    Plug 'scrooloose/NERDTree'
-    " Auto pairs for '(' '[' '{'
+    " Auto pairs for quotes and brackets 
     Plug 'jiangmiao/auto-pairs'
     " Intellisense (coc)
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -33,11 +31,14 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'justinmk/vim-sneak'
     " Surround
     Plug 'tpope/vim-surround'
+    " Markdown preview
+    Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
     "Themes
     Plug 'morhetz/gruvbox'
     Plug 'phanviet/vim-monokai-pro'
     Plug 'arcticicestudio/nord-vim'
+
 
 call plug#end()
 
