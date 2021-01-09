@@ -17,6 +17,7 @@ let g:startify_bookmarks = [
       \ {'k': '~/.config/fish/conf.d/keybindings.fish'}, 
       \ {'s': '~/.config/nvim/plugconfig/startify.vim'}, 
       \ {'c': '~/.config/nvim/coc-settings.json'}, 
+      \ {'g': '~/.cfg/info/exclude'}, 
       \ '~/.bash_profile',
       \ ]
 

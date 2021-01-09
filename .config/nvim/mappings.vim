@@ -25,7 +25,7 @@ nnoremap <silent> <M-TAB> :bnext<CR>
 nnoremap <silent> <S-TAB> :bprevious<CR>
 
 " Directory navigation
-nnoremap <C-p> :GFiles<CR>
+noremap <C-p> :Files<CR>
 
 " File navigation
 nnoremap <C-e> 3<C-e>

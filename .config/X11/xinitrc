@@ -36,6 +36,6 @@ fi
 # Remap caps lock to escape
 setxkbmap -option caps:escape
 nitrogen --restore &
-picom &
+picom --config $XDG_CONFIG_HOME/picom/picom.conf &
 xsetroot -cursor_name left_ptr &
 exec xmonad

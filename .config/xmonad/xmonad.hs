@@ -14,6 +14,7 @@
     -- Base
 import XMonad
 import System.Exit
+import XMonad.ManageHook
 import qualified XMonad.StackSet as W
 
     -- Actions
@@ -24,6 +25,7 @@ import qualified XMonad.Actions.Search as S
 
     -- Data
 import Data.Monoid
+import Data.Ratio
 import qualified Data.Map as M
 
     -- Hooks
@@ -50,6 +52,7 @@ import XMonad.Layout.Renamed
     -- Utils
 import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Util.SpawnOnce
+import XMonad.Util.NamedScratchpad
 
     -- DBus
 import qualified DBus as D
@@ -122,7 +125,8 @@ myManageHook = composeAll
     , className =? "Mailspring"     --> doShift "4"
     , className =? "Slack"          --> doShift "5"
     , className =? "discord"        --> doShift "5"
-    , manageDocks]
+    , manageDocks
+    ] 
   where
     role = stringProperty "WM_WINDOW_ROLE"
 
@@ -149,30 +153,6 @@ searchList = [
     ("w", S.wikipedia)
     ]
 
---------------------------------------------------------------------------------
--- LogHook (xmonad-log output)
---------------------------------------------------------------------------------
-myLogHook :: D.Client -> PP
-myLogHook dbus = def
-    { ppOutput = dbusOutput dbus
-    , ppCurrent = wrap ("%{F" ++ "#4ec9b0" ++ "} ") " %{F-}"
-    , ppVisible = wrap ("%{F" ++ "#2266d0" ++ "} ") " %{F-}"
-    , ppUrgent = wrap ("%{F" ++ "#fb4934" ++ "} ") " %{F-}"
-    , ppHidden = wrap " " " "
-    , ppWsSep = ""
-    , ppSep = " | "
-    }
-
-dbusOutput :: D.Client -> String -> IO ()
-dbusOutput dbus str = do
-    let signal = (D.signal objectPath interfaceName memberName) {
-            D.signalBody = [D.toVariant $ UTF8.decodeString str]
-        }
-    D.emit dbus signal
-  where
-    objectPath = D.objectPath_ "/org/xmonad/Log"
-    interfaceName = D.interfaceName_ "org.xmonad.Log"
-    memberName = D.memberName_ "Update"
 
 --------------------------------------------------------------------------------
 -- Mouse Bindings
@@ -188,6 +168,25 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
                                        >> windows W.shiftMaster))
     -- you may also bind events to the mouse scroll wheel (button4 and button5)
     ]
+
+--------------------------------------------------------------------------------
+-- Scratchpads
+--------------------------------------------------------------------------------
+myScratchPads :: [NamedScratchpad]
+myScratchPads = [ NS "terminal" spawnTerm findTerm manageTerm
+                --, NS "spotify" spawnSpotify findSpotify manageSpotify
+                --, NS "chromium" spawnChromium findChromium manageChromium
+                ]
+                    where
+                        spawnTerm = myTerminal ++ " -t terminal"
+                        findTerm = title =? "terminal"
+                        -- % from left, % from top, width, height
+                        manageTerm = customFloating $ W.RationalRect l t w h
+                            where
+                                h = 0.9 -- height
+                                w = 0.9 -- width
+                                t = 0.95 - h -- offset from top
+                                l = 0.95 - w -- offset from left
 
 --------------------------------------------------------------------------------
 -- Keybindings
@@ -215,6 +214,9 @@ myKeys = [
     , ("M-m", spawn "mailspring")
     , ("M-t", spawn "slack")
     , ("M-S-t", spawn "discord")
+
+    -- Scratchpads
+    , ("M-\\", namedScratchpadAction myScratchPads "terminal")
 
     -- Kill Windows
     , ("M-q", kill) -- Focused window
@@ -310,7 +312,8 @@ main = do
 myConfig = def
     { terminal           = myTerminal
     , layoutHook         = myLayoutHook
-    , manageHook         = placeHook(smart(0.5, 0.5))
+    , manageHook         = namedScratchpadManageHook myScratchPads
+        <+> placeHook(smart(0.5, 0.5))
         <+> manageDocks
         <+> myManageHook
         <+> manageHook def
@@ -331,3 +334,32 @@ myConfig = def
     , focusedBorderColor = myFocusColor
     , mouseBindings      = myMouseBindings
     } `additionalKeysP` myKeys
+
+
+--------------------------------------------------------------------------------
+-- LogHook (xmonad-log output)
+--------------------------------------------------------------------------------
+myLogHook :: D.Client -> PP
+myLogHook dbus = def
+    { ppOutput = dbusOutput dbus
+    , ppCurrent = wrap ("%{F" ++ "#4ec9b0" ++ "} ") " %{F-}"
+    , ppVisible = wrap ("%{F" ++ "#2266d0" ++ "} ") " %{F-}"
+    , ppUrgent = wrap ("%{F" ++ "#fb4934" ++ "} ") " %{F-}"
+    , ppHidden = noScratchpad
+    , ppHiddenNoWindows = noScratchpad
+    , ppWsSep = ""
+    , ppSep = " | "
+    }
+            where 
+                noScratchpad ws = if ws == "NSP" then "" else ws
+
+dbusOutput :: D.Client -> String -> IO ()
+dbusOutput dbus str = do
+    let signal = (D.signal objectPath interfaceName memberName) {
+            D.signalBody = [D.toVariant $ UTF8.decodeString str]
+        }
+    D.emit dbus signal
+  where
+    objectPath = D.objectPath_ "/org/xmonad/Log"
+    interfaceName = D.interfaceName_ "org.xmonad.Log"
+    memberName = D.memberName_ "Update"
