@@ -1,6 +1,6 @@
-
 syntax enable					" Syntax highlighing
 set t_Co=256                    " Support 256 colors
+set showtabline=2               " Always show buffer tabs
 set termguicolors				" Enable termguicolors
 set background=dark             " Set background color
 set hidden                      " Allow multiple buffers to be open
@@ -11,15 +11,16 @@ set cursorline                  " Highlight current line
 set splitbelow                  " Hsplit below
 set splitright                  " Vsplit to the right
 set colorcolumn=80              " Column at line 80
-highlight ColorColumn guibg=#3B4252
+set ignorecase
+set smartcase
+set shell=/usr/bin/fish
 
 set tabstop=4					" Tab = 4 spaces
 set shiftwidth=4                " Indent = 4 space
 set smarttab                    " Makes tabbing smarter
-set expandtab										" Leave tabs as tabs
+set expandtab					" Leave tabs as tabs
 set smartindent                 " Makes indenting smart
 set autoindent                  " Auto indent
-set showtabline=2               " Always show tabs
 
 set encoding=utf-8              " Displayed encoding
 set fileencoding=utf-8          " File encoding
@@ -41,3 +42,5 @@ au! BufWritePost $MYVIMRC source % " auto source when writing to init.vm alterna
 " Prevent automatic comment continuation
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
+" Set .env as a python root file
+autocmd FileType python let b:coc_root_patterns = ['.git', '.env']

@@ -6,6 +6,7 @@
 --   \/_____/   \/_____/   \/_/\/_/   \/_____/ --
 --                                             --
 -- =========================================== --
+-- subzero
 
 --------------------------------------------------------------------------------
 -- Imports
@@ -35,6 +36,7 @@ import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.DynamicProperty
 import XMonad.Hooks.SetWMName
+import XMonad.Hooks.InsertPosition
 
     -- Layouts
 import XMonad.Layout.Spiral
@@ -44,7 +46,6 @@ import XMonad.Layout.WindowArranger
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.LayoutModifier
 import XMonad.Layout.Renamed
-import XMonad.Layout.Minimize
 
     -- Utils
 import XMonad.Util.EZConfig (additionalKeysP)
@@ -99,7 +100,7 @@ tall    = renamed [Replace "Main"]
             $ smartBorders
             $ mySpacing 2
         -- params: windows in master, increment on resize, proportion for master
-            $ ResizableTall 1 (3/100) (1/2) [] 
+            $ ResizableTall 1 (3/100) (51/100) [] 
 full    = renamed [Replace "Fullscreen"]
             $ noBorders Full
 
@@ -196,25 +197,32 @@ myKeys = [
     -- Launch Programs
     ("M-<Return>", spawn myTerminal) -- Terminal
     , ("M-S-<Return>", spawn "rofi -show drun -config $HOME/.config/rofi/main.rasi") -- Run Prompt
+    , ("M-f", spawn "nemo") -- Google Drive
     , ("M-c", spawn "chromium --profile-directory='Default'") -- Chromium (main)
     , ("M-S-c", spawn "chromium --profile-directory='Profile 1'") -- Chromium (alt)
     , ("M-o", spawn "chromium https://onq.queensu.ca/d2l/home") -- OnQ
     , ("M-n", spawn "chromium https://www.notion.so/ecall/") -- Notion
     , ("M-g", spawn "chromium https://github.com") -- Github
+    , ("M-d", spawn "chromium https://drive.google.com/drive/my-drive") -- Google Drive
+    , ("M-S-d", spawn "nemo ~/Dropbox") -- Dropbox
     , ("M-y", spawn "chromium --profile-directory='Profile 1' https://youtube.com") -- Github
     , ("M-b", spawn "$HOME/.config/polybar/launch.sh") -- Polybar
     , ("M-S-b", spawn "nitrogen") -- Nitrogen
     , ("M-<XF86AudioPlay>", spawn "spotify --disable-gpu --disable-software-rasterizer") -- Spotify
     , ("M-<Esc> <Return>", spawn "$HOME/.config/polybar/scripts/powermenu.sh") -- Powermenu
+    , ("M-S-s", spawn "flameshot gui") -- Screenshot GUI
+    , ("M1-S-s", spawn "flameshot full -p ~/screenshots") -- Screenshot
+    , ("M-m", spawn "mailspring")
+    , ("M-t", spawn "slack")
+    , ("M-S-t", spawn "discord")
 
     -- Kill Windows
     , ("M-q", kill) -- Focused window
     , ("M-S-q", killAll) -- Kill all windows
 
     -- Layout
-    --, ("M-S-<Tab>", sendMessage NextLayout) -- Next Layout
-    , ("M-C-<Down>", sendMessage DeArrange) -- Tile Mode
-    , ("M-S-<Space>", withFocused $ windows . W.sink) -- Reset Tiling
+    , ("M-<Space>", sendMessage NextLayout) -- Next Layout
+    , ("M-C-<Down>", sequence_[sendMessage DeArrange, withFocused $ windows . W.sink]) -- Tile Mode
     , ("M-S-h", sendMessage Shrink) -- Shrink horizontal
     , ("M-S-l", sendMessage Expand) -- Expand horizontal
     , ("M-S-j", sendMessage MirrorShrink) -- Shrink vertical
@@ -238,7 +246,7 @@ myKeys = [
     , ("M-M1-<Right>", sendMessage (IncreaseRight 20))
 
     -- Focus
-    , ("M-m", windows W.focusMaster) -- Focus master window
+    , ("M-S-m", windows W.focusMaster) -- Focus master window
     , ("M-C-m", windows W.swapMaster) -- Swap focused with master
 
     -- Workspace
@@ -306,6 +314,7 @@ myConfig = def
         <+> manageDocks
         <+> myManageHook
         <+> manageHook def
+        <+> insertPosition Below Newer
     , handleEventHook    = docksEventHook
         <+> minimizeEventHook
         <+> fullscreenEventHook

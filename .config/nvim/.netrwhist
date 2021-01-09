@@ -1,4 +1,12 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =2
+let g:netrw_dirhistcnt =1
+let g:netrw_dirhist_1='/home/ecal/.config/nvim'
+let g:netrw_dirhist_0='/home/ecal/projects/qmind-vaad/attn_detection'
+let g:netrw_dirhist_9='/home/ecal/projects/qmind-vaad/attn_detection/utils'
+let g:netrw_dirhist_8='/home/ecal/projects/qmind-vaad/attn_detection'
+let g:netrw_dirhist_7='/home/ecal'
+let g:netrw_dirhist_6='/home/ecal/projects/qmind-vaad/attn_detection/cnn'
+let g:netrw_dirhist_5='/home/ecal/projects/qmind-vaad/attn_detection'
+let g:netrw_dirhist_4='/home/ecal/projects/qmind-vaad/frontend/src'
+let g:netrw_dirhist_3='/home/ecal/projects/qmind-vaad/frontend'
 let g:netrw_dirhist_2='/home/ecal/projects/qmind-vaad/frontend/src'
-let g:netrw_dirhist_1='/home/ecal/.config'

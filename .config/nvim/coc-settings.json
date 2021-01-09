@@ -5,11 +5,11 @@
         "python",
         "haskell"
     ],
-    "python.linting.enabled": true,
-    "python.jediEnabled": false,
-    "python.linting.pylintEnabled": false,
     "snippets.ultisnips.directories": [
         "UltiSnips",
         "~/.config/nvim/utils/snips"
-    ]
+    ],
+
+    "python.jediEnabled": true,
+    "python.linting.pylintArgs": ["--disable=C0116,C0114,C0115,W0401,W0611,W0621"]
 }

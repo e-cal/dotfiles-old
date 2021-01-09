@@ -3,3 +3,5 @@
 	name = ecal
 [credential]
 	helper = store
+[init]
+	defaultBranch = main

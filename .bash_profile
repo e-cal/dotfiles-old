@@ -2,7 +2,7 @@
 # ~/.bash_profile
 #
 
-export PATH=$HOME/scripts:$PATH
+export PATH=$HOME/.local/bin:$HOME/scripts:$PATH
 
 # XDG path spec
 export XDG_CONFIG_HOME=~/.config
@@ -19,6 +19,7 @@ export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME"/jupyter
 export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
+export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode # Volatile
 
 # Other env variables
 export FZF_DEFAULT_COMMAND='find .'

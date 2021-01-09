@@ -26,9 +26,10 @@
 .viminfo
 .Xauthority
 .xsession-errors
-Downloads
+downloads
 textbooks/
 yay-git
+screenshots/
 
 # Directories
 projects/
@@ -53,6 +54,8 @@ Dropbox/
 .config/Slack/
 .config/spicetify/
 .config/spotify/
+.config/VSCodium
+.config/jupyter
 
 # Other
 .config/nvim/autoload/
