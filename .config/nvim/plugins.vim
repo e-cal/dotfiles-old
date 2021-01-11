@@ -47,7 +47,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'mhinz/vim-startify'
 
     "Themes
-    Plug 'morhetz/gruvbox'
+    Plug 'gruvbox-community/gruvbox'
     Plug 'phanviet/vim-monokai-pro'
     Plug 'arcticicestudio/nord-vim'
 

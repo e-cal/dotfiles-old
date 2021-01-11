@@ -10,9 +10,6 @@ source $HOME/.config/nvim/themes/gruvbox.vim
 "source $HOME/.config/nvim/themes/monokai-pro.vim
 "source $HOME/.config/nvim/themes/nord.vim
 
-" Languages
-source $HOME/.config/nvim/languages/python.vim
-
 " Plugins
 source $HOME/.config/nvim/plugconfig/coc.vim
 source $HOME/.config/nvim/plugconfig/vim-hexokinase.vim
@@ -25,5 +22,3 @@ source $HOME/.config/nvim/plugconfig/fzf.vim
 source $HOME/.config/nvim/plugconfig/whichkey.vim
 source $HOME/.config/nvim/plugconfig/quickscope.vim
 source $HOME/.config/nvim/plugconfig/startify.vim
-
-unmap <leader>qf

@@ -48,6 +48,9 @@ import XMonad.Layout.WindowArranger
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.LayoutModifier
 import XMonad.Layout.Renamed
+import XMonad.Layout.MultiToggle
+import XMonad.Layout.MultiToggle.Instances
+
 
     -- Utils
 import XMonad.Util.EZConfig (additionalKeysP)
@@ -99,17 +102,17 @@ mySpacing :: Integer -> l a -> XMonad.Layout.LayoutModifier.ModifiedLayout Spaci
 mySpacing i = spacingRaw True (Border 0 i i i) True (Border 0 i i i ) True
 
 tall    = renamed [Replace "Main"]
-            $ avoidStruts
             $ smartBorders
             $ mySpacing 2
         -- params: windows in master, increment on resize, proportion for master
-            $ ResizableTall 1 (3/100) (51/100) [] 
+            $ ResizableTall 1 (3/100) (51/100) []
 full    = renamed [Replace "Fullscreen"]
             $ noBorders Full
 
-myLayoutHook = windowArrange myLayout
-                where
-                    myLayout = tall ||| full
+myLayoutHook = avoidStruts $ windowArrange
+               $ mkToggle (NBFULL ?? NOBORDERS ?? EOT) myLayout
+                   where
+                       myLayout = tall ||| full
 
 --------------------------------------------------------------------------------
 -- Manage Hook
@@ -126,7 +129,7 @@ myManageHook = composeAll
     , className =? "Slack"          --> doShift "5"
     , className =? "discord"        --> doShift "5"
     , manageDocks
-    ] 
+    ]
   where
     role = stringProperty "WM_WINDOW_ROLE"
 
@@ -137,37 +140,6 @@ myStartupHook :: X ()
 myStartupHook = do
     spawn "$HOME/.config/polybar/launch.sh"
     setWMName "LG3D"
-
---------------------------------------------------------------------------------
--- Search Engines
---------------------------------------------------------------------------------
-archwiki = S.searchEngine "archwiki" "https://wiki.archlinux.org/index.php?search="
-searchList :: [(String, S.SearchEngine)]
-searchList = [
-    ("a", archwiki),
-    ("d", S.vocabulary),
-    ("i", S.images),
-    ("g", S.google),
-    ("t", S.thesaurus),
-    ("v", S.youtube),
-    ("w", S.wikipedia)
-    ]
-
-
---------------------------------------------------------------------------------
--- Mouse Bindings
---------------------------------------------------------------------------------
-myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
-    -- mod-button1, Set the window to floating mode and move by dragging
-    [ ((modm, button1), (\w -> focus w >> mouseMoveWindow w
-                                       >> windows W.shiftMaster))
-    -- mod-button2, Raise the window to the top of the stack
-    , ((modm, button2), (\w -> focus w >> windows W.shiftMaster))
-    -- mod-button3, Set the window to floating mode and resize by dragging
-    , ((modm, button3), (\w -> focus w >> mouseResizeWindow w
-                                       >> windows W.shiftMaster))
-    -- you may also bind events to the mouse scroll wheel (button4 and button5)
-    ]
 
 --------------------------------------------------------------------------------
 -- Scratchpads
@@ -189,6 +161,37 @@ myScratchPads = [ NS "terminal" spawnTerm findTerm manageTerm
                                 l = 0.95 - w -- offset from left
 
 --------------------------------------------------------------------------------
+-- Search Engines
+--------------------------------------------------------------------------------
+archwiki = S.searchEngine "archwiki" "https://wiki.archlinux.org/index.php?search="
+searchList :: [(String, S.SearchEngine)]
+searchList = [
+    ("a", archwiki),
+    ("d", S.vocabulary),
+    ("i", S.images),
+    ("g", S.google),
+    ("t", S.thesaurus),
+    ("v", S.youtube),
+    ("w", S.wikipedia)
+    ]
+
+--------------------------------------------------------------------------------
+-- Mouse Bindings
+--------------------------------------------------------------------------------
+myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
+    -- mod-button1, Set the window to floating mode and move by dragging
+    [ ((modm, button1), (\w -> focus w >> mouseMoveWindow w
+                                       >> windows W.shiftMaster))
+    -- mod-button2, Raise the window to the top of the stack
+    , ((modm, button2), (\w -> focus w >> windows W.shiftMaster))
+    -- mod-button3, Set the window to floating mode and resize by dragging
+    , ((modm, button3), (\w -> focus w >> mouseResizeWindow w
+                                       >> windows W.shiftMaster))
+    -- you may also bind events to the mouse scroll wheel (button4 and button5)
+    ]
+
+
+--------------------------------------------------------------------------------
 -- Keybindings
 --------------------------------------------------------------------------------
 myKeys :: [(String, X())]
@@ -203,9 +206,9 @@ myKeys = [
     , ("M-n", spawn "chromium https://www.notion.so/ecall/") -- Notion
     , ("M-g", spawn "chromium https://github.com") -- Github
     , ("M-d", spawn "chromium https://drive.google.com/drive/my-drive") -- Google Drive
-    , ("M-S-d", spawn "nemo ~/Dropbox") -- Dropbox
+    , ("M-S-d", sequence_[spawn "nemo ~/Dropbox", spawnOnce "dropbox &"]) -- Dropbox
     , ("M-y", spawn "chromium --profile-directory='Profile 1' https://youtube.com") -- Github
-    , ("M-b", spawn "$HOME/.config/polybar/launch.sh") -- Polybar
+    , ("M-C-b", spawn "$HOME/.config/polybar/launch.sh") -- Polybar
     , ("M-S-b", spawn "nitrogen") -- Nitrogen
     , ("M-<XF86AudioPlay>", spawn "spotify --disable-gpu --disable-software-rasterizer") -- Spotify
     , ("M-<Esc> <Return>", spawn "$HOME/.config/polybar/scripts/powermenu.sh") -- Powermenu
@@ -223,7 +226,9 @@ myKeys = [
     , ("M-S-q", killAll) -- Kill all windows
 
     -- Layout
-    , ("M-<Space>", sendMessage NextLayout) -- Next Layout
+    , ("M-<Space>", sendMessage NextLayout)
+    --, ("M-<Space>", sequence_[sendMessage (Toggle NBFULL), spawn "polybar-msg cmd toggle", sendMessage ToggleStruts]) -- Fullscreen
+    , ("M-b", spawn "polybar-msg cmd toggle" >> sendMessage ToggleStruts)
     , ("M-C-<Down>", sequence_[sendMessage DeArrange, withFocused $ windows . W.sink]) -- Tile Mode
     , ("M-S-h", sendMessage Shrink) -- Shrink horizontal
     , ("M-S-l", sendMessage Expand) -- Expand horizontal
@@ -266,7 +271,7 @@ myKeys = [
     --, ("<XF86AudioMute>", spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
     , ("<XF86AudioRaiseVolume>", spawn "volumeControl up")
     , ("<XF86AudioLowerVolume>", spawn "volumeControl down")
-    , ("<XF86AudioMute>", spawn "volumeControl mute")           
+    , ("<XF86AudioMute>", spawn "volumeControl mute")
 
     , ("<XF86AudioPlay>", spawn "playerctl play-pause")
     , ("<XF86AudioPrev>", spawn "playerctl previous")
@@ -275,7 +280,8 @@ myKeys = [
     --, ("<XF86MonBrightnessUp>", spawn "xbacklight -inc 2%")
     --, ("<XF86MonBrightnessDown>", spawn "xbacklight -dec 2%")
     , ("<XF86MonBrightnessUp>", spawn "brightnessControl up")
-    , ("<XF86MonBrightnessDown>", spawn "brightnessControl down")]
+    , ("<XF86MonBrightnessDown>", spawn "brightnessControl down")
+    ]
 
 myWindowNavigation = withWindowNavigationKeys ([
     ((myModMask, xK_k), WNGo U),
@@ -301,7 +307,7 @@ main = do
         $ docks
         $ myConfig {
          logHook = dynamicLogWithPP (myLogHook dbus)
-             >> fadeInactiveLogHook 0.9
+             >> fadeInactiveLogHook 0.8
         }
 
     xmonad fullConfig
@@ -318,11 +324,12 @@ myConfig = def
         <+> myManageHook
         <+> manageHook def
         <+> insertPosition Below Newer
+        <+> (isFullscreen --> doFullFloat)
     , handleEventHook    = docksEventHook
         <+> minimizeEventHook
         <+> fullscreenEventHook
     -- Move Spotify to workspace 5
-        <+> dynamicPropertyChange "WM_NAME" 
+        <+> dynamicPropertyChange "WM_NAME"
             (className =? "Spotify" --> doShift "3")
     , startupHook        = myStartupHook
     , focusFollowsMouse  = False
@@ -350,7 +357,7 @@ myLogHook dbus = def
     , ppWsSep = ""
     , ppSep = " | "
     }
-            where 
+            where
                 noScratchpad ws = if ws == "NSP" then "" else ws
 
 dbusOutput :: D.Client -> String -> IO ()

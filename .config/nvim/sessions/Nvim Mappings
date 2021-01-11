@@ -2,24 +2,16 @@ let SessionLoad = 1
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 let v:this_session=expand("<sfile>:p")
 silent only
-cd ~/projects/qmind-vaad
+cd ~/
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +1 attn_detection/add_data.py
-badd +1 attn_detection/detector.py
-badd +1 attn_detection/run.py
-badd +1 attn_detection/train_classifier.py
-badd +1 attn_detection/test_classifier.py
-badd +1 attn_detection/classifier.py
+badd +23 .config/nvim/mappings.vim
+badd +13 .config/nvim/plugconfig/whichkey.vim
 argglobal
 %argdel
-$argadd attn_detection/add_data.py
-$argadd attn_detection/detector.py
-$argadd attn_detection/run.py
-$argadd attn_detection/train_classifier.py
-edit attn_detection/test_classifier.py
+edit .config/nvim/mappings.vim
 set splitbelow splitright
 wincmd _ | wincmd |
 vsplit
@@ -33,7 +25,6 @@ set winwidth=1
 exe 'vert 1resize ' . ((&columns * 86 + 86) / 173)
 exe 'vert 2resize ' . ((&columns * 86 + 86) / 173)
 argglobal
-if bufexists("attn_detection/test_classifier.py") | buffer attn_detection/test_classifier.py | else | edit attn_detection/test_classifier.py | endif
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -43,15 +34,16 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 1 - ((0 * winheight(0) + 21) / 42)
+let s:l = 23 - ((19 * winheight(0) + 20) / 40)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-1
+23
 normal! 0
+lcd ~/.config/nvim
 wincmd w
 argglobal
-if bufexists("attn_detection/classifier.py") | buffer attn_detection/classifier.py | else | edit attn_detection/classifier.py | endif
+if bufexists("~/.config/nvim/plugconfig/whichkey.vim") | buffer ~/.config/nvim/plugconfig/whichkey.vim | else | edit ~/.config/nvim/plugconfig/whichkey.vim | endif
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -61,12 +53,13 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 1 - ((0 * winheight(0) + 21) / 42)
+let s:l = 13 - ((12 * winheight(0) + 20) / 40)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-1
+13
 normal! 0
+lcd ~/.config/nvim
 wincmd w
 exe 'vert 1resize ' . ((&columns * 86 + 86) / 173)
 exe 'vert 2resize ' . ((&columns * 86 + 86) / 173)
