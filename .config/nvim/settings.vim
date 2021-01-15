@@ -15,7 +15,7 @@ set noerrorbells                " Disable error sounds
 set nohlsearch                  " Don't highlight search matches
 set ignorecase                  " Default case insensitive search
 set smartcase                   " Case sensitive if search has a capital letter
-set mouse=v                     " Enable mouse in visual mode
+set mouse=a                     " Enable mouse
 set scrolloff=8                 " Start scrolling before reaching the bottom
 
 " Use undofile instead of swap files for history

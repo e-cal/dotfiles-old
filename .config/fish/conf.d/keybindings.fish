@@ -15,6 +15,7 @@ bind -M insert \cd 'cds ~; redraw'
 bind -M insert \ce 'vs'
 bind -M insert \cl 'pwd; la; redraw'
 bind -M insert \ck 'clear; echo; redraw'
+bind -m insert \ck 'clear; echo; redraw'
 bind -M insert \cs 'configstat; redraw'
 
 # bind ctrl+space to cd ~

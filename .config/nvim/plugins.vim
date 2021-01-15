@@ -7,7 +7,7 @@ endif
 call plug#begin('~/.config/nvim/autoload/plugged')
     " Better Syntax Support
     Plug 'sheerun/vim-polyglot'
-    " Auto pairs for quotes and brackets 
+    " Auto pairs for quotes and brackets
     Plug 'jiangmiao/auto-pairs'
     " Intellisense (coc)
     Plug 'neoclide/coc.nvim', {'branch': 'release'}

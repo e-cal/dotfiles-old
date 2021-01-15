@@ -7,7 +7,6 @@ function get_brightness {
 function send_notification {
   icon="/usr/share/icons/Qogir-dark/16/panel/gpm-brightness-lcd.svg"
   brightness=$(get_brightness)
-  echo $brightness
   # Make the bar with the special character ─ (it's not dash -)
   # https://en.wikipedia.org/wiki/Box-drawing_character
   bar=$(seq -s "─" 0 $((brightness / 3)) | sed 's/[0-9]//g')
@@ -24,4 +23,12 @@ case $1 in
     xbacklight -dec 2
     send_notification
     ;;
+  set)
+    xbacklight -set $2
+    send_notification
+    ;;
+  monitor)
+    sudo ddcutil setvcp 10 $2
+    ;;
+
 esac

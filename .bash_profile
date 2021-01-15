@@ -20,6 +20,8 @@ export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
 export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode # Volatile
+export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
+export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
 
 # Other env variables
 export FZF_DEFAULT_COMMAND='find .'

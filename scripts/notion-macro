@@ -1,0 +1,36 @@
+#!/bin/bash
+
+function type_string() {
+    xdotool search --classname 'notion.so' windowfocus --sync type "$1"
+}
+
+function move_back() {
+    for ((i =0 ; i <= $1 ; i++))
+    do
+        sleep 0.01
+        xdotool key Left
+    done
+}
+
+function new_eqn {
+    type_string "/adv eqn"
+    xdotool key Return
+}
+
+case $1 in
+    tex)
+        new_eqn
+        ;;
+
+    matrix)
+        type_string "\begin{bmatrix}  \end{bmatrix}"
+        move_back 13
+        ;;
+
+    align)
+        new_eqn
+        sleep 0.4
+        type_string "\begin{aligned}  &= \\\\ \end{aligned}"
+        move_back 19
+        ;;
+esac

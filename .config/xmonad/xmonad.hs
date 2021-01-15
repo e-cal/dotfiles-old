@@ -6,7 +6,6 @@
 --   \/_____/   \/_____/   \/_/\/_/   \/_____/ --
 --                                             --
 -- =========================================== --
--- subzero
 
 --------------------------------------------------------------------------------
 -- Imports
@@ -56,6 +55,7 @@ import XMonad.Layout.MultiToggle.Instances
 import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Util.SpawnOnce
 import XMonad.Util.NamedScratchpad
+import XMonad.Util.Paste
 
     -- DBus
 import qualified DBus as D
@@ -84,8 +84,10 @@ myEditor = "nvim"
     -- Border
 myBorderWidth :: Dimension
 myBorderWidth = 3
-myBorderColor = "#474747"
+myBorderColor = "#272A29"
 myFocusColor = "#4ec9b0"
+
+focusMouse = True
 
 --------------------------------------------------------------------------------
 -- Workspaces
@@ -99,7 +101,7 @@ myWorkspaces = ["1", "2", "3", "4", "5"]
 mySpacing :: Integer -> l a -> XMonad.Layout.LayoutModifier.ModifiedLayout Spacing l a
 -- params: disable gaps on one window, screen edges (top, bottom, left, right),
         -- screen edge gaps on, window gaps, window gaps on
-mySpacing i = spacingRaw True (Border 0 i i i) True (Border 0 i i i ) True
+mySpacing i = spacingRaw True (Border i i i i) True (Border 0 i i i ) True
 
 tall    = renamed [Replace "Main"]
             $ smartBorders
@@ -125,9 +127,10 @@ myManageHook = composeAll
     , className =? "feh"            --> doFloat
     , className =? "Gpick"          --> doFloat
     , role      =? "pop-up"         --> doFloat
+    , className =? "Slack"          --> doShift "3"
+    , className =? "discord"        --> doShift "3"
     , className =? "Mailspring"     --> doShift "4"
-    , className =? "Slack"          --> doShift "5"
-    , className =? "discord"        --> doShift "5"
+    , className =? "barrier"        --> doShift "5"
     , manageDocks
     ]
   where
@@ -145,19 +148,22 @@ myStartupHook = do
 -- Scratchpads
 --------------------------------------------------------------------------------
 myScratchPads :: [NamedScratchpad]
-myScratchPads = [ NS "terminal" spawnTerm findTerm manageTerm
-                --, NS "spotify" spawnSpotify findSpotify manageSpotify
-                --, NS "chromium" spawnChromium findChromium manageChromium
+myScratchPads = [ NS "terminal" spawnTerm findTerm manageScratchpad
+                , NS "notes" spawnKeep findKeep manageScratchpad
                 ]
                     where
                         spawnTerm = myTerminal ++ " -t terminal"
                         findTerm = title =? "terminal"
+
+                        spawnKeep = "google-keep"
+                        findKeep = resource =? "google-keep-nativefier-d04d04"
+
                         -- % from left, % from top, width, height
-                        manageTerm = customFloating $ W.RationalRect l t w h
+                        manageScratchpad = customFloating $ W.RationalRect l t w h
                             where
                                 h = 0.9 -- height
                                 w = 0.9 -- width
-                                t = 0.95 - h -- offset from top
+                                t = 0.945 - h -- offset from top
                                 l = 0.95 - w -- offset from left
 
 --------------------------------------------------------------------------------
@@ -199,27 +205,37 @@ myKeys = [
     -- Launch Programs
     ("M-<Return>", spawn myTerminal) -- Terminal
     , ("M-S-<Return>", spawn "rofi -show drun -config $HOME/.config/rofi/main.rasi") -- Run Prompt
-    , ("M-f", spawn "nemo") -- Google Drive
-    , ("M-c", spawn "chromium --profile-directory='Default'") -- Chromium (main)
-    , ("M-S-c", spawn "chromium --profile-directory='Profile 1'") -- Chromium (alt)
-    , ("M-o", spawn "chromium https://onq.queensu.ca/d2l/home") -- OnQ
-    , ("M-n", spawn "chromium https://www.notion.so/ecall/") -- Notion
-    , ("M-g", spawn "chromium https://github.com") -- Github
-    , ("M-d", spawn "chromium https://drive.google.com/drive/my-drive") -- Google Drive
+    , ("M-f", spawn "nemo") -- files
+    , ("M-c", spawn "chromium --profile-directory='Default' --disable-software-rasterizer") -- Chromium (main)
+    , ("M-S-c", spawn "chromium --profile-directory='Profile 1' --disable-software-rasterizer") -- Chromium (alt)
+    , ("M-o", spawn "chromium https://onq.queensu.ca/d2l/home --disable-software-rasterizer") -- OnQ
+    , ("M-g", spawn "chromium https://github.com --disable-software-rasterizer") -- Github
+    , ("M-d", spawn "chromium https://drive.google.com/drive/my-drive --disable-software-rasterizer") -- Google Drive
     , ("M-S-d", sequence_[spawn "nemo ~/Dropbox", spawnOnce "dropbox &"]) -- Dropbox
-    , ("M-y", spawn "chromium --profile-directory='Profile 1' https://youtube.com") -- Github
+    , ("M-y", spawn "chromium --profile-directory='Profile 1' https://youtube.com --disable-software-rasterizer") -- Github
     , ("M-C-b", spawn "$HOME/.config/polybar/launch.sh") -- Polybar
-    , ("M-S-b", spawn "nitrogen") -- Nitrogen
-    , ("M-<XF86AudioPlay>", spawn "spotify --disable-gpu --disable-software-rasterizer") -- Spotify
+    , ("M-C-w", spawn "nitrogen") -- Nitrogen
+    , ("M-s", spawn "focus-spotify") -- Spotify
     , ("M-<Esc> <Return>", spawn "$HOME/.config/polybar/scripts/powermenu.sh") -- Powermenu
     , ("M-S-s", spawn "flameshot gui") -- Screenshot GUI
     , ("M1-S-s", spawn "flameshot full -p ~/screenshots") -- Screenshot
-    , ("M-m", spawn "mailspring")
-    , ("M-t", spawn "slack")
-    , ("M-S-t", spawn "discord")
+    , ("M-S-m", spawn "mailspring")
+    , ("M-t", spawn "chromium --profile-directory='Default' https://teams.microsoft.com --disable-software-rasterizer")
+    , ("M-S-t", spawn "slack")
+    , ("M-S-b b", spawn "airpods")
+    , ("M-S-n", spawn "focus-notion")
 
     -- Scratchpads
     , ("M-\\", namedScratchpadAction myScratchPads "terminal")
+    , ("M-S-\\", namedScratchpadAction myScratchPads "notes")
+
+    -- Notion macros
+    , ("M-n m", spawn "notion-macro matrix")
+    , ("M-n =", spawn "notion-macro tex")
+    , ("M-n a", spawn "notion-macro align")
+
+    , ("M-M1-m", spawn "monitor-res")
+    , ("M-M1-l", spawn "laptop-res")
 
     -- Kill Windows
     , ("M-q", kill) -- Focused window
@@ -253,7 +269,7 @@ myKeys = [
     , ("M-M1-<Right>", sendMessage (IncreaseRight 20))
 
     -- Focus
-    , ("M-S-m", windows W.focusMaster) -- Focus master window
+    --, ("M-m", windows W.focusMaster) -- Focus master window
     , ("M-C-m", windows W.swapMaster) -- Swap focused with master
 
     -- Workspace
@@ -263,15 +279,15 @@ myKeys = [
 
     -- XMonad
     , ("C-M1-<Delete>", io (exitWith ExitSuccess)) -- Quit
-    , ("M-S-r", spawn "xmonad --recompile; xmonad --restart") -- Restart
+    , ("M-S-r", sequence_[spawn "xmonad --recompile; xmonad --restart", spawn "$HOME/.config/polybar/launch.sh"]) -- Restart
 
     -- Function Keys
     --, ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ +2%")
     --, ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@  -2%")
     --, ("<XF86AudioMute>", spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
-    , ("<XF86AudioRaiseVolume>", spawn "volumeControl up")
-    , ("<XF86AudioLowerVolume>", spawn "volumeControl down")
-    , ("<XF86AudioMute>", spawn "volumeControl mute")
+    , ("<XF86AudioRaiseVolume>", spawn "volume up")
+    , ("<XF86AudioLowerVolume>", spawn "volume down")
+    , ("<XF86AudioMute>", spawn "volume mute")
 
     , ("<XF86AudioPlay>", spawn "playerctl play-pause")
     , ("<XF86AudioPrev>", spawn "playerctl previous")
@@ -279,8 +295,8 @@ myKeys = [
 
     --, ("<XF86MonBrightnessUp>", spawn "xbacklight -inc 2%")
     --, ("<XF86MonBrightnessDown>", spawn "xbacklight -dec 2%")
-    , ("<XF86MonBrightnessUp>", spawn "brightnessControl up")
-    , ("<XF86MonBrightnessDown>", spawn "brightnessControl down")
+    , ("<XF86MonBrightnessUp>", spawn "brightness up")
+    , ("<XF86MonBrightnessDown>", spawn "brightness down")
     ]
 
 myWindowNavigation = withWindowNavigationKeys ([
@@ -330,9 +346,9 @@ myConfig = def
         <+> fullscreenEventHook
     -- Move Spotify to workspace 5
         <+> dynamicPropertyChange "WM_NAME"
-            (className =? "Spotify" --> doShift "3")
+            (className =? "Spotify" --> doShift "5")
     , startupHook        = myStartupHook
-    , focusFollowsMouse  = False
+    , focusFollowsMouse  = focusMouse
     , clickJustFocuses   = False
     , borderWidth        = myBorderWidth
     , modMask            = myModMask

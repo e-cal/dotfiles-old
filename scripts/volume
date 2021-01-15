@@ -44,4 +44,8 @@ case $1 in
     pactl set-sink-mute @DEFAULT_SINK@ toggle
     send_notification
     ;;
+  set)
+    pactl set-sink-volume @DEFAULT_SINK@ $2%
+    send_notification
+
 esac

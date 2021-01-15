@@ -1,0 +1,6 @@
+#!/bin/bash
+
+xrandr -s 1920x1080
+~/.config/polybar/launch.sh
+nitrogen
+killall barrierc
