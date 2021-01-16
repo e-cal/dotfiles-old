@@ -229,6 +229,7 @@ myKeys = [
     , ("M-\\", namedScratchpadAction myScratchPads "terminal")
     , ("M-S-\\", namedScratchpadAction myScratchPads "notes")
 
+
     -- Notion macros
     , ("M-n m", spawn "notion-macro matrix")
     , ("M-n =", spawn "notion-macro tex")
@@ -282,21 +283,24 @@ myKeys = [
     , ("M-S-r", sequence_[spawn "xmonad --recompile; xmonad --restart", spawn "$HOME/.config/polybar/launch.sh"]) -- Restart
 
     -- Function Keys
-    --, ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ +2%")
-    --, ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@  -2%")
-    --, ("<XF86AudioMute>", spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
-    , ("<XF86AudioRaiseVolume>", spawn "volume up")
-    , ("<XF86AudioLowerVolume>", spawn "volume down")
     , ("<XF86AudioMute>", spawn "volume mute")
+    , ("M-<F1>", spawn "volume mute")
+    , ("<XF86AudioLowerVolume>", spawn "volume down")
+    , ("M-<F2>", spawn "volume down")
+    , ("<XF86AudioRaiseVolume>", spawn "volume up")
+    , ("M-<F3>", spawn "volume up")
 
-    , ("<XF86AudioPlay>", spawn "playerctl play-pause")
     , ("<XF86AudioPrev>", spawn "playerctl previous")
+    , ("M-<F4>", spawn "playerctl previous")
+    , ("<XF86AudioPlay>", spawn "playerctl play-pause")
+    , ("M-<F5>", spawn "playerctl play-pause")
     , ("<XF86AudioNext>", spawn "playerctl next")
+    , ("M-<F6>", spawn "playerctl next")
 
-    --, ("<XF86MonBrightnessUp>", spawn "xbacklight -inc 2%")
-    --, ("<XF86MonBrightnessDown>", spawn "xbacklight -dec 2%")
-    , ("<XF86MonBrightnessUp>", spawn "brightness up")
     , ("<XF86MonBrightnessDown>", spawn "brightness down")
+    , ("M-<F11>", spawn "brightness down")
+    , ("<XF86MonBrightnessUp>", spawn "brightness up")
+    , ("M-<F12>", spawn "brightness up")
     ]
 
 myWindowNavigation = withWindowNavigationKeys ([
