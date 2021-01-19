@@ -1,6 +1,6 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
-SETUVAR --export BW_SESSION:f2fdhj0w9cZXxluw8KpSlCJW20oAGd2shKbVQ3NQNhHVZcFX9xT0xb9StlBlvq8AY58tF8XfAyYkXlut9I4\x2bwQ\x3d\x3d
+SETUVAR --export BW_SESSION:r2VkuvTNtmNn62vExgohD6o8g8O4arCzkHqvYkTkshBsByQRoDwfAyn5GLnXGt98uh0/Hb7qP1mhyMQSBXeaeQ\x3d\x3d
 SETUVAR --export EDITOR:/usr/bin/nvim
 SETUVAR --export LC_ALL:en_US\x2eUTF\x2d8
 SETUVAR --export LC_CTYPE:en_US\x2eUTF\x2d8

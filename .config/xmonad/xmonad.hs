@@ -87,7 +87,7 @@ myBorderWidth = 3
 myBorderColor = "#272A29"
 myFocusColor = "#4ec9b0"
 
-focusMouse = True
+focusMouse = False
 
 --------------------------------------------------------------------------------
 -- Workspaces

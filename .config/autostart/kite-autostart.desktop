@@ -1,0 +1,8 @@
+[Desktop Entry]
+NoDisplay=true
+Type=Application
+Version=2.20201221.0
+Name=Kite
+Comment=Kite - ML powered code completions
+Exec=/home/ecal/.local/share/kite/kited --system-boot
+Hidden=true

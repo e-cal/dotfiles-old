@@ -1,6 +1,0 @@
-#!/bin/bash
-
-xrandr --output DP3 --mode 2560x1440
-~/.config/polybar/launch.sh
-nitrogen
-barrier

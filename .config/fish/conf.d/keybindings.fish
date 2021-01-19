@@ -17,6 +17,7 @@ bind -M insert \cl 'pwd; la; redraw'
 bind -M insert \ck 'clear; echo; redraw'
 bind -m insert \ck 'clear; echo; redraw'
 bind -M insert \cs 'configstat; redraw'
+bind -M insert \cv 'vclip'
 
 # bind ctrl+space to cd ~
 # bind alt+tab to complete

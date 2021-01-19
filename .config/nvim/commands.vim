@@ -11,3 +11,6 @@ augroup AUTO
     autocmd!
     autocmd BufWritePre * :call TrimWhitespace()
 augroup end
+
+" Spell check markdown files
+autocmd FileType markdown setlocal spell

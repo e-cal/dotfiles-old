@@ -1,6 +1,6 @@
 syntax enable					" Syntax highlighing
 set t_Co=256                    " Support 256 colors
-set shell=/usr/bin/fish         " Set default terminal shell
+set shell=/usr/bin/bash         " Set default terminal shell
 set showtabline=2               " Always show buffer tabs
 set termguicolors				" Enable termguicolors
 set background=dark             " Set background color
@@ -44,6 +44,3 @@ set timeoutlen=500              " By default timeoutlen is 1000 ms
 set clipboard=unnamedplus       " Copy paste between vim and everything else
 
 au! BufWritePost $MYVIMRC source % " auto source when writing to init.vm alternatively you can run :source $MYVIMRC
-
-" Set .env as a python root file
-autocmd FileType python let b:coc_root_patterns = ['.git', '.env']

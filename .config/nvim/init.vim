@@ -22,3 +22,4 @@ source $HOME/.config/nvim/plugconfig/fzf.vim
 source $HOME/.config/nvim/plugconfig/whichkey.vim
 source $HOME/.config/nvim/plugconfig/quickscope.vim
 source $HOME/.config/nvim/plugconfig/startify.vim
+source $HOME/.config/nvim/plugconfig/kite.vim

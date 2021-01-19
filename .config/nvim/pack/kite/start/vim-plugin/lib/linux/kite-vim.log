@@ -1,0 +1,13 @@
+
+> /home/ecal/.config/nvim/pack/kite/start/vim-plugin/lib/linux/kite-http --timeout 120ms 'http://127.0.0.1:46624/clientapi/languages'
+< HTTP/1.1 200 OK
+< 
+< ["bash","c","cpp","csharp","css","go","html","java","javascript","jsx","kotlin","less","objectivec","php","python","ruby","scala","tsx","typescript","vue"]
+< 
+
+> /home/ecal/.config/nvim/pack/kite/start/vim-plugin/lib/linux/kite-http --timeout 120ms 'http://127.0.0.1:46624/clientapi/settings/max_file_size_kb'
+< HTTP/1.1 200 OK
+< 
+< 1024
+
+> /home/ecal/.config/nvim/pack/kite/start/vim-plugin/lib/linux/kite-http --timeout 120ms - 'http://127.0.0.1:46624/clientapi/editor/event'
