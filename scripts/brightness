@@ -26,36 +26,18 @@ function mon_notification {
   dunstify -i "$icon" -r 5555 -u normal " $bar"
 }
 
-if xrandr | grep "DP3 connected"
-then
-  case $1 in
-    up)
-      sudo ddcutil setvcp 10 + 2
-      mon_notification
-      ;;
-    down)
-      sudo ddcutil setvcp 10 - 2
-      mon_notification
-      ;;
-    set)
-      sudo ddcutil setvcp 10 $2
-      mon_notification
-      ;;
-  esac
-else
-  case $1 in
-    up)
-      xbacklight -inc 2
-      lap_notification
-      ;;
-    down)
-      xbacklight -dec 2
-      lap_notification
-      ;;
-    set)
-      xbacklight -set $2
-      lap_notification
-      ;;
-  esac
-fi
+case $1 in
+  up)
+    sudo ddcutil setvcp 10 + 2
+    mon_notification
+    ;;
+  down)
+    sudo ddcutil setvcp 10 - 2
+    mon_notification
+    ;;
+  set)
+    sudo ddcutil setvcp 10 $2
+    mon_notification
+    ;;
+esac
 

@@ -83,11 +83,11 @@ myEditor = "nvim"
 
     -- Border
 myBorderWidth :: Dimension
-myBorderWidth = 3
+myBorderWidth = 0
 myBorderColor = "#272A29"
 myFocusColor = "#4ec9b0"
 
-focusMouse = False
+focusMouse = True
 
 --------------------------------------------------------------------------------
 -- Workspaces
