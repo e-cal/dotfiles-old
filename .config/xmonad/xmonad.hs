@@ -209,7 +209,7 @@ myKeys = [
     , ("M-c", spawn "chromium --profile-directory='Default' --disable-software-rasterizer") -- Chromium (main)
     , ("M-S-c", spawn "chromium --profile-directory='Profile 1' --disable-software-rasterizer") -- Chromium (alt)
     , ("M-o", spawn "chromium https://onq.queensu.ca/d2l/home --disable-software-rasterizer") -- OnQ
-    , ("M-g", spawn "chromium https://github.com --disable-software-rasterizer") -- Github
+    , ("M-g", spawn "chromium https://github.com  --profile-directory='Default' --disable-software-rasterizer") -- Github
     , ("M-d", spawn "chromium https://drive.google.com/drive/my-drive --disable-software-rasterizer") -- Google Drive
     , ("M-S-d", sequence_[spawn "nemo ~/Dropbox", spawnOnce "dropbox &"]) -- Dropbox
     , ("M-y", spawn "chromium --profile-directory='Profile 1' https://youtube.com --disable-software-rasterizer") -- Github

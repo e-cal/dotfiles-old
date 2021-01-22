@@ -5,10 +5,6 @@ endfunction
 
 
 function! kite#codenav#from_line()
-  if getline(".") ==# ''
-    call kite#utils#warn("Code finder only works on non-empty lines.")
-    return
-  endif
   let filepath = kite#utils#filepath(0)
   call kite#codenav#request_related(filepath, line("."))
 endfunction
@@ -30,13 +26,14 @@ function! kite#codenav#handler(response) abort
       return
     endif
 
-    let err = trim(a:response.body)
-    if err == 'ErrProjectStillIndexing'
-      call kite#utils#warn("Kite is not done indexing your project yet.")
-    elseif err == 'ErrPathNotInSupportedProject'
-      call kite#utils#warn("Code finder only works in Git projects.")
-    else
+
+    let err = json_decode(a:response.body)
+
+    if empty(err) || type(err.message) != v:t_string
       call kite#utils#warn("Oops! Something went wrong with Code Finder. Please try again later.")
+      return
     endif
+
+    call kite#utils#warn(err.message)
   endif
 endfunction
