@@ -1,5 +1,5 @@
 # Greeting
-clearpattern
+triangles
 # colorscript random # Random color script
 
 # Exports

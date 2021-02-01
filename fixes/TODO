@@ -1,0 +1,6 @@
+- Fix brightness
+- Customize spotify
+- Customize GRUB
+- Add plymouth animation
+- Add display manager
+- Fix borders (broken in version 14 of smartBorders)

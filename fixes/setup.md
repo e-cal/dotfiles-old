@@ -27,9 +27,12 @@ bitwarden-cli (aur)
 jq
 xsel
 nodejs
+npm
 python
 python-pip
+python-pipenv
 neovim (pip)
+jedi (pip)
 polybar (aur)
 bat
 starship (starship.rs)
@@ -49,6 +52,7 @@ playerctl
 mailspring (aur)
 gnome-keyring
 wmctrl
+xdotool
 
 # Set up multiple monitors
 https://wiki.archlinux.org/index.php/Multihead#Example:_dualhead_configuration_using_relative_coordinates

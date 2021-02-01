@@ -39,5 +39,4 @@ setxkbmap -option caps:escape
 nitrogen --restore &
 picom --config $XDG_CONFIG_HOME/picom/picom.conf &
 xsetroot -cursor_name left_ptr &
-dropbox &
 exec xmonad

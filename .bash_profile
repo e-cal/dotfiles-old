@@ -26,6 +26,7 @@ export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode # Volatile
 export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
 export NVM_DIR="$XDG_DATA_HOME"/nvm
+export MATLAB_LOG_DIR="$XDG_CACHE_HOME"/matlab/logs
 
 # Other env variables
 export FZF_DEFAULT_COMMAND='find .'

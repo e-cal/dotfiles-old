@@ -1,8 +1,8 @@
 # Aliases
 alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 alias configstat="config status -u"
-alias clearpattern="yes '△▽' | head -n (math --scale=0 (tput cols) / 2) | tr '\n' ',' | sed 's/,//g' | lolcat -F 0.03"
-alias clear="clear;clearpattern"
+alias triangles="yes '△▽' | head -n (math --scale=0 (tput cols) / 2) | tr '\n' ',' | sed 's/,//g' | lolcat -F 0.03"
+alias clear="clear;triangles"
 alias vim=nvim
 alias v=nvim
 alias la="exa -la --color=always --group-directories-first"
@@ -24,3 +24,8 @@ alias wmconfig="nvim ~/.config/xmonad/xmonad.hs"
 alias shellconfig="cd ~/.config/fish"
 alias py="python"
 alias cduni="cd ~/Dropbox/uni/2021W"
+alias cd221="cd ~/Dropbox/uni/2021W/CISC221/"
+alias cd223="cd ~/Dropbox/uni/2021W/CISC223/"
+alias cd235="cd ~/Dropbox/uni/2021W/CISC235/"
+alias cd271="cd ~/Dropbox/uni/2021W/CISC271/"
+alias cleanup="rm ~/java.log.*"
