@@ -31,5 +31,5 @@ vnoremap <leader>p "_dP
 let g:which_key_map.p = 'del-paste'
 
 " Terminal
-nnoremap <leader>t :new \| term<CR>ifish<CR>
+nnoremap <leader>t :new +resize10 \| term<CR>ifish<CR>
 nnoremap <leader>T :vnew \| term<CR>ifish<CR>

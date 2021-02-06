@@ -105,7 +105,8 @@ getSortByIndexNoNSP = fmap (. filter (\(W.Workspace tag _ _) -> not (tag `elem` 
 --------------------------------------------------------------------------------
 mySpacing :: Integer -> l a -> XMonad.Layout.LayoutModifier.ModifiedLayout Spacing l a
 -- disable when one window, screen edge gaps, screen edge gaps?, window gaps, window gaps?
-mySpacing i = spacingRaw True (Border i i i i) True (Border 0 i i i) True
+-- T B R L
+mySpacing i = spacingRaw True (Border i i i i) True (Border 0 i 0 i) True
 
 tall    = renamed [Replace "Main"]
             $ smartBorders
@@ -154,15 +155,10 @@ myStartupHook = do
 -- Scratchpads
 --------------------------------------------------------------------------------
 myScratchPads :: [NamedScratchpad]
-myScratchPads = [ NS "terminal" spawnTerm findTerm manageScratchpad
-                , NS "notes" spawnKeep findKeep manageScratchpad
-                ]
+myScratchPads = [ NS "terminal" spawnTerm findTerm manageScratchpad ]
                     where
                         spawnTerm = myTerminal ++ " -t terminal"
                         findTerm = title =? "terminal"
-
-                        spawnKeep = "google-keep"
-                        findKeep = resource =? "google-keep-nativefier-d04d04"
 
                         -- % from left, % from top, width, height
                         manageScratchpad = customFloating $ W.RationalRect l t w h
@@ -234,7 +230,6 @@ myKeys = [
 
     -- Scratchpads
     , ("M-\\", namedScratchpadAction myScratchPads "terminal")
-    , ("M-S-\\", namedScratchpadAction myScratchPads "notes")
 
     -- Macros
     , ("M-n m", spawn "macro notion matrix")
@@ -244,10 +239,26 @@ myKeys = [
     , ("M-n S-a", spawn "macro notion aligned")
     , ("M-n b", spawn "macro notion mathbb")
     , ("M-n d", spawn "macro notion def")
-    , ("M-n s", spawn "macro notion sum")
+    , ("M-n S-s", spawn "macro notion sum")
     , ("M-n n", spawn "macro notion null")
     , ("M-n -", spawn "macro notion inverse")
     , ("M-n t", spawn "macro notion to")
+    , ("M-n v", spawn "macro notion vector")
+    , ("M-n l", spawn "macro notion lin-combo")
+    , ("M-n i", spawn "macro notion inline")
+    , ("M-n r", spawn "macro notion reals")
+    , ("M-n [", spawn "macro notion brackets")
+    , ("M-n S-[", spawn "macro notion braces")
+        -- Symbols
+    , ("M-n s a", spawn "macro notion symbol alpha")
+    , ("M-n s e", spawn "macro notion symbol epsilon")
+    , ("M-n s l", spawn "macro notion symbol lambda")
+    , ("M-n s S-l", spawn "macro notion symbol cap-lambda")
+    , ("M-n s t", spawn "macro notion symbol theta")
+    , ("M-n s s", spawn "macro notion symbol sigma")
+    , ("M-n s S-s", spawn "macro notion symbol cap-sigma")
+    , ("M-n s =", spawn "macro notion symbol not-equal")
+    , ("M-n s d", spawn "macro notion symbol data-matrix")
 
     -- Kill Windows
     , ("M-q", kill) -- Focused window
@@ -368,7 +379,9 @@ myConfig = def
         <+> (isFullscreen --> doFullFloat)
     , handleEventHook    = docksEventHook
         <+> minimizeEventHook
-        <+> fullscreenEventHook
+        -- Allows windows to properly fullscreen
+        -- breaks flameshot: https://github.com/flameshot-org/flameshot/issues/773#issuecomment-752933143
+        -- <+> fullscreenEventHook
     -- Move Spotify to workspace 5
         <+> dynamicPropertyChange "WM_NAME"
             (className =? "Spotify" --> doShift "5")

@@ -44,7 +44,8 @@ vnoremap K :m '>-2<CR>gv=gv
 vnoremap J :m '>+1<CR>gv=gv
 
 " Terminal
-tnoremap <Esc> <C-\><C-n>
+tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
+nnoremap <C-c> i<C-c>
 
 source $HOME/.config/nvim/mappings/leader.vim
 source $HOME/.config/nvim/mappings/debug.vim

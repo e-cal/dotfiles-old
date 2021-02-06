@@ -62,7 +62,10 @@ case $1 in
             tex)
                 new_eqn
                 ;;
-
+            inline)
+                xdotool key Control+Shift+E
+                xdotool key space
+                ;;
             matrix)
                 text "\begin{bmatrix}\end{bmatrix}"
                 left 14
@@ -71,8 +74,8 @@ case $1 in
                 newline
                 xdotool key Up
                 ;;
-
             aligned)
+                sleep 0.4
                 new_eqn
                 sleep 0.4
                 text "\begin{aligned} &= \\\\&=\end{aligned}"
@@ -84,32 +87,27 @@ case $1 in
                 newline
                 up 2
                 ;;
-
             align)
                 up 10
                 text "\begin{aligned}"
                 down 10
                 text "\end{aligned}"
                 ;;
-
             mathbb)
                 text "\mathbb "
                 ;;
-
             def)
                 text "\overset{\text{\tiny def}}{=} "
+                xdotool key BackSpace
                 ;;
-
             sum)
                 text "\sum\limits^{}_{}"
                 left 5
                 ;;
-
             null)
                 text "\text{null}()"
                 left 1
                 ;;
-
             matrix-set)
                 text "\left\{\right\}"
                 left 9
@@ -121,16 +119,72 @@ case $1 in
                 macro notion matrix
                 up 3
                 ;;
-
             inverse)
                 text "^{-1}"
                 xdotool key BackSpace
                 ;;
-
             to)
                 text "\$\$\to\$\$"
                 ;;
+            vector)
+                sleep 0.05
+                text "\vec "
+                xdotool key BackSpace
+                ;;
+            lin-combo)
+                text "\alpha_1 \vec q_1 + \alpha_2 \vec q_2 + \dots + \alpha_m \vec q_m"
+                ;;
+            reals)
+                text "\in \R^{}"
+                xdotool key BackSpace
+                left 1
+                ;;
+            brackets)
+                text "\left[  \right]"
+                xdotool key BackSpace
+                left 8
+                ;;
+            braces)
+                text "\left\{  \right\}"
+                xdotool key BackSpace
+                left 9
+                ;;
 
+            symbol)
+                # if they don't appear, add a space or 2 after
+                case $3 in
+                    alpha)
+                        text "\alpha"
+                        ;;
+                    epsilon)
+                        text "\epsilon"
+                        ;;
+                    lambda)
+                        text "\lambda"
+                        ;;
+                    cap-lambda)
+                        text "\Lambda"
+                        ;;
+                    theta)
+                        text "\theta"
+                        ;;
+                    sigma)
+                        text "\sigma"
+                        ;;
+                    cap-sigma)
+                        text "\Sigma"
+                        ;;
+                    not-equal)
+                        text "\not="
+                        ;;
+                    data-matrix)
+                        text "\$\$A \in \R^{m\times n}\$\$"
+                        xdotool key space
+                        xdotool key space
+                        ;;
+                esac
+                xdotool key BackSpace
+                ;;
         esac
         ;;
 esac

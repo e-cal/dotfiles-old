@@ -43,3 +43,6 @@ end
 
 # Starship prompt
 starship init fish | source
+
+# Initiate ssh session and add keys
+fssh
