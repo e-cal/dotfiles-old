@@ -4,7 +4,7 @@ function left() {
     for ((i = 0 ; i < $1 ; i++))
     do
         # sleep 0.005
-        xdotool key Left
+        xdotool key --clearmodifiers Left
     done
 }
 
@@ -12,7 +12,7 @@ function right() {
     for ((i = 0 ; i < $1 ; i++))
     do
         # sleep 0.005
-        xdotool key Right
+        xdotool key --clearmodifiers Right
     done
 }
 
@@ -20,7 +20,7 @@ function up() {
     for ((i = 0 ; i < $1 ; i++))
     do
         # sleep 0.005
-        xdotool key Up
+        xdotool key --clearmodifiers Up
     done
 }
 
@@ -28,7 +28,7 @@ function down() {
     for ((i = 0 ; i < $1 ; i++))
     do
         # sleep 0.005
-        xdotool key Down
+        xdotool key --clearmodifiers Down
     done
 }
 
@@ -42,7 +42,7 @@ function focus() {
 
 function text() {
     xsel -ib <<< "$1"
-    xdotool key Control+V
+    xdotool key --clearmodifiers Control+V
 }
 
 function type_string() {
@@ -61,9 +61,12 @@ case $1 in
         case $2 in
             tex)
                 new_eqn
+                sleep 0.3
+                xdotool key space
                 ;;
             inline)
-                xdotool key Control+Shift+E
+                xdotool key --clearmodifiers Control+Shift+E
+                sleep 0.2
                 xdotool key space
                 ;;
             matrix)
@@ -92,9 +95,15 @@ case $1 in
                 text "\begin{aligned}"
                 down 10
                 text "\end{aligned}"
+                xdotool key BackSpace
+                left 13
+                newline
+                newline
+                up 1
                 ;;
             mathbb)
                 text "\mathbb "
+                xdotool key BackSpace
                 ;;
             def)
                 text "\overset{\text{\tiny def}}{=} "
@@ -127,7 +136,7 @@ case $1 in
                 text "\$\$\to\$\$"
                 ;;
             vector)
-                sleep 0.05
+                sleep 0.2
                 text "\vec "
                 xdotool key BackSpace
                 ;;
@@ -148,6 +157,15 @@ case $1 in
                 text "\left\{  \right\}"
                 xdotool key BackSpace
                 left 9
+                ;;
+            parenthesis)
+                text "\left(  \right)"
+                xdotool key BackSpace
+                left 8
+                ;;
+            expr)
+                text "\lang\text{expr}\rang"
+                xdotool key BackSpace
                 ;;
 
             symbol)

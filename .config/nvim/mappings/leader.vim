@@ -33,3 +33,9 @@ let g:which_key_map.p = 'del-paste'
 " Terminal
 nnoremap <leader>t :new +resize10 \| term<CR>ifish<CR>
 nnoremap <leader>T :vnew \| term<CR>ifish<CR>
+let g:which_key_map.t = 'term'
+let g:which_key_map.T = 'v term'
+
+" Compile and run c code
+" This is definitely a terrible way of doing this but it works
+nnoremap <leader>r :put =expand('%:t')<CR>yeigcc <Esc>A -o <Esc>pY<C-w>jpA<CR><C-\><C-n><C-w>kdd:put =expand('%:t')<CR>i./<Esc>A<BS><BS><Esc>Y<C-w>jpA<CR><C-\><C-n><C-w>kdd:w<CR>2k

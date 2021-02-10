@@ -45,4 +45,5 @@ end
 starship init fish | source
 
 # Initiate ssh session and add keys
+echo
 fssh

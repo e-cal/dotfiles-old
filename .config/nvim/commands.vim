@@ -14,3 +14,10 @@ augroup end
 
 " Spell check markdown files
 autocmd FileType markdown setlocal spell
+
+" Python
+augroup python
+    autocmd!
+    " Add shiftwidth and/or softtabstop if you want to override those too.
+    autocmd FileType python set shiftwidth=4
+augroup end

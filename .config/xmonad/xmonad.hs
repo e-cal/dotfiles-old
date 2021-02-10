@@ -232,6 +232,8 @@ myKeys = [
     , ("M-\\", namedScratchpadAction myScratchPads "terminal")
 
     -- Macros
+
+    -- Notion
     , ("M-n m", spawn "macro notion matrix")
     , ("M-n S-m", spawn "macro notion matrix-set")
     , ("M-n =", spawn "macro notion tex")
@@ -244,11 +246,15 @@ myKeys = [
     , ("M-n -", spawn "macro notion inverse")
     , ("M-n t", spawn "macro notion to")
     , ("M-n v", spawn "macro notion vector")
+    , ("<KP_Insert>", spawn "macro notion vector")
     , ("M-n l", spawn "macro notion lin-combo")
     , ("M-n i", spawn "macro notion inline")
+    , ("<F9>", spawn "macro notion inline")
     , ("M-n r", spawn "macro notion reals")
     , ("M-n [", spawn "macro notion brackets")
     , ("M-n S-[", spawn "macro notion braces")
+    , ("M-n S-9", spawn "macro notion parenthesis")
+    , ("M-n e", spawn "macro notion expr")
         -- Symbols
     , ("M-n s a", spawn "macro notion symbol alpha")
     , ("M-n s e", spawn "macro notion symbol epsilon")
