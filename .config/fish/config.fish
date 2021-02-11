@@ -1,5 +1,5 @@
 # Greeting
-clearpattern
+triangles
 # colorscript random # Random color script
 
 # Exports
@@ -43,3 +43,7 @@ end
 
 # Starship prompt
 starship init fish | source
+
+# Initiate ssh session and add keys
+echo
+fssh

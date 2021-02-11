@@ -45,6 +45,11 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'liuchengxu/vim-which-key'
     " Startify
     Plug 'mhinz/vim-startify'
+    " MATLAB
+    Plug 'daeyun/vim-matlab'
+    " Snippets
+    Plug 'sirver/ultisnips'
+    Plug 'honza/vim-snippets'
 
     "Themes
     Plug 'morhetz/gruvbox'

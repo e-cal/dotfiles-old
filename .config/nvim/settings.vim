@@ -44,3 +44,6 @@ set timeoutlen=500              " By default timeoutlen is 1000 ms
 set clipboard=unnamedplus       " Copy paste between vim and everything else
 
 au! BufWritePost $MYVIMRC source % " auto source when writing to init.vm alternatively you can run :source $MYVIMRC
+
+let g:python_highlight_space_errors = 0 " Disable red whitespace in python
+let g:polyglot_disabled = ['autoindent'] " Disable polyglot autoindent

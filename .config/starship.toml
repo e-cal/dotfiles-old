@@ -47,6 +47,7 @@ $git_state\
 $git_status\
 
 $line_break\
+
 $username\
 $hostname\
 $shlvl\
@@ -111,7 +112,7 @@ when = "batterycharging"
 shell = ["bash"]
 
 [cmd_duration]
-min_time = 10_000
+min_time = 1_000
 format = "祥[$duration]($style) "
 
 [time]
@@ -155,7 +156,7 @@ behind = " ×${count} "
 diverged = "נּ 落 ×${ahead_count}  ×${behind_count} "
 modified = " ×${count} "
 untracked = "﬒ ×${count} "
-stashed = "﬚  " 
+stashed = "﬚  "
 staged = "ﱐ ×${count} "
 renamed = " ×${count} "
 deleted = " ×${count} "

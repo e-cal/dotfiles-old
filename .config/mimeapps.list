@@ -3,3 +3,5 @@
 x-scheme-handler/webcal=chromium.desktop
 x-scheme-handler/mailspring=mailspring.desktop
 x-scheme-handler/kite=kite-copilot.desktop
+x-scheme-handler/msteams=teams.desktop
+application/vnd.oasis.opendocument.text=libreoffice-writer.desktop

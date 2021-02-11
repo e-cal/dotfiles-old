@@ -31,9 +31,10 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
-# Set the resolution for the VM 
+# Set the resolution for the VM
 # xrandr --output Virtual-1 --mode 1920x1200
 # Remap caps lock to escape
+xrandr --output DP-2 --auto --output DP-5 --auto --left-of DP-2
 setxkbmap -option caps:escape
 nitrogen --restore &
 picom --config $XDG_CONFIG_HOME/picom/picom.conf &

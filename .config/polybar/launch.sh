@@ -5,5 +5,5 @@ killall -q polybar
 sleep 3
 
 # launch polybar
-polybar main -c $HOME/.config/polybar/config.ini &
-#polybar alt -c $HOME/.config/polybar/config.ini &
+#polybar main -c $HOME/.config/polybar/config.ini &
+polybar desktop -c $HOME/.config/polybar/config.ini &

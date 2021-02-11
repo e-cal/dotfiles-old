@@ -20,6 +20,7 @@ import qualified XMonad.StackSet as W
 import XMonad.Actions.WithAll (killAll)
 import XMonad.Actions.WindowNavigation
 import XMonad.Actions.CycleWS
+import XMonad.Actions.Minimize
 import qualified XMonad.Actions.Search as S
 
     -- Data
@@ -49,13 +50,15 @@ import XMonad.Layout.LayoutModifier
 import XMonad.Layout.Renamed
 import XMonad.Layout.MultiToggle
 import XMonad.Layout.MultiToggle.Instances
+import XMonad.Layout.Minimize
+import qualified XMonad.Layout.BoringWindows as BW
 
 
     -- Utils
 import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Util.SpawnOnce
 import XMonad.Util.NamedScratchpad
-import XMonad.Util.Paste
+import XMonad.Util.WorkspaceCompare
 
     -- DBus
 import qualified DBus as D
@@ -83,29 +86,32 @@ myEditor = "nvim"
 
     -- Border
 myBorderWidth :: Dimension
-myBorderWidth = 3
+myBorderWidth = 0
 myBorderColor = "#272A29"
 myFocusColor = "#4ec9b0"
 
-focusMouse = False
+focusMouse = True
 
 --------------------------------------------------------------------------------
 -- Workspaces
 --------------------------------------------------------------------------------
-myWorkspaces :: [String]
-myWorkspaces = ["1", "2", "3", "4", "5"]
+myExtraWorkspaces = ["NSP"]
+myWorkspaces = map show [1..5] ++ myExtraWorkspaces
+
+getSortByIndexNoNSP = fmap (. filter (\(W.Workspace tag _ _) -> not (tag `elem` myExtraWorkspaces))) getSortByIndex
 
 --------------------------------------------------------------------------------
 -- Layouts
 --------------------------------------------------------------------------------
 mySpacing :: Integer -> l a -> XMonad.Layout.LayoutModifier.ModifiedLayout Spacing l a
--- params: disable gaps on one window, screen edges (top, bottom, left, right),
-        -- screen edge gaps on, window gaps, window gaps on
-mySpacing i = spacingRaw True (Border i i i i) True (Border 0 i i i ) True
+-- disable when one window, screen edge gaps, screen edge gaps?, window gaps, window gaps?
+-- T B R L
+mySpacing i = spacingRaw True (Border i i i i) True (Border 0 i 0 i) True
 
 tall    = renamed [Replace "Main"]
             $ smartBorders
-            $ mySpacing 2
+            $ minimize . BW.boringWindows
+            $ mySpacing 5
         -- params: windows in master, increment on resize, proportion for master
             $ ResizableTall 1 (3/100) (51/100) []
 full    = renamed [Replace "Fullscreen"]
@@ -141,22 +147,18 @@ myManageHook = composeAll
 --------------------------------------------------------------------------------
 myStartupHook :: X ()
 myStartupHook = do
-    spawn "$HOME/.config/polybar/launch.sh"
+    spawnOnce "~/.config/polybar/launch.sh &"
+    spawnOnce "dropbox &"
     setWMName "LG3D"
 
 --------------------------------------------------------------------------------
 -- Scratchpads
 --------------------------------------------------------------------------------
 myScratchPads :: [NamedScratchpad]
-myScratchPads = [ NS "terminal" spawnTerm findTerm manageScratchpad
-                , NS "notes" spawnKeep findKeep manageScratchpad
-                ]
+myScratchPads = [ NS "terminal" spawnTerm findTerm manageScratchpad ]
                     where
                         spawnTerm = myTerminal ++ " -t terminal"
                         findTerm = title =? "terminal"
-
-                        spawnKeep = "google-keep"
-                        findKeep = resource =? "google-keep-nativefier-d04d04"
 
                         -- % from left, % from top, width, height
                         manageScratchpad = customFloating $ W.RationalRect l t w h
@@ -208,35 +210,66 @@ myKeys = [
     , ("M-f", spawn "nemo") -- files
     , ("M-c", spawn "chromium --profile-directory='Default' --disable-software-rasterizer") -- Chromium (main)
     , ("M-S-c", spawn "chromium --profile-directory='Profile 1' --disable-software-rasterizer") -- Chromium (alt)
+    , ("M-C-c", spawn "chromium https://calendar.google.com --profile-directory='Default' --disable-software-rasterizer") -- Google Drive
     , ("M-o", spawn "chromium https://onq.queensu.ca/d2l/home --disable-software-rasterizer") -- OnQ
+<<<<<<< HEAD
     , ("M-g", spawn "chromium https://github.com  --profile-directory='Default' --disable-software-rasterizer") -- Github
     , ("M-d", spawn "chromium https://drive.google.com/drive/my-drive --disable-software-rasterizer") -- Google Drive
+=======
+    , ("M-g", spawn "chromium https://github.com --profile-directory='Default' --disable-software-rasterizer") -- Github
+    , ("M-d", spawn "chromium https://drive.google.com/drive/my-drive --profile-directory='Default' --disable-software-rasterizer") -- Google Drive
+>>>>>>> coeus
     , ("M-S-d", sequence_[spawn "nemo ~/Dropbox", spawnOnce "dropbox &"]) -- Dropbox
     , ("M-y", spawn "chromium --profile-directory='Profile 1' https://youtube.com --disable-software-rasterizer") -- Github
-    , ("M-C-b", spawn "$HOME/.config/polybar/launch.sh") -- Polybar
+    , ("M-S-b", spawn "$HOME/.config/polybar/launch.sh") -- Polybar
+    , ("M-S-p", spawn "launch-picom")
     , ("M-C-w", spawn "nitrogen") -- Nitrogen
     , ("M-s", spawn "focus-spotify") -- Spotify
     , ("M-<Esc> <Return>", spawn "$HOME/.config/polybar/scripts/powermenu.sh") -- Powermenu
     , ("M-S-s", spawn "flameshot gui") -- Screenshot GUI
     , ("M1-S-s", spawn "flameshot full -p ~/screenshots") -- Screenshot
     , ("M-S-m", spawn "mailspring")
-    , ("M-t", spawn "chromium --profile-directory='Default' https://teams.microsoft.com --disable-software-rasterizer")
+    , ("M-t", spawn "teams")
     , ("M-S-t", spawn "slack")
-    , ("M-S-b b", spawn "airpods")
     , ("M-S-n", spawn "focus-notion")
 
     -- Scratchpads
     , ("M-\\", namedScratchpadAction myScratchPads "terminal")
-    , ("M-S-\\", namedScratchpadAction myScratchPads "notes")
 
+    -- Macros
 
-    -- Notion macros
-    , ("M-n m", spawn "notion-macro matrix")
-    , ("M-n =", spawn "notion-macro tex")
-    , ("M-n a", spawn "notion-macro align")
-
-    , ("M-M1-m", spawn "monitor-res")
-    , ("M-M1-l", spawn "laptop-res")
+    -- Notion
+    , ("M-n m", spawn "macro notion matrix")
+    , ("M-n S-m", spawn "macro notion matrix-set")
+    , ("M-n =", spawn "macro notion tex")
+    , ("M-n a", spawn "macro notion align")
+    , ("M-n S-a", spawn "macro notion aligned")
+    , ("M-n b", spawn "macro notion mathbb")
+    , ("M-n d", spawn "macro notion def")
+    , ("M-n S-s", spawn "macro notion sum")
+    , ("M-n n", spawn "macro notion null")
+    , ("M-n -", spawn "macro notion inverse")
+    , ("M-n t", spawn "macro notion to")
+    , ("M-n v", spawn "macro notion vector")
+    , ("<KP_Insert>", spawn "macro notion vector")
+    , ("M-n l", spawn "macro notion lin-combo")
+    , ("M-n i", spawn "macro notion inline")
+    , ("<F9>", spawn "macro notion inline")
+    , ("M-n r", spawn "macro notion reals")
+    , ("M-n [", spawn "macro notion brackets")
+    , ("M-n S-[", spawn "macro notion braces")
+    , ("M-n S-9", spawn "macro notion parenthesis")
+    , ("M-n e", spawn "macro notion expr")
+        -- Symbols
+    , ("M-n s a", spawn "macro notion symbol alpha")
+    , ("M-n s e", spawn "macro notion symbol epsilon")
+    , ("M-n s l", spawn "macro notion symbol lambda")
+    , ("M-n s S-l", spawn "macro notion symbol cap-lambda")
+    , ("M-n s t", spawn "macro notion symbol theta")
+    , ("M-n s s", spawn "macro notion symbol sigma")
+    , ("M-n s S-s", spawn "macro notion symbol cap-sigma")
+    , ("M-n s =", spawn "macro notion symbol not-equal")
+    , ("M-n s d", spawn "macro notion symbol data-matrix")
 
     -- Kill Windows
     , ("M-q", kill) -- Focused window
@@ -253,6 +286,13 @@ myKeys = [
     , ("M-S-k", sendMessage MirrorExpand) -- Expand vertical
     , ("M-,", sendMessage (IncMasterN 1)) -- Add a window to master area
     , ("M-.", sendMessage (IncMasterN (-1))) -- Remove a window from master area
+    , ("M--", withFocused minimizeWindow) -- Minimize
+    , ("M-=", withLastMinimized maximizeWindowAndFocus) -- Maximize
+
+
+    -- Resolution scripts
+    , ("M-M1-m", spawn "monitor-res")
+    , ("M-M1-l", spawn "laptop-res")
 
     -- Floating Layout
     , ("M-C-<Up>", sendMessage Arrange) -- Floating Mode
@@ -299,8 +339,10 @@ myKeys = [
 
     , ("<XF86MonBrightnessDown>", spawn "brightness down")
     , ("M-<F11>", spawn "brightness down")
+    , ("M-C-<F11>", spawn "brightness set 10")
     , ("<XF86MonBrightnessUp>", spawn "brightness up")
     , ("M-<F12>", spawn "brightness up")
+    , ("M-C-<F12>", spawn "brightness set 70")
     ]
 
 myWindowNavigation = withWindowNavigationKeys ([
@@ -312,6 +354,7 @@ myWindowNavigation = withWindowNavigationKeys ([
     ((myModMask .|. controlMask, xK_j), WNSwap D),
     ((myModMask .|. controlMask, xK_h), WNSwap L),
     ((myModMask .|. controlMask, xK_l), WNSwap R)])
+
 
 --------------------------------------------------------------------------------
 -- Main
@@ -347,10 +390,14 @@ myConfig = def
         <+> (isFullscreen --> doFullFloat)
     , handleEventHook    = docksEventHook
         <+> minimizeEventHook
-        <+> fullscreenEventHook
+        -- Allows windows to properly fullscreen
+        -- breaks flameshot: https://github.com/flameshot-org/flameshot/issues/773#issuecomment-752933143
+        -- <+> fullscreenEventHook
     -- Move Spotify to workspace 5
         <+> dynamicPropertyChange "WM_NAME"
             (className =? "Spotify" --> doShift "5")
+        <+> dynamicPropertyChange "WM_NAME"
+            (className =? "microsoft teams - preview" --> doShift "3")
     , startupHook        = myStartupHook
     , focusFollowsMouse  = focusMouse
     , clickJustFocuses   = False
@@ -369,16 +416,10 @@ myConfig = def
 myLogHook :: D.Client -> PP
 myLogHook dbus = def
     { ppOutput = dbusOutput dbus
-    , ppCurrent = wrap ("%{F" ++ "#4ec9b0" ++ "} ") " %{F-}"
-    , ppVisible = wrap ("%{F" ++ "#2266d0" ++ "} ") " %{F-}"
-    , ppUrgent = wrap ("%{F" ++ "#fb4934" ++ "} ") " %{F-}"
-    , ppHidden = noScratchpad
-    , ppHiddenNoWindows = noScratchpad
-    , ppWsSep = ""
-    , ppSep = " | "
-    }
-            where
-                noScratchpad ws = if ws == "NSP" then "" else ws
+    , ppHidden = noScratchPad
+    , ppSort = fmap (.namedScratchpadFilterOutWorkspace) $ ppSort def
+    } where
+        noScratchPad ws = if ws == "NSP" then "" else ws
 
 dbusOutput :: D.Client -> String -> IO ()
 dbusOutput dbus str = do

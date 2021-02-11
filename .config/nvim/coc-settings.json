@@ -5,11 +5,28 @@
         "python",
         "haskell"
     ],
-    "snippets.ultisnips.directories": [
-        "UltiSnips",
-        "~/.config/nvim/utils/snips"
+    // BROKEN - for using snippets with Kite
+    /* "languageserver": { */
+    /*     "kite": { */
+    /*         "command": "/home/ecal/.local/share/kite/kite-v2.20210114.0/kite-lsp --editor=nvim", */
+    /*         "filetypes": ["python", "go", "javascript"] */
+    /*     } */
+    /* }, */
+    "python.jediEnabled": true,
+    "python.linting.pylintArgs": [
+        "--disable=C0116,C0114,C0115,C0103,W0401,W0611,W0621"
     ],
 
-    "python.jediEnabled": true,
-    "python.linting.pylintArgs": ["--disable=C0116,C0114,C0115,W0401,W0611,W0621"]
+    "languageserver": {
+        "ccls": {
+            "command": "ccls",
+            "filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"],
+            "rootPatterns": [".ccls", "compile_commands.json", ".git/", ".hg/"],
+            "initializationOptions": {
+                "cache": {
+                    "directory": "/tmp/ccls"
+                }
+            }
+        }
+    }
 }

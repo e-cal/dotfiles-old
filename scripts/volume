@@ -9,8 +9,8 @@ function is_mute {
 }
 
 function send_notification {
-    iconSound="/usr/share/icons/Qogir-dark/16/panel/volume-level-high.svg"
-    iconMuted="/usr/share/icons/Qogir-dark/16/panel/volume-level-muted.svg"
+    iconSound="$HOME/.local/share/icons/Qogir-dark/16/panel/volume-level-high.svg"
+    iconSound="$HOME/.local/share/icons/Qogir-dark/16/panel/volume-level-muted.svg"
   if is_mute ; then
     dunstify -i $iconMuted -r 2593 -u normal " mute"
   else

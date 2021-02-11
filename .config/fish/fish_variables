@@ -1,6 +1,6 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
-SETUVAR --export BW_SESSION:r2VkuvTNtmNn62vExgohD6o8g8O4arCzkHqvYkTkshBsByQRoDwfAyn5GLnXGt98uh0/Hb7qP1mhyMQSBXeaeQ\x3d\x3d
+SETUVAR --export BW_SESSION:k1RF\x2bwUx\x2bUXQ0V0kcyLmCaKZ8g4VdJZCKcHQaNy5Z9T0TyVkTf3AS\x2bR14fAhKNWpDUp0m2Td0gNJlxzGnMObzA\x3d\x3d
 SETUVAR --export EDITOR:/usr/bin/nvim
 SETUVAR --export LC_ALL:en_US\x2eUTF\x2d8
 SETUVAR --export LC_CTYPE:en_US\x2eUTF\x2d8
@@ -8,6 +8,7 @@ SETUVAR --export --path PATH:/home/ecal/scripts\x1e/usr/local/sbin\x1e/usr/local
 SETUVAR --export VIRTUALFISH_HOME:/home/ecal/python/\x2evirtualenvs
 SETUVAR --export VISUAL:/usr/bin/nvim
 SETUVAR __fish_initialized:3100
+SETUVAR _fish_abbr_startx:startx\x20\x22\x24XDG_CONFIG_HOME\x22/X11/xinitrc
 SETUVAR fish_color_autosuggestion:\x237d7d7d
 SETUVAR fish_color_cancel:\x2dr
 SETUVAR fish_color_command:brcyan
