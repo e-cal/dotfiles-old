@@ -24,4 +24,5 @@ source $HOME/.config/nvim/plugconfig/startify.vim
 source $HOME/.config/nvim/plugconfig/kite.vim
 source $HOME/.config/nvim/plugconfig/matlab.vim
 source $HOME/.config/nvim/plugconfig/ultisnips.vim
+source $HOME/.config/nvim/plugconfig/indentLine.vim
 

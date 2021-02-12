@@ -16,12 +16,24 @@
     "python.linting.pylintArgs": [
         "--disable=C0116,C0114,C0115,C0103,W0401,W0611,W0621"
     ],
-
+    "diagnostic.checkCurrentLine": true,
     "languageserver": {
         "ccls": {
             "command": "ccls",
-            "filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"],
-            "rootPatterns": [".ccls", "compile_commands.json", ".git/", ".hg/"],
+            "filetypes": [
+                "c",
+                "cc",
+                "cpp",
+                "c++",
+                "objc",
+                "objcpp"
+            ],
+            "rootPatterns": [
+                ".ccls",
+                "compile_commands.json",
+                ".git/",
+                ".hg/"
+            ],
             "initializationOptions": {
                 "cache": {
                     "directory": "/tmp/ccls"

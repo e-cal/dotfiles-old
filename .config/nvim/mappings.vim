@@ -47,8 +47,8 @@ vnoremap J :m '>+1<CR>gv=gv
 tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
 nnoremap <C-c> i<C-c>
 
-source $HOME/.config/nvim/mappings/leader.vim
 source $HOME/.config/nvim/mappings/debug.vim
 source $HOME/.config/nvim/mappings/git.vim
 source $HOME/.config/nvim/mappings/coc.vim
 " source $HOME/.config/nvim/mappings/matlab.vim
+source $HOME/.config/nvim/mappings/leader.vim

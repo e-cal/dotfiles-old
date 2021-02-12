@@ -50,6 +50,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Snippets
     Plug 'sirver/ultisnips'
     Plug 'honza/vim-snippets'
+    " Indent lines
+    Plug 'Yggdroot/indentLine'
 
     "Themes
     Plug 'morhetz/gruvbox'

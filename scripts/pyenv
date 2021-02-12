@@ -1,0 +1,3 @@
+#!/bin/bash
+
+pipenv install neovim jedi pylint autopep8

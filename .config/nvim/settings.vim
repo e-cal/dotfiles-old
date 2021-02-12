@@ -17,6 +17,7 @@ set ignorecase                  " Default case insensitive search
 set smartcase                   " Case sensitive if search has a capital letter
 set mouse=a                     " Enable mouse
 set scrolloff=8                 " Start scrolling before reaching the bottom
+"hi! Cursor ctermfg=1 ctermbg=1 guifg=#FF0000 guibg=#FF0000 HOW DO I CHANGE MY CURSOR COLOR
 
 " Use undofile instead of swap files for history
 set noswapfile

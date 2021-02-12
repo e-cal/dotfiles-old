@@ -75,4 +75,5 @@ https://unix.stackexchange.com/questions/473694/pulseaudio-not-recognizing-intel
 `rm -rf $HOME/.xmonad && mkdir $HOME/.local/share/xmonad`
 
 # Disable sleep on idle
-gsettings set org.gnome.desktop.session idle-delay 0
+setterm -powerdown 0
+xset s off
