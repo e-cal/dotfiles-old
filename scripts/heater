@@ -1,0 +1,11 @@
+#!/bin/bash
+bluetoothctl power on
+connected=`bluetoothctl info | grep "88:C6:26:D1:96:51" -A 8 | grep "Connected" | awk '{ print $2 }'`
+
+if [ $connected == 'yes' ]
+then
+    bluetoothctl disconnect 88:C6:26:D1:96:51
+else
+    bluetoothctl connect 88:C6:26:D1:96:51
+fi
+
