@@ -19,7 +19,11 @@ let g:startify_bookmarks = [
       \ {'c': '~/.config/nvim/coc-settings.json'},
       \ {'g': '~/.cfg/info/exclude'},
       \ {'p': '~/.config/picom/picom.conf'},
+      \ {'x': '~/.config/X11/xinitrc'},
       \ '~/.bash_profile',
+      \ '~/.config/fish/config.fish',
+      \ '~/.config/fish/conf.d/keybindings.fish',
+      \ '~/.config/alacritty/alacritty.yml',
       \ ]
 
 let g:startify_session_dir = '~/.config/nvim/sessions'

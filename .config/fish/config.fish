@@ -8,13 +8,13 @@ set -Ux EDITOR /usr/bin/nvim
 set -Ux VISUAL /usr/bin/nvim
 set -Ux LC_ALL en_US.UTF-8
 set -Ux LC_CTYPE en_US.UTF-8
-set PATH $HOME/.local/bin $HOME/scripts $PATH
+set PATH $HOME/.local/bin $HOME/scripts $PATH /opt/bin
 #set FZF_DEFAULT_COMMAND = 'rg --files --hidden --no-ignore-vcs'
 
 # Shell Mode
 function fish_user_key_bindings
-  # fish_default_key_bindings
-  fish_vi_key_bindings
+  fish_default_key_bindings
+  # fish_vi_key_bindings
 end
 
 # Cursor

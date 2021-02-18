@@ -2,12 +2,14 @@
 " Splits
 nnoremap <leader>s :split<CR>
 nnoremap <leader>S :vsplit<CR>
+nnoremap <leader>b :bo sp<CR>
 nnoremap <leader>h <C-w>t<C-w>K
 nnoremap <leader>v <C-w>t<C-w>H
-let g:which_key_map.s = 'horizontal split'
-let g:which_key_map.S = 'vertical split'
-let g:which_key_map.h = 'vert-hor split'
-let g:which_key_map.v = 'hor-vert split'
+let g:which_key_map.s = 'split'
+let g:which_key_map.S = 'vsplit'
+let g:which_key_map.b = 'bottom split'
+let g:which_key_map.h = 'vsplit->split'
+let g:which_key_map.v = 'split->vsplit'
 
 nnoremap <leader>x :bp\|bd! # <CR>
 nnoremap <leader>w :q <CR>
@@ -40,3 +42,23 @@ let g:which_key_map.T = 'v term'
 " This is definitely a terrible way of doing this but it works
 nnoremap <leader>r :put =expand('%:t')<CR>yeigcc <Esc>A -o <Esc>pY<C-w>jpA<CR><C-\><C-n><C-w>kdd:put =expand('%:t')<CR>i./<Esc>A<BS><BS><Esc>Y<C-w>jpA<CR><C-\><C-n><C-w>kdd:w<CR>2k
 let g:which_key_map.r = "run c"
+
+" Diagnostics
+
+" Show all diagnostics.
+nnoremap <silent><nowait> <leader>el  :<C-u>CocList diagnostics<cr>
+nnoremap <leader>ej     :call CocAction('diagnosticNext')<CR>
+nnoremap <leader>ek     :call CocAction('diagnosticPrevious')<CR>
+nnoremap <leader>edm    A # pylint: disable=no-member<Esc>
+
+
+let g:which_key_map.e = {
+      \ 'name' : '+Diagnostics',
+      \ 'l': 'list',
+      \ 'j': 'next',
+      \ 'k': 'prev',
+      \ 'd': {
+          \ 'name': '+Disable',
+          \ 'm': 'no-member'
+  \ }
+      \ }

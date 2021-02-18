@@ -1,5 +1,7 @@
 shell:
   program: /usr/bin/fish
+  args:
+    - --login
 
 window:
   padding:
@@ -51,7 +53,7 @@ colors:
 
 key_bindings:
     - { key: V, mods: Control|Shift, action: Paste }
-    #    - { key: C, mods: Control|Shift, action: Copy }
+    #- { key: C, mods: Control|Shift, action: Copy }
     - { key: Insert, mods: Shift, action: PasteSelection }
     - { key: Key0, mods: Control, action: ResetFontSize }
     - { key: Equals, mods: Control, action: IncreaseFontSize }
@@ -62,18 +64,22 @@ key_bindings:
     - { key: Paste, action: Paste }
     - { key: Copy, action: Copy }
     - { key: L, mods: Control, action: ReceiveChar }
-      #- { key: L, mods: Control, action: ClearLogNotice }
-      #- { key: L, mods: Control, chars: "\x0c" }
+    #- { key: L, mods: Control, action: ClearLogNotice }
+    #- { key: L, mods: Control, chars: "\x0c" }
     - { key: PageUp, mods: Shift, action: ScrollPageUp, mode: ~Alt }
     - { key: PageDown, mods: Shift, action: ScrollPageDown, mode: ~Alt }
     - { key: Home, mods: Shift, action: ScrollToTop,    mode: ~Alt }
     - { key: End, mods: Shift, action: ScrollToBottom, mode: ~Alt }
 
-      # Program keybindings (moved to fish keybindings)
-    # - { key: H, mods: Control|Shift, chars: "hist \x0D" }
-    # - { key: P, mods: Control|Shift, chars: "htop \x0D" }
-    # - { key: D, mods: Control|Shift, chars: "cds \x0D" }
-    # - { key: E, mods: Control|Shift, chars: "vs \x0D" }
-    # - { key: C, mods: Control|Shift, chars: "vclip \x0D" }
-    # - { key: L, mods: Control|Shift, chars: "clear \x0D" }
-    # - { key: S, mods: Control|Shift, chars: "configstat \x0D" }
+    - { key: E, mods: Control, chars: "\x04" } # EOF
+
+    - { key: Escape, mods: Alt, action: toggleViMode } # Vi mode
+
+    - { key: Tab, mods: Alt, chars: "\x1b\x5b\x31\x3b\x32\x50" } # f13
+
+    # TMUX Keybindings
+    - { key: B, mods: Control, chars: "\x02" } # tmux command prefix
+    - { key: D, mods: Control, chars: "\x02\x64" } # detach
+    - { key: D, mods: Control|Shift, chars: "\x02\x44" } # detach menu
+    - { key: X, mods: Control, chars: "\x02\x78" } # kill pane
+

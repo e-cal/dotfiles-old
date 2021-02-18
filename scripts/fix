@@ -4,4 +4,7 @@ case $1 in
     kite)
         sudo chmod a+x ~/.config/nvim/pack/kite/start/vim-plugin/lib/linux/kite-http
         ;;
+    mon)
+        xset edpms force standby
+        ;;
 esac
