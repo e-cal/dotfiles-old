@@ -8,9 +8,6 @@ nmap <leader>cb  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
 "nmap <leader>qf  <Plug>(coc-fix-current)
 
-" Mappings for CoCList
-" Show all diagnostics.
-nnoremap <silent><nowait> <leader>ce  :<C-u>CocList diagnostics<cr>
 " Show commands.
 nnoremap <silent><nowait> <leader>cc  :<C-u>CocList commands<cr>
 " Find symbol of current document.

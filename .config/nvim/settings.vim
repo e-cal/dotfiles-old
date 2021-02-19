@@ -1,3 +1,4 @@
+filetype plugin indent off
 syntax enable					" Syntax highlighing
 set t_Co=256                    " Support 256 colors
 set shell=/usr/bin/bash         " Set default terminal shell
@@ -48,3 +49,5 @@ au! BufWritePost $MYVIMRC source % " auto source when writing to init.vm alterna
 
 let g:python_highlight_space_errors = 0 " Disable red whitespace in python
 let g:polyglot_disabled = ['autoindent'] " Disable polyglot autoindent
+let g:vim_markdown_conceal_code_blocks = 0
+autocmd BufNewFile,BufRead *.md filetype plugin indent off

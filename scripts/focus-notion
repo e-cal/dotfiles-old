@@ -2,5 +2,5 @@
 
 if ! xdotool search -classname "notion.so" windowactivate
 then
-    chromium --profile-directory='Profile 2' --app=https://notion.so --disable-gpu --disable-software-rasterizer --window-size=1728,972 --window-position=10,10
+    chromium --profile-directory='Default' --app=https://notion.so --disable-gpu --disable-software-rasterizer --window-size=1728,972 --window-position=10,10
 fi

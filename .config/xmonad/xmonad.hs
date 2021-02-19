@@ -208,14 +208,14 @@ myKeys = [
     ("M-<Return>", spawn myTerminal) -- Terminal
     , ("M-S-<Return>", spawn "rofi -show drun -config $HOME/.config/rofi/main.rasi") -- Run Prompt
     , ("M-f", spawn "nemo") -- files
-    , ("M-c", spawn "chromium --profile-directory='Default' --disable-software-rasterizer") -- Chromium (main)
-    , ("M-S-c", spawn "chromium --profile-directory='Profile 1' --disable-software-rasterizer") -- Chromium (alt)
-    , ("M-C-c", spawn "chromium https://calendar.google.com --profile-directory='Default' --disable-software-rasterizer") -- Google Drive
-    , ("M-o", spawn "chromium https://onq.queensu.ca/d2l/home --disable-software-rasterizer") -- OnQ
-    , ("M-g", spawn "chromium https://github.com --profile-directory='Default' --disable-software-rasterizer") -- Github
-    , ("M-d", spawn "chromium https://drive.google.com/drive/my-drive --profile-directory='Default' --disable-software-rasterizer") -- Google Drive
+    , ("M-c", spawn "firefox") -- Firefox
+    -- , ("M-c", spawn "chromium --profile-directory='Default' --disable-software-rasterizer") -- Chromium (main)
+    -- , ("M-S-c", spawn "chromium --profile-directory='Profile 1' --disable-software-rasterizer") -- Chromium (alt)
+    -- , ("M-C-c", spawn "chromium https://calendar.google.com --profile-directory='Default' --disable-software-rasterizer") -- Google Drive
+    , ("M-g", spawn "firefox https://github.com") -- Github
+    , ("M-d", spawn "firefox https://drive.google.com/drive/my-drive") -- Google Drive
     , ("M-S-d", sequence_[spawn "nemo ~/Dropbox", spawnOnce "dropbox &"]) -- Dropbox
-    , ("M-y", spawn "chromium --profile-directory='Profile 1' https://youtube.com --disable-software-rasterizer") -- Github
+    , ("M-y", spawn "firefox https://youtube.com") -- Github
     , ("M-S-b", spawn "$HOME/.config/polybar/launch.sh") -- Polybar
     , ("M-S-p", spawn "launch-picom")
     , ("M-C-w", spawn "nitrogen") -- Nitrogen

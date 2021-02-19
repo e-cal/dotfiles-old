@@ -54,6 +54,16 @@ gnome-keyring
 wmctrl
 xdotool
 
+# H4CK (move to /opt)
+gnu-netcat
+nmap
+gobuster (aur, wget a dirlist)
+enum4linux-ng (git clone)
+hydra
+linpeas (wget github)
+john
+
+
 # Set up multiple monitors
 https://wiki.archlinux.org/index.php/Multihead#Example:_dualhead_configuration_using_relative_coordinates
 `xrandr --output DP-2 --auto --output DP-5 --auto --left-of DP-2`
@@ -75,5 +85,4 @@ https://unix.stackexchange.com/questions/473694/pulseaudio-not-recognizing-intel
 `rm -rf $HOME/.xmonad && mkdir $HOME/.local/share/xmonad`
 
 # Disable sleep on idle
-setterm -powerdown 0
-xset s off
+sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
