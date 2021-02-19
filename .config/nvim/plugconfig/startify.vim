@@ -20,6 +20,7 @@ let g:startify_bookmarks = [
       \ {'g': '~/.cfg/info/exclude'},
       \ {'p': '~/.config/picom/picom.conf'},
       \ {'x': '~/.config/X11/xinitrc'},
+      \ {'t': '~/.config/tmux/tmux.conf'},
       \ '~/.bash_profile',
       \ '~/.config/fish/config.fish',
       \ '~/.config/fish/conf.d/keybindings.fish',

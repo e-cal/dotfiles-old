@@ -23,7 +23,8 @@ nnoremap <M-k> <C-w>k
 nnoremap <M-l> <C-w>l
 
 " Tab navigation
-nnoremap <silent> <F13> :bnext<CR> " alt tab is rebound to f13 in alacritty
+nnoremap <silent> <F13> :bnext<CR> " incase alt tab is rebound to f13
+nnoremap <silent> <M-TAB> :bnext<CR>
 nnoremap <silent> <S-TAB> :bprevious<CR>
 
 " File search

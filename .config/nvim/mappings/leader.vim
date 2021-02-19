@@ -49,7 +49,7 @@ let g:which_key_map.r = "run c"
 nnoremap <silent><nowait> <leader>el  :<C-u>CocList diagnostics<cr>
 nnoremap <leader>ej     :call CocAction('diagnosticNext')<CR>
 nnoremap <leader>ek     :call CocAction('diagnosticPrevious')<CR>
-nnoremap <leader>edm    A # pylint: disable=no-member<Esc>
+nnoremap <leader>edm    A  # pylint: disable=no-member<Esc>
 
 
 let g:which_key_map.e = {
