@@ -24,6 +24,7 @@ nnoremap <M-l> <C-w>l
 
 " Tab navigation
 nnoremap <silent> <F13> :bnext<CR> " incase alt tab is rebound to f13
+nnoremap <silent> <C-T> :bnext<CR> " also alt tab, I should really stick to a binding
 nnoremap <silent> <M-TAB> :bnext<CR>
 nnoremap <silent> <S-TAB> :bprevious<CR>
 

@@ -14,8 +14,9 @@ bind \ck 'clear; echo; sleep 1; redraw'
 bind \ck 'clear; echo; redraw'
 bind \cs 'configstat; redraw'
 bind \cv 'vclip'
-bind -k f13 complete # alt+tab
 bind \ch  backward-kill-word # ctrl+backspace
+# bind -k f13 complete # alt+tab
+bind \ct complete # alt+tab
 
 # Insert mode keybindings
 bind -M insert \t forward-word
@@ -29,7 +30,7 @@ bind -M insert \ck 'clear; echo; redraw'
 bind -m insert \ck 'clear; echo; redraw'
 bind -M insert \cs 'configstat; redraw'
 bind -M insert \cv 'vclip'
-bind -M insert -k f13 complete # alt+tab
+# bind -M insert -k f13 complete # alt+tab
 
 # Temp
 bind -M insert \cw 'echo "Opening qmind project...";cd ~/projects/qmind-vaad; redraw'

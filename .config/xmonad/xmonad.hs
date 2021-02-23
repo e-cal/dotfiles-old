@@ -47,10 +47,13 @@ import XMonad.Layout.NoBorders
 import XMonad.Layout.WindowArranger
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.LayoutModifier
+import XMonad.Layout.Simplest
+import XMonad.Layout.SubLayouts
 import XMonad.Layout.Renamed
 import XMonad.Layout.MultiToggle
 import XMonad.Layout.MultiToggle.Instances
 import XMonad.Layout.Minimize
+import XMonad.Layout.ThreeColumns
 import qualified XMonad.Layout.BoringWindows as BW
 
 
@@ -113,14 +116,20 @@ tall    = renamed [Replace "Main"]
             $ minimize . BW.boringWindows
             $ mySpacing 5
         -- params: windows in master, increment on resize, proportion for master
-            $ ResizableTall 1 (3/100) (51/100) []
+            $ ResizableTall 1 (3/100) (1/2) []
 full    = renamed [Replace "Fullscreen"]
             $ noBorders Full
+triple  = renamed [Replace "Columns"]
+            $ subLayout [] (smartBorders Simplest)
+            $ mySpacing 5
+            $ minimize . BW.boringWindows
+        -- params: windows in master, increment on resize, proportion for master
+            $ ThreeCol 1 (3/100) (3/7)
 
 myLayoutHook = avoidStruts $ windowArrange
                $ mkToggle (NBFULL ?? NOBORDERS ?? EOT) myLayout
                    where
-                       myLayout = tall ||| full
+                       myLayout = tall ||| full -- ||| triple
 
 --------------------------------------------------------------------------------
 -- Manage Hook
@@ -234,6 +243,7 @@ myKeys = [
     -- Macros
 
     -- Notion
+    , ("M-n w", spawn "firefox notion.so") -- open notion in the normal browser
     , ("M-n m", spawn "macro notion matrix")
     , ("M-n S-m", spawn "macro notion matrix-set")
     , ("M-n =", spawn "macro notion tex")

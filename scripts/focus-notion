@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if ! xdotool search -classname "notion.so" windowactivate
+if ! xdotool search -name "notion.so" windowactivate
 then
-    chromium --profile-directory='Default' --app=https://notion.so --disable-gpu --disable-software-rasterizer --window-size=1728,972 --window-position=10,10
+    firefox --ssb "notion.so"
 fi

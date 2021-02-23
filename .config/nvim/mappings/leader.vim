@@ -30,7 +30,7 @@ let g:which_key_map.f = 'format'
 
 " Delete selection without storing and paste
 vnoremap <leader>p "_dP
-let g:which_key_map.p = 'del-paste'
+let g:which_key_map.p = 'del-paste (V mode)'
 
 " Terminal
 nnoremap <leader>t :new +resize10 \| term<CR>ifish<CR>

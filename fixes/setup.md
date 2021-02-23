@@ -85,4 +85,4 @@ https://unix.stackexchange.com/questions/473694/pulseaudio-not-recognizing-intel
 `rm -rf $HOME/.xmonad && mkdir $HOME/.local/share/xmonad`
 
 # Disable sleep on idle
-sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
+Add: `xset s off -dpms` to `.xinitrc`

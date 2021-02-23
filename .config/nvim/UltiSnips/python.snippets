@@ -223,8 +223,8 @@ endglobal
 # eg (marks end of globals to sneak to)
 
 snippet def "define a function" bA
-def ${1:function}(`!p snip.rv = "self, " if snip.indent else ""`$2):
-	${0:pass}
+def ${1:function}(`!p snip.rv = "self" if snip.indent else ""`$2):
+	${0:${VISUAL:pass}}
 endsnippet
 
 snippet ddef "define a function with a docstring" bA
@@ -234,5 +234,15 @@ if snip.indent:
 	`!p snip.rv = triple_quotes(snip)`${4:TODO: Docstring for $1.}`!p
 write_function_docstring(t, snip) `
 	${5:${VISUAL:pass}}
+endsnippet
+
+snippet class "create new class" bA
+class ${1:`!p snip.rv = snip.basename`}:
+	def __init__(self$2):
+		${0:${VISUAL:pass}}
+endsnippet
+
+snippet #! "make script executable" bA
+#!/usr/bin/env python
 endsnippet
 

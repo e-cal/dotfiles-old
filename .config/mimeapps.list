@@ -9,3 +9,6 @@ application/x-extension-burp=install4j_12fvkp-BurpSuiteCommunity.desktop
 x-scheme-handler/http=firefox.desktop
 x-scheme-handler/https=firefox.desktop
 application/pdf=firefox.desktop
+image/jpeg=firefox.desktop
+image/jpg=firefox.desktop
+image/png=firefox.desktop
