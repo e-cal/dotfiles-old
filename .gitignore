@@ -1,0 +1,87 @@
+# ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄        ▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄
+#▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░▌      ▐░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌
+# ▀▀▀▀█░█▀▀▀▀ ▐░█▀▀▀▀▀▀▀▀▀ ▐░▌░▌     ▐░▌▐░█▀▀▀▀▀▀▀█░▌▐░█▀▀▀▀▀▀▀█░▌▐░█▀▀▀▀▀▀▀▀▀
+#     ▐░▌     ▐░▌          ▐░▌▐░▌    ▐░▌▐░▌       ▐░▌▐░▌       ▐░▌▐░▌
+#     ▐░▌     ▐░▌ ▄▄▄▄▄▄▄▄ ▐░▌ ▐░▌   ▐░▌▐░▌       ▐░▌▐░█▄▄▄▄▄▄▄█░▌▐░█▄▄▄▄▄▄▄▄▄
+#     ▐░▌     ▐░▌▐░░░░░░░░▌▐░▌  ▐░▌  ▐░▌▐░▌       ▐░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌
+#     ▐░▌     ▐░▌ ▀▀▀▀▀▀█░▌▐░▌   ▐░▌ ▐░▌▐░▌       ▐░▌▐░█▀▀▀▀█░█▀▀ ▐░█▀▀▀▀▀▀▀▀▀
+#     ▐░▌     ▐░▌       ▐░▌▐░▌    ▐░▌▐░▌▐░▌       ▐░▌▐░▌     ▐░▌  ▐░▌
+# ▄▄▄▄█░█▄▄▄▄ ▐░█▄▄▄▄▄▄▄█░▌▐░▌     ▐░▐░▌▐░█▄▄▄▄▄▄▄█░▌▐░▌      ▐░▌ ▐░█▄▄▄▄▄▄▄▄▄
+#▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░▌      ▐░░▌▐░░░░░░░░░░░▌▐░▌       ▐░▌▐░░░░░░░░░░░▌
+# ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀        ▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀         ▀  ▀▀▀▀▀▀▀▀▀▀▀
+
+# Home Directory
+.local
+.BurpSuite
+.john
+.cfg
+.cache
+.matlab
+.mozilla
+.dropbox
+.dropbox-dist
+.pki
+.gitconfig
+.git-credentials
+.gnome
+.java
+.kite
+.streamlit
+.subversion
+.ssh
+.wget-hsts
+.yarnrc
+.zoom
+Downloads
+hack/
+textbooks/
+yay-git
+screenshots/
+change.txt
+tmp
+
+# Directories
+projects/
+Dropbox/
+
+# Hidden Directories
+.gnupg
+.pylint.d
+.npm
+
+# Irrelevant Configs
+.config/chromium
+.config/coc
+.config/configstore
+.config/Code
+.config/dconf
+.config/discord
+.config/Mailspring
+.config/nitrogen
+.config/pulse
+.config/pavucontrol.ini
+.config/Slack
+.config/spicetify
+.config/spotify
+.config/VSCodium
+.config/jupyter
+.config/nvim/undodir
+.config/google-keep-nativefier-d04d04
+.config/Bitwarden CLI/data.json
+.config/Debauchee/Barrier.conf
+.config/nvim/.netrwhist
+.config/python/history
+.config/Microsoft
+.config/teams
+.config/Kite
+.config/GIMP
+.config/libreoffice
+
+# Other
+.config/nvim/autoload/
+credentials
+
+# Exceptions
+!.local/share/fonts/
+!.local/share/themes/
+!.local/share/icons/
