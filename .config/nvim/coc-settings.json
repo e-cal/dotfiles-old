@@ -6,12 +6,6 @@
         "haskell"
     ],
     // BROKEN - for using snippets with Kite
-    /* "languageserver": { */
-    /*     "kite": { */
-    /*         "command": "/home/ecal/.local/share/kite/kite-v2.20210114.0/kite-lsp --editor=nvim", */
-    /*         "filetypes": ["python", "go", "javascript"] */
-    /*     } */
-    /* }, */
     "python.jediEnabled": true,
     "python.formatting.autopep8Args": ["--ignore", "E402"],
     "python.linting.pylintArgs": [
@@ -40,6 +34,10 @@
                     "directory": "/tmp/ccls"
                 }
             }
+        },
+        "kite": {
+            "command": "/home/ecal/.local/share/kite/current/kite-lsp",
+            "filetypes": ["python", "go", "javascript"]
         }
     }
 }

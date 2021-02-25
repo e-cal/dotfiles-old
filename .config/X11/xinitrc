@@ -38,6 +38,5 @@ xrandr --output DP-2 --auto --output DP-5 --auto --left-of DP-2
 setxkbmap -option caps:escape
 nitrogen --restore &
 picom --config $XDG_CONFIG_HOME/picom/picom.conf &
-redshift &
 xsetroot -cursor_name left_ptr &
 exec xmonad

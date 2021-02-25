@@ -158,6 +158,7 @@ myStartupHook :: X ()
 myStartupHook = do
     spawnOnce "~/.config/polybar/launch.sh &"
     spawnOnce "dropbox &"
+    spawnOnce "redshift &"
     setWMName "LG3D"
 
 --------------------------------------------------------------------------------

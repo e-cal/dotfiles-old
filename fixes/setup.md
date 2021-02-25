@@ -57,8 +57,9 @@ xdotool
 # H4CK (move to /opt)
 gnu-netcat
 nmap
-gobuster (aur, wget a dirlist)
-enum4linux-ng (git clone)
+gobuster (go get github.com/OJ/gobuster)
+enum4linux-ng (git@github.com:cddmp/enum4linux-ng.git)
+exploitdb (git@github.com:offensive-security/exploitdb.git)
 hydra
 linpeas (wget github)
 john
