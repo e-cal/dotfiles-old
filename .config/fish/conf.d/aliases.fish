@@ -32,5 +32,6 @@ alias cleanup="rm ~/java.log.*"
 alias sql="sqlite3"
 alias docker="sudo docker"
 alias yarn="yarn --use-yarnrc $XDG_CONFIG_HOME/yarn/config"
-alias pwn="source /home/ecal/.local/share/virtualenvs/pwncat-dBKAAQWS/bin/activate.fish"
+alias hackenv="source /home/ecal/.local/share/virtualenvs/hackenv-lLLAxNNd/bin/activate.fish"
 alias .hack='/usr/bin/git --git-dir=/opt/.hack --work-tree=/opt'
+alias rg="rg -S"

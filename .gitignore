@@ -24,6 +24,7 @@
 .gitconfig
 .git-credentials
 .gnome
+.hashcat
 .java
 .kite
 .streamlit

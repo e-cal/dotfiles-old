@@ -53,6 +53,7 @@ mailspring (aur)
 gnome-keyring
 wmctrl
 xdotool
+eog
 
 # H4CK (move to /opt)
 gnu-netcat
@@ -63,6 +64,11 @@ exploitdb (git@github.com:offensive-security/exploitdb.git)
 hydra
 linpeas (wget github)
 john
+exiftool (git@github.com:exiftool/exiftool.git)
+nikto (https://github.com/sullo/nikto)
+sqlmap (https://github.com/sqlmapproject/sqlmap.git)
+smbmap (git@github.com:ShawnDEvans/smbmap.git)
+
 
 
 # Set up multiple monitors

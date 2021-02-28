@@ -4,11 +4,9 @@ bind -e -M insert \cl
 
 # Normal (default) mode keybindings
 bind \cr '/bin/clear; exec fish'
-bind \er 'clear; exec fish'
 bind \t forward-word
-bind \cp 'htop; redraw'
 bind \cd 'cds ~; redraw'
-bind \ce 'vs'
+bind \cf 'vs'
 bind \cl 'pwd; la; redraw'
 bind \ck 'clear; echo; redraw'
 bind \cs 'configstat; redraw'
@@ -16,6 +14,7 @@ bind \cv 'vclip'
 bind \ch  backward-kill-word # ctrl+backspace
 # bind -k f13 complete # alt+tab
 bind \ct complete # alt+tab
+bind \e\[3\;5~ backward-kill-line
 
 # Insert mode keybindings
 bind -M insert \t forward-word

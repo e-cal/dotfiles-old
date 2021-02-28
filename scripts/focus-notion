@@ -2,5 +2,5 @@
 
 if ! xdotool search -name "notion.so" windowactivate
 then
-    firefox --ssb "notion.so"
+    firefox --new-instance -P ecal &
 fi

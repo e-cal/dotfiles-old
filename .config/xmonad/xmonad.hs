@@ -158,7 +158,7 @@ myStartupHook :: X ()
 myStartupHook = do
     spawnOnce "~/.config/polybar/launch.sh &"
     spawnOnce "dropbox &"
-    spawnOnce "redshift &"
+    spawnOnce "redshift"
     setWMName "LG3D"
 
 --------------------------------------------------------------------------------
@@ -218,10 +218,7 @@ myKeys = [
     ("M-<Return>", spawn myTerminal) -- Terminal
     , ("M-S-<Return>", spawn "rofi -show drun -config $HOME/.config/rofi/main.rasi") -- Run Prompt
     , ("M-f", spawn "nemo") -- files
-    , ("M-c", spawn "firefox") -- Firefox
-    -- , ("M-c", spawn "chromium --profile-directory='Default' --disable-software-rasterizer") -- Chromium (main)
-    -- , ("M-S-c", spawn "chromium --profile-directory='Profile 1' --disable-software-rasterizer") -- Chromium (alt)
-    -- , ("M-C-c", spawn "chromium https://calendar.google.com --profile-directory='Default' --disable-software-rasterizer") -- Google Drive
+    , ("M-c", spawn "firefox -P ecal") -- Firefox
     , ("M-g", spawn "firefox https://github.com") -- Github
     , ("M-d", spawn "firefox https://drive.google.com/drive/my-drive") -- Google Drive
     , ("M-S-d", sequence_[spawn "nemo ~/Dropbox", spawnOnce "dropbox &"]) -- Dropbox
@@ -236,7 +233,7 @@ myKeys = [
     , ("M-S-m", spawn "mailspring")
     , ("M-t", spawn "teams")
     , ("M-S-t", spawn "slack")
-    , ("M-S-n", spawn "focus-notion")
+    , ("M-S-n", spawn "firefox --kiosk notion.so -P notion")
 
     -- Scratchpads
     , ("M-\\", namedScratchpadAction myScratchPads "terminal")
