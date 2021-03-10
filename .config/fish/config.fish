@@ -8,7 +8,7 @@ set -Ux EDITOR /usr/bin/nvim
 set -Ux VISUAL /usr/bin/nvim
 set -Ux LC_ALL en_US.UTF-8
 set -Ux LC_CTYPE en_US.UTF-8
-set PATH $HOME/.local/bin $HOME/scripts $PATH /opt/bin
+set PATH $HOME/.local/bin $HOME/scripts /opt/bin /opt/bin/2john $PATH
 #set FZF_DEFAULT_COMMAND = 'rg --files --hidden --no-ignore-vcs'
 
 # Shell Mode

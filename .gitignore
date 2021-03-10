@@ -25,6 +25,7 @@
 .git-credentials
 .gnome
 .hashcat
+.msf4
 .java
 .kite
 .streamlit
@@ -40,6 +41,7 @@ yay-git
 screenshots/
 change.txt
 tmp
+images
 
 # Directories
 projects/
@@ -77,6 +79,8 @@ Dropbox/
 .config/Kite
 .config/GIMP
 .config/libreoffice
+.config/obs-studio
+.config/binwalk
 
 # Other
 .config/nvim/autoload/

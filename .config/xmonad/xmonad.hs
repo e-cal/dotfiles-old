@@ -141,6 +141,7 @@ myManageHook = composeAll
     , className =? "Gimp"           --> doFloat
     , className =? "feh"            --> doFloat
     , className =? "Gpick"          --> doFloat
+    , className =? "MATLAB R2020b - academic use" --> doFloat
     , role      =? "pop-up"         --> doFloat
     , className =? "Slack"          --> doShift "3"
     , className =? "discord"        --> doShift "3"
@@ -221,6 +222,7 @@ myKeys = [
     , ("M-c", spawn "firefox -P ecal") -- Firefox
     , ("M-g", spawn "firefox https://github.com") -- Github
     , ("M-d", spawn "firefox https://drive.google.com/drive/my-drive") -- Google Drive
+    , ("M-S-c", spawn "firefox https://calendar.google.com") -- Calendar
     , ("M-S-d", sequence_[spawn "nemo ~/Dropbox", spawnOnce "dropbox &"]) -- Dropbox
     , ("M-y", spawn "firefox https://youtube.com") -- Github
     , ("M-S-b", spawn "$HOME/.config/polybar/launch.sh") -- Polybar
@@ -233,7 +235,7 @@ myKeys = [
     , ("M-S-m", spawn "mailspring")
     , ("M-t", spawn "teams")
     , ("M-S-t", spawn "slack")
-    , ("M-S-n", spawn "firefox --kiosk notion.so -P notion")
+    , ("M-S-n", spawn "notion")
 
     -- Scratchpads
     , ("M-\\", namedScratchpadAction myScratchPads "terminal")
@@ -265,6 +267,7 @@ myKeys = [
     , ("M-n e", spawn "macro notion expr")
         -- Symbols
     , ("M-n s a", spawn "macro notion symbol alpha")
+    , ("M-n s b", spawn "macro notion symbol beta")
     , ("M-n s e", spawn "macro notion symbol epsilon")
     , ("M-n s l", spawn "macro notion symbol lambda")
     , ("M-n s S-l", spawn "macro notion symbol cap-lambda")
@@ -273,6 +276,7 @@ myKeys = [
     , ("M-n s S-s", spawn "macro notion symbol cap-sigma")
     , ("M-n s =", spawn "macro notion symbol not-equal")
     , ("M-n s d", spawn "macro notion symbol data-matrix")
+    , ("M-n s .", spawn "macro notion symbol dots")
 
     -- Kill Windows
     , ("M-q", kill) -- Focused window

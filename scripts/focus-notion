@@ -1,6 +1,0 @@
-#!/bin/bash
-
-if ! xdotool search -name "notion.so" windowactivate
-then
-    firefox --new-instance -P ecal &
-fi

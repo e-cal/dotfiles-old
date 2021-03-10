@@ -13,7 +13,7 @@ let g:startify_bookmarks = [
       \ {'m': '~/scripts/macro'},
       \ {'v': '~/.config/nvim/init.vim'},
       \ {'w': '~/.config/xmonad/xmonad.hs'},
-      \ {'b': '~/.config/polybar/config.ini'},
+      \ {'b': '~/.config/fish/conf.d/keybindings.fish'},
       \ {'d': '~/.config/dunst/dunstrc'},
       \ {'a': '~/.config/fish/conf.d/aliases.fish'},
       \ {'c': '~/.config/nvim/coc-settings.json'},
@@ -22,8 +22,8 @@ let g:startify_bookmarks = [
       \ {'x': '~/.config/X11/xinitrc'},
       \ {'t': '~/.config/tmux/tmux.conf'},
       \ '~/.bash_profile',
+      \ '~/.config/polybar/config.ini',
       \ '~/.config/fish/config.fish',
-      \ '~/.config/fish/conf.d/keybindings.fish',
       \ '~/.config/alacritty/alacritty.yml',
       \ ]
 

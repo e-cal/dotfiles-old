@@ -8,6 +8,7 @@ SETUVAR --export --path PATH:/home/ecal/scripts\x1e/usr/local/sbin\x1e/usr/local
 SETUVAR --export VIRTUALFISH_HOME:/home/ecal/python/\x2evirtualenvs
 SETUVAR --export VISUAL:/usr/bin/nvim
 SETUVAR __fish_initialized:3100
+SETUVAR __pipenv_fish_final_pwd:/home/ecal/hack/thm
 SETUVAR _fish_abbr_startx:startx\x20\x22\x24XDG_CONFIG_HOME\x22/X11/xinitrc
 SETUVAR fish_color_autosuggestion:\x237d7d7d
 SETUVAR fish_color_cancel:\x2dr

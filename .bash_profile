@@ -1,7 +1,4 @@
-#
-# ~/.bash_profile
-#
-
+# lemme use my scripts
 export PATH=$HOME/.local/bin:$HOME/scripts:$PATH
 
 # XDG path spec
@@ -9,6 +6,7 @@ export XDG_CONFIG_HOME=~/.config
 export XDG_CACHE_HOME=~/.cache
 export XDG_DATA_HOME=~/.local/share
 
+# GET OUT OF MY HOUSE
 export XMONAD_CONFIG_HOME="$XDG_CONFIG_HOME"/xmonad
 export XMONAD_DATA_HOME="$XDG_DATA_HOME"/xmonad
 export XMONAD_CACHE_HOME="$XDG_CACHE_HOME"/xmonad
@@ -28,9 +26,11 @@ export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
 export NVM_DIR="$XDG_DATA_HOME"/nvm
 export MATLAB_LOG_DIR="$XDG_CACHE_HOME"/matlab/logs
+export VIRTUALFISH_HOME="$HOME"/.local/share/virtualenvs
+export WGETRC="$XDG_CONFIG_HOME"/wgetrc
 
 # Other env variables
-export FZF_DEFAULT_COMMAND='find .'
+export FZF_DEFAULT_COMMAND='rg -l ""'
 
 # Source .bashrc
 [[ -f ~/.bashrc ]] && . ~/.bashrc

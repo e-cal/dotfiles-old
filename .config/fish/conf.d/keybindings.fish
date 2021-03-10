@@ -29,6 +29,6 @@ bind -M insert \cs 'configstat; redraw'
 bind -M insert \cv 'vclip'
 # bind -M insert -k f13 complete # alt+tab
 
-# Temp
-bind -M insert \cw 'echo "Opening qmind project...";cd ~/projects/qmind-vaad; redraw'
-bind \cw 'echo "Opening qmind project...";cd ~/projects/qmind-vaad; redraw'
+# Work shortcuts
+#bind \cw 'echo "Opening qmind project...";cd ~/projects/VAAD;redraw'
+bind \cw 'echo "CISC271 A3";cd ~/Dropbox/uni/2021W/CISC271/a3;redraw'

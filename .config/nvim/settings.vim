@@ -51,3 +51,4 @@ let g:python_highlight_space_errors = 0 " Disable red whitespace in python
 let g:polyglot_disabled = ['autoindent'] " Disable polyglot autoindent
 let g:vim_markdown_conceal_code_blocks = 0
 autocmd BufNewFile,BufRead *.md filetype plugin indent off
+"let g:python3_host_prog = '~/.local/share/virtualenvs/nvim/bin/python'

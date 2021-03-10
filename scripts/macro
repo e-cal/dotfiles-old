@@ -54,14 +54,15 @@ case $1 in
         focus notion.so
 
         function new_eqn {
-            type_string "/adv eqn"
+            type_string "/"
+            text "adv eqn"
             xdotool key Return
         }
 
         case $2 in
             tex)
                 new_eqn
-                sleep 0.3
+                sleep 1
                 xdotool key space
                 ;;
             inline)
@@ -112,6 +113,7 @@ case $1 in
             sum)
                 text "\sum\limits^{}_{}"
                 left 5
+                xdotool key Shift
                 ;;
             null)
                 text "\text{null}()"
@@ -174,6 +176,9 @@ case $1 in
                     alpha)
                         text "\alpha"
                         ;;
+                    beta)
+                        text "\beta"
+                        ;;
                     epsilon)
                         text "\epsilon"
                         ;;
@@ -190,7 +195,7 @@ case $1 in
                         text "\sigma"
                         ;;
                     cap-sigma)
-                        text "\Sigma"
+                        text "\Sigma "
                         ;;
                     not-equal)
                         text "\not="
@@ -199,6 +204,9 @@ case $1 in
                         text "\$\$A \in \R^{m\times n}\$\$"
                         xdotool key space
                         xdotool key space
+                        ;;
+                    dots)
+                        text "\dots "
                         ;;
                 esac
                 xdotool key BackSpace

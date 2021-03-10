@@ -54,6 +54,7 @@ gnome-keyring
 wmctrl
 xdotool
 eog
+postgresql
 
 # H4CK (move to /opt)
 gnu-netcat
@@ -68,6 +69,10 @@ exiftool (git@github.com:exiftool/exiftool.git)
 nikto (https://github.com/sullo/nikto)
 sqlmap (https://github.com/sqlmapproject/sqlmap.git)
 smbmap (git@github.com:ShawnDEvans/smbmap.git)
+pwncat (git@github.com:calebstewart/pwncat.git pwncat)
+impacket (git@github.com:SecureAuthCorp/impacket.git)
+metasploit
+wireshark-cli (or wireshark-qt)
 
 
 

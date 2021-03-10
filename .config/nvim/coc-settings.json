@@ -1,12 +1,11 @@
+/* "python.pythonPath": "/usr/bin/python", */
 {
     "coc.preferences.formatOnSaveFiletypes": [
         "json",
         "vim",
-        "python",
-        "haskell"
+        "python"
     ],
-    // BROKEN - for using snippets with Kite
-    "python.jediEnabled": true,
+    "python.jediEnabled": false,
     "python.formatting.autopep8Args": ["--ignore", "E402"],
     "python.linting.pylintArgs": [
         "--disable=C0116,C0114,C0115,C0103,W0401,W0611,W0621"
@@ -37,7 +36,8 @@
         },
         "kite": {
             "command": "/home/ecal/.local/share/kite/current/kite-lsp",
-            "filetypes": ["python", "go", "javascript"]
+            "filetypes": ["python"],
+            /* "disableDiagnostics": true */
         }
     }
 }

@@ -6,3 +6,4 @@ let g:matlab_server_launcher = 'vim'  "launch the server in a Neovim terminal bu
 
 " let g:matlab_server_split = 'vertical'   "launch the server in a vertical split
 let g:matlab_server_split = 'horizontal' "launch the server in a horizontal split
+

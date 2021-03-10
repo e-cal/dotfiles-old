@@ -35,3 +35,7 @@ alias yarn="yarn --use-yarnrc $XDG_CONFIG_HOME/yarn/config"
 alias hackenv="source /home/ecal/.local/share/virtualenvs/hackenv-lLLAxNNd/bin/activate.fish"
 alias .hack='/usr/bin/git --git-dir=/opt/.hack --work-tree=/opt'
 alias rg="rg -S"
+alias msf="msfconsole --quiet -x \"db_connect $USER@msf\""
+alias venv="python -m venv"
+alias searchsys="sudo find / 2>/dev/null | fzf"
+alias update="yay -Syyu"

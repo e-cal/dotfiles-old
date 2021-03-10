@@ -12,8 +12,6 @@ augroup AUTO
     autocmd BufWritePre * :call TrimWhitespace()
 augroup end
 
-" Spell check markdown files
-autocmd FileType markdown setlocal spell
 
 " Python
 augroup python
@@ -21,3 +19,21 @@ augroup python
     " Add shiftwidth and/or softtabstop if you want to override those too.
     autocmd FileType python set shiftwidth=4
 augroup end
+
+" Markdown
+augroup markdown
+    autocmd!
+    " Enable spell check
+    autocmd FileType markdown setlocal spell
+augroup end
+
+
+" MATLAB
+augroup matlab
+    autocmd!
+    autocmd FileType octave setl filetype=matlab
+    autocmd FileType matlab setl cms=%%s
+    autocmd FileType matlab setl syntax=octave
+augroup end
+
+
