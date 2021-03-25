@@ -17,7 +17,7 @@ let g:startify_bookmarks = [
       \ {'d': '~/.config/dunst/dunstrc'},
       \ {'a': '~/.config/fish/conf.d/aliases.fish'},
       \ {'c': '~/.config/nvim/coc-settings.json'},
-      \ {'g': '~/.cfg/info/exclude'},
+      \ {'g': '~/.gitignore'},
       \ {'p': '~/.config/picom/picom.conf'},
       \ {'x': '~/.config/X11/xinitrc'},
       \ {'t': '~/.config/tmux/tmux.conf'},

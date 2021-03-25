@@ -85,6 +85,7 @@ Dropbox/
 # Other
 .config/nvim/autoload/
 credentials
+known_hosts2
 
 # Exceptions
 !.local/share/fonts/

@@ -4,7 +4,7 @@ function left() {
     for ((i = 0 ; i < $1 ; i++))
     do
         # sleep 0.005
-        xdotool key --clearmodifiers Left
+        xdotool key  Left
     done
 }
 
@@ -12,7 +12,7 @@ function right() {
     for ((i = 0 ; i < $1 ; i++))
     do
         # sleep 0.005
-        xdotool key --clearmodifiers Right
+        xdotool key  Right
     done
 }
 
@@ -20,7 +20,7 @@ function up() {
     for ((i = 0 ; i < $1 ; i++))
     do
         # sleep 0.005
-        xdotool key --clearmodifiers Up
+        xdotool key  Up
     done
 }
 
@@ -28,7 +28,7 @@ function down() {
     for ((i = 0 ; i < $1 ; i++))
     do
         # sleep 0.005
-        xdotool key --clearmodifiers Down
+        xdotool key  Down
     done
 }
 
@@ -42,7 +42,7 @@ function focus() {
 
 function text() {
     xsel -ib <<< "$1"
-    xdotool key --clearmodifiers Control+V
+    xdotool key  Control+V
 }
 
 function type_string() {
@@ -66,7 +66,7 @@ case $1 in
                 xdotool key space
                 ;;
             inline)
-                xdotool key --clearmodifiers Control+Shift+E
+                xdotool key  Control+Shift+E
                 sleep 0.2
                 xdotool key space
                 ;;

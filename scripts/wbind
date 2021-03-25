@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [ -z $1 ]
+then
+    echo "bind \cw 'cd $(pwd);redraw'" > $HOME/.config/fish/conf.d/work-binding.fish
+else
+    echo "bind \cw 'cd $1;redraw'" > $HOME/.config/fish/conf.d/work-binding.fish
+fi
+exec fish

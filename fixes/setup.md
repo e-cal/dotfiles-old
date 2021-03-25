@@ -69,10 +69,11 @@ exiftool (git@github.com:exiftool/exiftool.git)
 nikto (https://github.com/sullo/nikto)
 sqlmap (https://github.com/sqlmapproject/sqlmap.git)
 smbmap (git@github.com:ShawnDEvans/smbmap.git)
-pwncat (git@github.com:calebstewart/pwncat.git pwncat)
+pwncat (git@github.com:calebstewart/pwncat.git)
 impacket (git@github.com:SecureAuthCorp/impacket.git)
 metasploit
 wireshark-cli (or wireshark-qt)
+wfuzz (pip)
 
 
 

@@ -137,6 +137,11 @@ format = "[$symbol$version]($style) "
 symbol = "喝"
 format = "[$symbol$version]($style) "
 
+[ruby]
+symbol = " "
+format = "[$symbol$version]($style) "
+
+
 [package]
 disabled = true
 

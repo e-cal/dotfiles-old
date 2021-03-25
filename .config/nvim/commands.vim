@@ -1,5 +1,6 @@
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 command! -nargs=0 Mappings :edit $HOME/.config/nvim/mappings.vim
+command! -nargs=0 UltiSnipsDefaults :edit $HOME/.config/nvim/autoload/plugged/vim-snippets/UltiSnips/
 
 fun! TrimWhitespace()
     let l:save = winsaveview()

@@ -39,6 +39,7 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.DynamicProperty
 import XMonad.Hooks.SetWMName
 import XMonad.Hooks.InsertPosition
+import XMonad.Hooks.Focus
 
     -- Layouts
 import XMonad.Layout.Spiral
@@ -256,7 +257,6 @@ myKeys = [
     , ("M-n -", spawn "macro notion inverse")
     , ("M-n t", spawn "macro notion to")
     , ("M-n v", spawn "macro notion vector")
-    , ("<KP_Insert>", spawn "macro notion vector")
     , ("M-n l", spawn "macro notion lin-combo")
     , ("M-n i", spawn "macro notion inline")
     , ("<F9>", spawn "macro notion inline")
@@ -385,10 +385,17 @@ main = do
 --------------------------------------------------------------------------------
 -- Config
 --------------------------------------------------------------------------------
+fh = manageFocus $ composeOne
+        -- For activated windows.
+        [ liftQuery activated -?> keepWorkspace <+> keepFocus
+        -- For new windows.
+        , Just <$> switchFocus
+        ]
 myConfig = def
     { terminal           = myTerminal
     , layoutHook         = myLayoutHook
     , manageHook         = namedScratchpadManageHook myScratchPads
+        <+> fh
         <+> placeHook(smart(0.5, 0.5))
         <+> manageDocks
         <+> myManageHook
