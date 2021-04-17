@@ -6,7 +6,6 @@ nnoremap <silent> <leader> :<c-u>WhichKey '<Space>'<CR>
 vnoremap <silent> <leader> :<c-u>WhichKeyVisual '<Space>'<CR>
 let g:which_key_map =  {}
 
-
 " Reload settings
 nnoremap <M-r> :so $MYVIMRC <CR>
 
@@ -32,8 +31,8 @@ nnoremap <silent> <S-TAB> :bprevious<CR>
 noremap <C-p> :Files<CR>
 
 " Scrolling
-nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
+nnoremap <C-e> 3<C-e>
 
 " Tab selection
 vmap <Tab> >gv
@@ -54,3 +53,6 @@ source $HOME/.config/nvim/mappings/git.vim
 source $HOME/.config/nvim/mappings/coc.vim
 " source $HOME/.config/nvim/mappings/matlab.vim
 source $HOME/.config/nvim/mappings/leader.vim
+
+" disable bindings
+nnoremap Q <nop>

@@ -28,6 +28,7 @@ export NVM_DIR="$XDG_DATA_HOME"/nvm
 export MATLAB_LOG_DIR="$XDG_CACHE_HOME"/matlab/logs
 export VIRTUALFISH_HOME="$HOME"/.local/share/virtualenvs
 export WGETRC="$XDG_CONFIG_HOME"/wgetrc
+export CARGO_HOME="$XDG_DATA_HOME"/cargo
 
 # Other env variables
 export FZF_DEFAULT_COMMAND='rg -l ""'

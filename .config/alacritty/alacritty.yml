@@ -71,7 +71,8 @@ key_bindings:
     - { key: Home, mods: Shift, action: ScrollToTop,    mode: ~Alt }
     - { key: End, mods: Shift, action: ScrollToBottom, mode: ~Alt }
 
-    - { key: E, mods: Control, chars: "\x04" } # EOF
+    # - { key: E, mods: Control, chars: "\x04" } # EOF
+    - { key: Return, mods: Control, chars: "\x1b\x65" }
 
     - { key: Escape, mods: Alt, action: toggleViMode } # Vi mode
 

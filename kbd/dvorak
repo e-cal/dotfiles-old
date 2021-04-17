@@ -69,5 +69,6 @@ fn [com]>[w]
 [home]>[del]
 [end]>[home]
 [pup]>[end]
-{hk8}>{x1}{lwin-}{N}{lwin+}
-{prnt}>{x1}{lwin-}{lshift-}{S}{lshift+}{lwin+}
+{hk4}>{x1}{-lwin}{n}{+lwin}
+{hk8}>{x1}{-lwin}{n}{+lwin}{i}
+{prnt}>{x1}{-lwin}{-lshft}{s}{+lshft}{+lwin}

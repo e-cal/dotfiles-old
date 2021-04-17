@@ -39,7 +39,7 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.DynamicProperty
 import XMonad.Hooks.SetWMName
 import XMonad.Hooks.InsertPosition
-import XMonad.Hooks.Focus
+-- import XMonad.Hooks.Focus
 
     -- Layouts
 import XMonad.Layout.Spiral
@@ -385,17 +385,17 @@ main = do
 --------------------------------------------------------------------------------
 -- Config
 --------------------------------------------------------------------------------
-fh = manageFocus $ composeOne
-        -- For activated windows.
-        [ liftQuery activated -?> keepWorkspace <+> keepFocus
-        -- For new windows.
-        , Just <$> switchFocus
-        ]
+-- fh = manageFocus $ composeOne
+--         -- For activated windows.
+--         [ liftQuery activated -?> keepWorkspace <+> keepFocus
+--         -- For new windows.
+--         , Just <$> switchFocus
+--         ]
 myConfig = def
     { terminal           = myTerminal
     , layoutHook         = myLayoutHook
     , manageHook         = namedScratchpadManageHook myScratchPads
-        <+> fh
+--        <+> fh
         <+> placeHook(smart(0.5, 0.5))
         <+> manageDocks
         <+> myManageHook

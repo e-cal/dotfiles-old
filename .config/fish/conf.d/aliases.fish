@@ -2,7 +2,7 @@
 alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 alias configstat="config status -u"
 alias triangles="yes '△▽' | head -n (math --scale=0 (tput cols) / 2) | tr '\n' ',' | sed 's/,//g' | lolcat -F 0.03"
-alias clear="clear;triangles"
+alias clear="/bin/clear;triangles"
 alias vim=nvim
 alias v=nvim
 alias la="exa -la --color=always --group-directories-first"

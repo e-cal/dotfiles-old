@@ -1,4 +1,0 @@
-#!/bin/bash
-
-cp ~/scripts/kbd/main.txt "/run/media/ecal/FS PRO/layouts/layout1.txt"
-cp ~/scripts/kbd/dvorak_.txt "/run/media/ecal/FS PRO/layouts/layout2.txt"

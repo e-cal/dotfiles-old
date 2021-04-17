@@ -1,9 +1,0 @@
-[esc]>[caps]
-[caps]>[esc]
-[hk6]>[del]
-[del]>[pup]
-[home]>[del]
-[end]>[home]
-[pup]>[end]
-{hk8}>{x1}{lwin-}{N}{lwin+}
-{prnt}>{x1}{lwin-}{lshift-}{S}{lshift+}{lwin+}

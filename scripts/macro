@@ -42,7 +42,7 @@ function focus() {
 
 function text() {
     xsel -ib <<< "$1"
-    xdotool key  Control+V
+    xdotool key Control+V
 }
 
 function type_string() {

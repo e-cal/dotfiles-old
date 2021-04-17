@@ -86,11 +86,11 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
  " Make <c-space> do the above^
- inoremap <silent><expr> <c-space> pumvisible() ? coc#_select_confirm()
+ inoremap <silent><expr> <M-e> pumvisible() ? coc#_select_confirm()
                                \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Make <CR> just create a newline
-" inoremap <expr> <CR> pumvisible() ? "\<C-e><CR>" : "\<CR>"
+inoremap <expr> <CR> pumvisible() ? "\<C-e><CR>" : "\<CR>"
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.

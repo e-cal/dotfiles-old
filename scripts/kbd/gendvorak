@@ -1,4 +1,0 @@
-#!/bin/bash
-
-cp ~/scripts/kbd/dvorak.txt ~/scripts/kbd/dvorak_.txt
-cat ~/scripts/kbd/main.txt >> ~/scripts/kbd/dvorak_.txt

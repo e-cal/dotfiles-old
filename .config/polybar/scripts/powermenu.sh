@@ -31,9 +31,7 @@ case $chosen in
 	    sudo reboot
         ;;
     $suspend)
-        amixer set Master mute
-	    #betterlockscreen -l & 
-        echo impliment lock screen
+	    #betterlockscreen -l &
 	    sleep 0.5
         systemctl suspend
         ;;
