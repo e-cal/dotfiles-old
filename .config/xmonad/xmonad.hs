@@ -308,13 +308,13 @@ myKeys = [
     , ("M-<Left>", sendMessage (MoveLeft 20))
     , ("M-<Right>", sendMessage (MoveRight 20))
     , ("M-S-<Up>", sendMessage (IncreaseUp 20))
-    , ("M-S-<Down>", sendMessage (DecreaseDown 20))
+    , ("M-S-<Down>", sendMessage (IncreaseDown 20))
     , ("M-S-<Left>", sendMessage (IncreaseLeft 20))
-    , ("M-S-<Right>", sendMessage (DecreaseRight 20))
+    , ("M-S-<Right>", sendMessage (IncreaseRight 20))
     , ("M-M1-<Up>", sendMessage (DecreaseUp 20))
-    , ("M-M1-<Down>", sendMessage (IncreaseDown 20))
+    , ("M-M1-<Down>", sendMessage (DecreaseDown 20))
     , ("M-M1-<Left>", sendMessage (DecreaseLeft 20))
-    , ("M-M1-<Right>", sendMessage (IncreaseRight 20))
+    , ("M-M1-<Right>", sendMessage (DecreaseRight 20))
 
     -- Focus
     --, ("M-m", windows W.focusMaster) -- Focus master window

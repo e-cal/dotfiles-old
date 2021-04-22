@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =5
+let g:netrw_dirhist_5='/home/ecal/Dropbox/uni/2021W/CISC271/a4'
+let g:netrw_dirhist_4='/home/ecal/Dropbox/uni/2021W/CISC271/a3'
+let g:netrw_dirhist_3='/home/ecal/Dropbox/uni/2021W/CISC271/a2'
+let g:netrw_dirhist_2='/home/ecal/Dropbox/uni/2021W/CISC271/test4'
+let g:netrw_dirhist_1='/home/ecal/Dropbox/uni/2021W/CISC235/a3'
+let g:netrw_dirhist_0='/home/ecal/Dropbox/uni/2021W/CISC235'
+let g:netrw_dirhist_9='/home/ecal/Dropbox/uni/2021W'
+let g:netrw_dirhist_8='/home/ecal/Dropbox/uni/2021W/CISC271/a4'
+let g:netrw_dirhist_7='/home/ecal/Dropbox/uni/2021W/CISC271/a3'
+let g:netrw_dirhist_6='/home/ecal/.config/nvim/autoload/plugged/vim-snippets/UltiSnips'

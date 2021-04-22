@@ -69,6 +69,7 @@ Dropbox/
 .config/VSCodium
 .config/jupyter
 .config/nvim/undodir
+.config/nvim.old/undodir
 .config/google-keep-nativefier-d04d04
 .config/Bitwarden CLI/data.json
 .config/Debauchee/Barrier.conf

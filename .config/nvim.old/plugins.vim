@@ -35,8 +35,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'tpope/vim-surround'
     " Comment lines
     Plug 'tpope/vim-commentary'
-    " Markdown preview
-    Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
     " Debugging
     Plug 'puremourning/vimspector'
     " Maximizer
@@ -52,8 +50,11 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'honza/vim-snippets'
     " Indent lines
     Plug 'Yggdroot/indentLine'
+    " Markdown
+    Plug 'godlygeek/tabular'
+    Plug 'plasticboy/vim-markdown'
 
-    "Themes
+    " Themes
     Plug 'morhetz/gruvbox'
     Plug 'phanviet/vim-monokai-pro'
     Plug 'arcticicestudio/nord-vim'

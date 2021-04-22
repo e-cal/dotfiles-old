@@ -72,12 +72,12 @@ key_bindings:
     - { key: End, mods: Shift, action: ScrollToBottom, mode: ~Alt }
 
     # - { key: E, mods: Control, chars: "\x04" } # EOF
-    - { key: Return, mods: Control, chars: "\x1b\x65" }
+    # - { key: Return, mods: Control, chars: "\x1b\x65" }
 
-    - { key: Escape, mods: Alt, action: toggleViMode } # Vi mode
+    - { key: Escape, mods: Alt, action: toggleViMode } # M-Esc -> Vi mode
 
     # - { key: Tab, mods: Alt, chars: "\x1b\x5b\x31\x3b\x32\x50" } # f13
-    - { key: Tab, mods: Alt, chars: "\x14" } # f13
+    - { key: Tab, mods: Alt, chars: "\x14" } # M-TAB -> C-T
 
     # TMUX Keybindings
-    - { key: Space, mods: Control, chars: "\x02" } # tmux command prefix
+    - { key: Space, mods: Control, chars: "\x02" } # C-Space -> C-B
