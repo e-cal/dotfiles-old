@@ -4,5 +4,5 @@ function nvimsearch
     else
         set searchFrom "."
     end
-    v (find $searchFrom -type f | fzf --preview 'bat --theme=gruvbox --color=always {}')
+    v (find $searchFrom -type f | fzf --preview 'bat --theme=deus --color=always {}')
 end

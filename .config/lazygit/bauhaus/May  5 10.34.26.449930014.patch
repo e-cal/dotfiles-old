@@ -1,0 +1,8 @@
+--- a/setup.py
++++ b/setup.py
+@@ -57,3 +57,4 @@ setup(
+     packages=find_packages(exclude=['tests', 'tests.*']),
+     keywords='logic nnf sat constraints encodings',
+     include_package_data=True
++)
+\ No newline at end of file

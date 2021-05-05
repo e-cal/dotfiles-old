@@ -80,4 +80,4 @@ key_bindings:
     - { key: Tab, mods: Alt, chars: "\x14" } # M-TAB -> C-T
 
     # TMUX Keybindings
-    - { key: Space, mods: Control, chars: "\x02" } # C-Space -> C-B
+    # - { key: Space, mods: Control, chars: "\x02" } # C-Space -> C-B

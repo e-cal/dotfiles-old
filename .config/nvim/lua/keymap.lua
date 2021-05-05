@@ -1,37 +1,61 @@
--- ================================ LEADER =====================================
--- unmap space and set it as the leader key
-vim.api.nvim_set_keymap('n', '<Space>', '<NOP>', { noremap=true, silent=true })
-vim.g.mapleader = ' '
+local map = vim.api.nvim_set_keymap
 
--- quit
-vim.api.nvim_set_keymap('n', '<Leader>q', ':qa<CR>', { noremap=true, silent=true })
+-- ================================ GLOBAL ====================================
 
--- file explorer
-vim.api.nvim_set_keymap('n', '<Leader>e', ':NvimTreeToggle<CR>', { noremap=true, silent=true })
-
--- ================================ GLOBAL =====================================
-
--- ================================ NORMAL =====================================
-
+-- ================================ NORMAL ====================================
 -- Split navigation
-vim.api.nvim_set_keymap('n', '<M-h>', '<C-w>h', { silent=true })
-vim.api.nvim_set_keymap('n', '<M-j>', '<C-w>j', { silent=true })
-vim.api.nvim_set_keymap('n', '<M-k>', '<C-w>k', { silent=true })
-vim.api.nvim_set_keymap('n', '<M-l>', '<C-w>l', { silent=true })
+map('n', '<M-h>', '<C-w>h', {silent = true})
+map('n', '<M-j>', '<C-w>j', {silent = true})
+map('n', '<M-k>', '<C-w>k', {silent = true})
+map('n', '<M-l>', '<C-w>l', {silent = true})
 
 -- Buffer navigation
-vim.api.nvim_set_keymap('n', '<C-T>', ':bnext<CR>', { noremap=true, silent=true })
-vim.api.nvim_set_keymap('n', '<M-TAB>', ':bnext<CR>', { noremap=true, silent=true })
+map('n', '<C-T>', ':BufferNext<CR>', {noremap = true, silent = true})
+map('n', '<M-TAB>', ':BufferNext<CR>', {noremap = true, silent = true})
 
+-- File navigation
+map('n', '<C-y>', '3<C-y>', {noremap = true, silent = true})
+map('n', '<C-e>', '3<C-e>', {noremap = true, silent = true})
 
--- ================================ INSERT =====================================
+-- Resizing
+map('n', '<C-Up>', ':resize +2<CR>', {noremap = true, silent = true})
+map('n', '<C-Down>', ':resize -2<CR>', {noremap = true, silent = true})
+map('n', '<C-Right>', ':vert resize +2<CR>', {noremap = true, silent = true})
+map('n', '<C-Left>', ':vert resize -2<CR>', {noremap = true, silent = true})
 
--- ================================ VISUAL =====================================
+-- LSP
+map('n', 'K', ':Lspsaga hover_doc<CR>', {noremap = true, silent = true})
+map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>',
+    {noremap = true, silent = true})
+map('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>',
+    {noremap = true, silent = true})
+map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>',
+    {noremap = true, silent = true})
+map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>',
+    {noremap = true, silent = true})
+-- map('n', 'ca', ':Lspsaga code_action<CR>', { noremap=true, silent=true }) -- in whichkey
+map('n', '<C-p>', ':Lspsaga diagnostic_jump_prev<CR>',
+    {noremap = true, silent = true})
+map('n', '<C-n>', ':Lspsaga diagnostic_jump_next<CR>',
+    {noremap = true, silent = true})
+-- scroll down hover doc or scroll in definition preview
+map('n', '<Down>',
+    '<cmd>lua require(\'lspsaga.action\').smart_scroll_with_saga(1)<CR>',
+    {noremap = true, silent = true})
+-- scroll up hover doc
+map('n', '<Up>',
+    '<cmd>lua require(\'lspsaga.action\').smart_scroll_with_saga(-1)<CR>',
+    {noremap = true, silent = true})
 
+-- ================================ INSERT ====================================
+
+-- ================================ VISUAL ====================================
 -- Indenting
-vim.api.nvim_set_keymap('v', '<', '<gv', { noremap=true, silent=true })
-vim.api.nvim_set_keymap('v', '>', '>gv', { noremap=true, silent=true })
+map('v', '<', '<gv', {noremap = true, silent = true})
+map('v', '>', '>gv', {noremap = true, silent = true})
 
 -- Move line
-vim.api.nvim_set_keymap('v', 'K', ':m \'>-2<CR>gv-gv', { noremap=true, silent=true })
+map('v', 'K', ':m \'>-2<CR>gv-gv', {noremap = true, silent = true})
 
+-- ================================ UNMAP =====================================
+map('n', 'Q', '<NOP>', {noremap = true, silent = true})

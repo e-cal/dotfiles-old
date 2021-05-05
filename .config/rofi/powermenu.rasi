@@ -13,7 +13,7 @@
   /* General */
   icon-font: "Material Design Icons Desktop 18";
   text-font: "BreezeSans 18";
-  
+
   option-6-listview-spacing: 6px;
   menu-window-padding: 5px 5px;
   menu-element-padding: 6px 0 0px 8px;
@@ -23,10 +23,10 @@
   width: 50px;
   anchor: north east;
   location: north east;
-  x-offset: -9px;
+  x-offset: -14px;
   y-offset: 42px;
   border: 0px;
-  border-radius: 0px 0px 5px 5px;
+  border-radius: 0px 0px 0px 0px;
   background-color: @background;
 }
 

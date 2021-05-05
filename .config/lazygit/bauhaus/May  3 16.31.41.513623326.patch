@@ -1,0 +1,16 @@
+--- a/bauhaus/utils.py
++++ b/bauhaus/utils.py
+@@ -15,13 +15,12 @@ def compute_pairs(func) -> list:
+     compute_pairs : func
+         Function that accepts a list of Var objects.
+     """
+     def find_pairs(vars):
+         pairs = []
+         for v1 in vars:
+             for v2 in vars:
+                 if func(v1.name, v2.name):
+-                    pairs.append([v1,v2])
+         return pairs
+     return find_pairs
+ 
+ 

@@ -42,6 +42,7 @@ import XMonad.Hooks.InsertPosition
 -- import XMonad.Hooks.Focus
 
     -- Layouts
+import XMonad.Layout.Accordion
 import XMonad.Layout.Spiral
 import XMonad.Layout.Spacing
 import XMonad.Layout.NoBorders
@@ -120,6 +121,19 @@ tall    = renamed [Replace "Main"]
             $ ResizableTall 1 (3/100) (1/2) []
 full    = renamed [Replace "Fullscreen"]
             $ noBorders Full
+mirror  = renamed [Replace "Vertical"]
+			$ smartBorders
+			$ minimize . BW.boringWindows
+			$ mySpacing 5
+            $ Mirror
+			$ ResizableTall 1 (3/100) (60/100) []
+accordion = renamed [Replace "Accordion"]
+			$ Accordion
+spirals  = renamed [Replace "Spiral"]
+			$ smartBorders
+			$ minimize . BW.boringWindows
+			$ mySpacing 5
+			$ spiral (6/7)
 triple  = renamed [Replace "Columns"]
             $ subLayout [] (smartBorders Simplest)
             $ mySpacing 5
@@ -130,7 +144,11 @@ triple  = renamed [Replace "Columns"]
 myLayoutHook = avoidStruts $ windowArrange
                $ mkToggle (NBFULL ?? NOBORDERS ?? EOT) myLayout
                    where
-                       myLayout = tall ||| full -- ||| triple
+                       myLayout =   tall
+					   			||| full
+								||| mirror
+								||| accordion
+								||| spirals
 
 --------------------------------------------------------------------------------
 -- Manage Hook
@@ -146,6 +164,7 @@ myManageHook = composeAll
     , role      =? "pop-up"         --> doFloat
     , className =? "Slack"          --> doShift "3"
     , className =? "discord"        --> doShift "3"
+    , className =? "microsoft teams - preview" --> doShift "3"
     , className =? "Mailspring"     --> doShift "4"
     , className =? "barrier"        --> doShift "5"
     , manageDocks
