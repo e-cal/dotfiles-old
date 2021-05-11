@@ -79,6 +79,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/ecal/.local/share/nvim/site/pack/packer/start/dashboard-nvim"
   },
+  edge = {
+    loaded = true,
+    path = "/home/ecal/.local/share/nvim/site/pack/packer/start/edge"
+  },
   ["galaxyline.nvim"] = {
     loaded = true,
     path = "/home/ecal/.local/share/nvim/site/pack/packer/start/galaxyline.nvim"
@@ -96,14 +100,8 @@ _G.packer_plugins = {
     path = "/home/ecal/.local/share/nvim/site/pack/packer/start/markdown-preview.nvim"
   },
   ["nord-vim"] = {
-    loaded = false,
-    needs_bufread = false,
-    path = "/home/ecal/.local/share/nvim/site/pack/packer/opt/nord-vim"
-  },
-  ["nvcode-color-schemes.vim"] = {
-    loaded = false,
-    needs_bufread = false,
-    path = "/home/ecal/.local/share/nvim/site/pack/packer/opt/nvcode-color-schemes.vim"
+    loaded = true,
+    path = "/home/ecal/.local/share/nvim/site/pack/packer/start/nord-vim"
   },
   ["nvim-autopairs"] = {
     loaded = true,
@@ -129,6 +127,18 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/ecal/.local/share/nvim/site/pack/packer/start/nvim-dap"
   },
+  ["nvim-dap-python"] = {
+    loaded = true,
+    path = "/home/ecal/.local/share/nvim/site/pack/packer/start/nvim-dap-python"
+  },
+  ["nvim-dap-ui"] = {
+    loaded = true,
+    path = "/home/ecal/.local/share/nvim/site/pack/packer/start/nvim-dap-ui"
+  },
+  ["nvim-deus"] = {
+    loaded = true,
+    path = "/home/ecal/.local/share/nvim/site/pack/packer/start/nvim-deus"
+  },
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/home/ecal/.local/share/nvim/site/pack/packer/start/nvim-lspconfig"
@@ -149,6 +159,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/ecal/.local/share/nvim/site/pack/packer/start/nvim-treesitter"
   },
+  ["nvim-ts-autotag"] = {
+    loaded = true,
+    path = "/home/ecal/.local/share/nvim/site/pack/packer/start/nvim-ts-autotag"
+  },
   ["nvim-web-devicons"] = {
     loaded = true,
     path = "/home/ecal/.local/share/nvim/site/pack/packer/start/nvim-web-devicons"
@@ -164,6 +178,10 @@ _G.packer_plugins = {
   ["popup.nvim"] = {
     loaded = true,
     path = "/home/ecal/.local/share/nvim/site/pack/packer/start/popup.nvim"
+  },
+  sniprun = {
+    loaded = true,
+    path = "/home/ecal/.local/share/nvim/site/pack/packer/start/sniprun"
   },
   ["surround.nvim"] = {
     loaded = true,
@@ -185,15 +203,13 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/ecal/.local/share/nvim/site/pack/packer/start/ultisnips"
   },
-  ["vim-deus"] = {
-    loaded = false,
-    needs_bufread = false,
-    path = "/home/ecal/.local/share/nvim/site/pack/packer/opt/vim-deus"
+  ["vim-printer"] = {
+    loaded = true,
+    path = "/home/ecal/.local/share/nvim/site/pack/packer/start/vim-printer"
   },
   ["vim-two-firewatch"] = {
-    loaded = false,
-    needs_bufread = false,
-    path = "/home/ecal/.local/share/nvim/site/pack/packer/opt/vim-two-firewatch"
+    loaded = true,
+    path = "/home/ecal/.local/share/nvim/site/pack/packer/start/vim-two-firewatch"
   },
   ["which-key.nvim"] = {
     loaded = true,

@@ -31,11 +31,9 @@ Inspired by [LunarVim](https://github.com/ChristianChiarulli/LunarVim) and [TheP
 - [Installation](#install)
 - [Features](#features)
 - [Configuration](#config)
-- [Plugins](#plugins)
 - [Default Keymap](#keys)
 - [Colorschemes](#colors)
-- [Need Help?](#help)
-- [Todo](#todo)
+- [Plugins](#plugins)
 ---
 
 ## Installation <a name="install"></a>
@@ -50,9 +48,10 @@ Inspired by [LunarVim](https://github.com/ChristianChiarulli/LunarVim) and [TheP
     - Seems to be broken when installed with `:LspInstall`
     - I recommend installing with `go get github.com/mattn/efm-langserver` or
     `brew install efm-langserver` or `pacman -S efm-langserver`
+	- wsl2 requires some additional manual setup (environment variables)
 
 ## Features <a name="features"></a>
-- Almost entirely lua
+- Written and configured entirely in lua
 - Native LSP
 	- Completions, linting, formatting, snippets
     - Enable/disable auto-formatting for a filetype with `<leader>-l-F` or
@@ -73,6 +72,7 @@ to search for text in notes)
 - Improvement of life features: autopairs, strip end-of-line whitespace, better
 quickfix, sane keymappings, undo edits from previous sessions, and more...
 - Easily configurable and extensible - Make it your own!
+    - Or checkout the `ecal` branch to use my preferred settings
 
 ## Configuration <a name="config"></a>
 - General settings in `settings.lua`
@@ -81,51 +81,6 @@ quickfix, sane keymappings, undo edits from previous sessions, and more...
 	- `require` new configs in `init.lua`
 - Non-leader keymappings are defined in `lua/keymap.lua`
 - Leader keymappings
-
-
-## Plugins <a name="plugins"></a>
-**Plugin manager**
-- [packer](https://www.github.com/wbthomason/packer.nvim)
-
-**LSP**
-- [nvim-lspconfig](https://www.github.com/neovim/nvim-lspconfig)
-- [lspsaga](https://www.github.com/glepnir/lspsaga.nvim)
-- [nvim-lspinstall](https://www.github.com/kabouzeid/nvim-lspinstall)
-- [nvim-compe](https://www.github.com/hrsh7th/nvim-compe)
-- [ultisnips](https://www.github.com/SirVer/ultisnips)
-
-**Navigation**
-- [nvim-tree](https://www.github.com/kyazdani42/nvim-tree.lua)
-- [popup (dependency)](https://www.github.com/nvim-lua/popup.nvim)
-- [plenary (dependency)](https://www.github.com/nvim-lua/plenary.nvim)
-- [telescope](https://www.github.com/nvim-telescope/telescope.nvim)
-- [telescope-fzy-native](https://www.github.com/nvim-telescope/telescope-fzy-native.nvim)
-- [telescope-media-files](https://www.github.com/nvim-telescope/telescope-media-files.nvim)
-
-**Convenience**
-- [which-key](https://www.github.com/folke/which-key.nvim)
-- [nvim-autopairs](https://www.github.com/windwp/nvim-autopairs)
-- [nvim-comment](https://www.github.com/terrortylor/nvim-comment)
-- [nvim-bqf](https://www.github.com/kevinhwang91/nvim-bqf)
-- [markdown-preview](https://www.github.com/iamcco/markdown-preview.nvim)
-- [nvim-colorizer](https://www.github.com/norcalli/nvim-colorizer.lua)
-- [gitsigns](https://www.github.com/lewis6991/gitsigns.nvim)
-- [nvim-ts-autotag](https://www.github.com/windwp/nvim-ts-autotag)
-- [surround](https://www.github.com/blackCauldron7/surround.nvim)
-- [nvim-toggleterm](https://www.github.com/akinsho/nvim-toggleterm.lua)
-
-**Debuging**
-- [nvim-dap](https://www.github.com/mfussenegger/nvim-dap)
-
-**Theming**
-- [nvim-web-devicons](https://www.github.com/kyazdani42/nvim-web-devicons)
-- [galaxyline](https://www.github.com/glepnir/galaxyline.nvim)
-- [barbar](https://www.github.com/romgrk/barbar.nvim)
-- [nvim-treesitter](https://www.github.com/nvim-treesitter/nvim-treesitter)
-- [dashboard-nvim](https://www.github.com/glepnir/dashboard-nvim)
-- [vim-deus](https://www.github.com/ajmwagar/vim-deus)
-- [nord-vim](https://www.github.com/arcticicestudio/nord-vim)
-- [vim-two-firewatch](https://www.github.com/rakr/vim-two-firewatch)
 
 ## Default Keymap <a name="keys"></a>
 ```
@@ -168,25 +123,55 @@ If you can't find what you're looking for here, its probably in there
 You can try out the installed colorschemes with the keymap `<space>-t-c`. To
 make the change permanent, change it in `settings.lua`.
 
-Some themes may require some extra tweaking. The relevant files are
-`lua/colors.lua`, `lua/plugins/galaxyline.lua` and `lua/plugins/barbar.lua`.
+Some themes may require some extra tweaking to get things looking the way you
+want. The relevant files are `lua/colors.lua`, `lua/plugins/galaxyline.lua`
+and `lua/plugins/barbar.lua`.
 
-## Need Help? <a name="help"></a>
-- Check the plugin's readme or issues
-- Check old issues (remove `is:open`)
-- Check the help menu `:h thing-giving-me-problems`
-- Or open an issue and I'll take a look!
+If you add and tweak a colorscheme, put in a PR!
 
-## Todo <a name="todo"></a>
-Feel free to tackle something or submit a PR to add anything you think is
-missing!
-- [x] add snippets
-- [x] support terminal
-- [x] add floating lazygit
-- [x] support kite
-- [x] auto formatting
-- [x] add common lsps
-- [ ] xdg-open images from tree
-- [x] fix colors for firewatch colorscheme
-- [ ] fix colors for nord colorscheme
-- [ ] dap configuration
+## Plugins <a name="plugins"></a>
+**Plugin manager**
+- [packer](https://www.github.com/wbthomason/packer.nvim)
+
+**LSP**
+- [nvim-lspconfig](https://www.github.com/neovim/nvim-lspconfig)
+- [lspsaga](https://www.github.com/glepnir/lspsaga.nvim)
+- [nvim-lspinstall](https://www.github.com/kabouzeid/nvim-lspinstall)
+- [nvim-compe](https://www.github.com/hrsh7th/nvim-compe)
+- [ultisnips](https://www.github.com/SirVer/ultisnips)
+
+**Navigation**
+- [nvim-tree](https://www.github.com/kyazdani42/nvim-tree.lua)
+- [popup (dependency)](https://www.github.com/nvim-lua/popup.nvim)
+- [plenary (dependency)](https://www.github.com/nvim-lua/plenary.nvim)
+- [telescope](https://www.github.com/nvim-telescope/telescope.nvim)
+- [telescope-fzy-native](https://www.github.com/nvim-telescope/telescope-fzy-native.nvim)
+- [telescope-media-files](https://www.github.com/nvim-telescope/telescope-media-files.nvim)
+
+**Convenience**
+- [which-key](https://www.github.com/folke/which-key.nvim)
+- [nvim-autopairs](https://www.github.com/windwp/nvim-autopairs)
+- [nvim-comment](https://www.github.com/terrortylor/nvim-comment)
+- [nvim-bqf](https://www.github.com/kevinhwang91/nvim-bqf)
+- [markdown-preview](https://www.github.com/iamcco/markdown-preview.nvim)
+- [nvim-colorizer](https://www.github.com/norcalli/nvim-colorizer.lua)
+- [gitsigns](https://www.github.com/lewis6991/gitsigns.nvim)
+- [nvim-ts-autotag](https://www.github.com/windwp/nvim-ts-autotag)
+- [surround](https://www.github.com/blackCauldron7/surround.nvim)
+- [nvim-toggleterm](https://www.github.com/akinsho/nvim-toggleterm.lua)
+
+**Debuging**
+- [nvim-dap](https://www.github.com/mfussenegger/nvim-dap)
+- [nvim-dap-ui](https://www.github.com/rcarriga/nvim-dap-ui)
+- [nvim-dap-python](https://www.github.com/mfussenegger/nvim-dap-python)
+- [sniprun](https://www.github.com/michaelb/sniprun)
+
+**Theming**
+- [nvim-web-devicons](https://www.github.com/kyazdani42/nvim-web-devicons)
+- [galaxyline](https://www.github.com/glepnir/galaxyline.nvim)
+- [barbar](https://www.github.com/romgrk/barbar.nvim)
+- [nvim-treesitter](https://www.github.com/nvim-treesitter/nvim-treesitter)
+- [dashboard-nvim](https://www.github.com/glepnir/dashboard-nvim)
+- [vim-deus](https://www.github.com/ajmwagar/vim-deus)
+- [nord-vim](https://www.github.com/arcticicestudio/nord-vim)
+- [vim-two-firewatch](https://www.github.com/rakr/vim-two-firewatch)

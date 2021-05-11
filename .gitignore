@@ -82,6 +82,9 @@ Dropbox/
 .config/libreoffice
 .config/obs-studio
 .config/binwalk
+.config/obsidian
+.config/gatsby
+.config/nvim-old
 
 # Other
 .config/nvim/autoload/

@@ -40,3 +40,7 @@ export FZF_DEFAULT_COMMAND='rg -l ""'
 if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
   startx "$XDG_CONFIG_HOME"/X11/xinitrc
 fi
+
+export NVM_DIR="$HOME/.local/share/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

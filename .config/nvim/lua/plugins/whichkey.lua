@@ -42,7 +42,7 @@ wk.setup {
 vim.g.mapleader = ' '
 
 -- NORMAL mode
-local opts = {
+local nopts = {
     mode = "n",
     prefix = "<leader>",
     buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
@@ -51,8 +51,10 @@ local opts = {
     nowait = false -- use `nowait` when creating keymaps
 }
 
-local mappings = {
+local nmappings = {
     [' '] = 'which_key_ignore',
+    p = 'print var below',
+    P = 'print var above',
     f = {'<cmd>Telescope find_files<cr>', 'find files'},
     H = {'<cmd>Dashboard<cr>', 'home'},
     ['/'] = {'<cmd>CommentToggle<cr>', 'toggle comment'},
@@ -67,9 +69,9 @@ local mappings = {
     ['.'] = {'<cmd>luafile %<cr>', 'source file'},
     h = {'<cmd>sp<cr>', 'split below'},
     v = {'<cmd>vert sp<cr>', 'split right'},
-    p = {'<cmd>PasteImg<cr>', 'paste image'},
+    i = {'<cmd>PasteImg<cr>', 'paste image'},
     T = {'<cmd>ToggleTerm<cr>', 'toggle terminal'},
-    [':'] = {'<cmd>setlocal indentkeys-=<:><cr>', 'fix :'},
+    n = {'<cmd>enew<cr>', 'new buffer'},
 
     b = {
         name = '+buffer',
@@ -85,10 +87,18 @@ local mappings = {
         name = '+debug',
         b = {'<cmd>DebugToggleBreakpoint<cr>', 'toggle breakpoint'},
         c = {'<cmd>DebugContinue<cr>', 'continue'},
-        i = {'<cmd>DebugStepInto<cr>', 'step into'},
+        j = {'<cmd>DebugStepInto<cr>', 'step into'},
         o = {'<cmd>DebugStepOver<cr>', 'step over'},
-        r = {'<cmd>DebugToggleRepl<cr>', 'toggle repl'},
-        s = {'<cmd>DebugStart<cr>', 'start'}
+        O = {'<cmd>DebugStepOut<cr>', 'step out'},
+        k = {'<cmd>DebugStepBack<cr>', 'step back'},
+        t = {'<cmd>DebugToggleRepl<cr>', 'toggle repl'},
+        l = {'<cmd>DebugListBreakpoints<cr>', 'list breakpoints'},
+        f = {'<cmd>DebugFloatElement<cr>', 'float ui element'},
+        p = {
+            name = '+python',
+            m = {'<cmd>PythonTestMethod<cr>', 'test method'},
+            c = {'<cmd>PythonTestClass<cr>', 'test class'}
+        }
     },
 
     F = {
@@ -167,7 +177,8 @@ local mappings = {
         x = {'<cmd>cclose<cr>', 'close quickfix'},
         s = {'<cmd>Telescope lsp_document_symbols<cr>', 'document symbols'},
         S = {'<cmd>Telescope lsp_workspace_symbols<cr>', 'workspace symbols'},
-        R = {'<cmd>LspRestart<cr>', 'restart lsp'}
+        R = {'<cmd>LspRestart<cr>', 'restart lsp'},
+        i = {'<cmd>normal A  # type: ignore<cr>bbbbhhh', 'pyright ignore'}
     },
 
     m = {
@@ -179,16 +190,50 @@ local mappings = {
 
     w = {
         name = '+window',
-        ["<"] = {"<C-w><", "resize left"},
-        [">"] = {"<C-w>>", "resize right"},
-        ["-"] = {"<C-w>-", "resize down"},
-        ["+"] = {"<C-w>+", "resize height"},
-        ["="] = {"<C-w>=", "reset window"},
-        ["h"] = {"<cmd>split<cr>", "split horizontal"},
-        ["v"] = {"<cmd>vsplit<cr>", "split vertical"},
-        ["d"] = {"<cmd>close<cr>", "close split window"}
+        ['<'] = {'<C-w><', 'resize left'},
+        ['>'] = {'<C-w>>', 'resize right'},
+        ['-'] = {'<C-w>-', 'resize down'},
+        ['+'] = {'<C-w>+', 'resize height'},
+        ['='] = {'<C-w>=', 'reset window'},
+        h = {'<cmd>split<cr>', 'split horizontal'},
+        v = {'<cmd>vsplit<cr>', 'split vertical'},
+        d = {'<cmd>close<cr>', 'close split window'}
+    },
+
+    r = {
+        name = '+run',
+        r = {'<Plug>SnipRunOperator', 'run <movement>'},
+        l = {'<Plug>SnipRun', 'run line'},
+        a = {'<cmd>%SnipRun<cr>', 'run all'},
+        c = {'<Plug>SnipClose', 'clear output'},
+        x = {'<Plug>SnipReset', 'reset'},
+        d = {'<Plug>SnipReplMemoryClean', 'clear memory'},
+        i = {'<Plug>SnipInfo', 'info'}
     }
 
 }
 
-wk.register(mappings, opts)
+wk.register(nmappings, nopts)
+
+-- Visual mode
+local vopts = {
+    mode = "v",
+    prefix = "<leader>",
+    buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+    silent = true, -- use `silent` when creating keymaps
+    noremap = true, -- use `noremap` when creating keymaps
+    nowait = false -- use `nowait` when creating keymaps
+}
+
+local vmappings = {
+    r = {'<Plug>SnipRun', 'run selection'},
+
+    d = {
+        name = '+debug',
+        e = {'<cmd>DebugEvaluate<cr>', 'evaluate selected expression'},
+        s = {'<cmd>PythonDebugSelection<cr>', 'py debug selection'}
+    }
+
+}
+
+wk.register(vmappings, vopts)

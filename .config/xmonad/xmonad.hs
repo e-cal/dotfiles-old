@@ -11,7 +11,7 @@
 -- Imports
 --------------------------------------------------------------------------------
     -- Base
-import XMonad
+import XMonad hiding ( (|||) )
 import System.Exit
 import XMonad.ManageHook
 import qualified XMonad.StackSet as W
@@ -42,6 +42,9 @@ import XMonad.Hooks.InsertPosition
 -- import XMonad.Hooks.Focus
 
     -- Layouts
+import XMonad.Layout hiding ( (|||) )
+import XMonad.Layout.LayoutCombinators
+import XMonad.Layout.Named
 import XMonad.Layout.Accordion
 import XMonad.Layout.Spiral
 import XMonad.Layout.Spacing
@@ -113,42 +116,42 @@ mySpacing :: Integer -> l a -> XMonad.Layout.LayoutModifier.ModifiedLayout Spaci
 -- T B R L
 mySpacing i = spacingRaw True (Border i i i i) True (Border 0 i 0 i) True
 
-tall    = renamed [Replace "Main"]
+horizontal  = renamed [Replace "horizontal"]
             $ smartBorders
             $ minimize . BW.boringWindows
             $ mySpacing 5
         -- params: windows in master, increment on resize, proportion for master
             $ ResizableTall 1 (3/100) (1/2) []
-full    = renamed [Replace "Fullscreen"]
+full    = renamed [Replace "full"]
             $ noBorders Full
-mirror  = renamed [Replace "Vertical"]
+vertical  = renamed [Replace "vertical"]
 			$ smartBorders
 			$ minimize . BW.boringWindows
 			$ mySpacing 5
             $ Mirror
-			$ ResizableTall 1 (3/100) (60/100) []
+			$ ResizableTall 1 (3/100) (80/100) []
+
+-- Not using
 accordion = renamed [Replace "Accordion"]
 			$ Accordion
+triple  = renamed [Replace "Columns"]
+            $ subLayout [] (smartBorders Simplest)
+            $ mySpacing 5
+            $ minimize . BW.boringWindows
+            $ ThreeCol 1 (3/100) (3/7)
 spirals  = renamed [Replace "Spiral"]
 			$ smartBorders
 			$ minimize . BW.boringWindows
 			$ mySpacing 5
 			$ spiral (6/7)
-triple  = renamed [Replace "Columns"]
-            $ subLayout [] (smartBorders Simplest)
-            $ mySpacing 5
-            $ minimize . BW.boringWindows
-        -- params: windows in master, increment on resize, proportion for master
-            $ ThreeCol 1 (3/100) (3/7)
+
+myLayouts =
+	named "horizontal" horizontal |||
+	named "full" full |||
+	named "vertical" vertical
 
 myLayoutHook = avoidStruts $ windowArrange
-               $ mkToggle (NBFULL ?? NOBORDERS ?? EOT) myLayout
-                   where
-                       myLayout =   tall
-					   			||| full
-								||| mirror
-								||| accordion
-								||| spirals
+               $ mkToggle (NBFULL ?? NOBORDERS ?? EOT) myLayouts
 
 --------------------------------------------------------------------------------
 -- Manage Hook
@@ -302,8 +305,10 @@ myKeys = [
     , ("M-S-q", killAll) -- Kill all windows
 
     -- Layout
-    , ("M-<Space>", sendMessage NextLayout)
-    --, ("M-<Space>", sequence_[sendMessage (Toggle NBFULL), spawn "polybar-msg cmd toggle", sendMessage ToggleStruts]) -- Fullscreen
+    , ("M-<Space> n", sendMessage NextLayout)
+	, ("M-<Space> f", sendMessage $ JumpToLayout "full")
+	, ("M-<Space> h", sendMessage $ JumpToLayout "horizontal")
+	, ("M-<Space> v", sendMessage $ JumpToLayout "vertical")
     , ("M-b", spawn "polybar-msg cmd toggle" >> sendMessage ToggleStruts)
     , ("M-C-<Down>", sequence_[sendMessage DeArrange, withFocused $ windows . W.sink]) -- Tile Mode
     , ("M-S-h", sendMessage Shrink) -- Shrink horizontal
@@ -314,11 +319,6 @@ myKeys = [
     , ("M-.", sendMessage (IncMasterN (-1))) -- Remove a window from master area
     , ("M--", withFocused minimizeWindow) -- Minimize
     , ("M-=", withLastMinimized maximizeWindowAndFocus) -- Maximize
-
-
-    -- Resolution scripts
-    , ("M-M1-m", spawn "monitor-res")
-    , ("M-M1-l", spawn "laptop-res")
 
     -- Floating Layout
     , ("M-C-<Up>", sendMessage Arrange) -- Floating Mode

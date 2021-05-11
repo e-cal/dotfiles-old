@@ -1,8 +1,9 @@
 lastupdatecheck: 0
 recentrepos:
+- /home/ecal/projects/gatsby-tutorial
+- /home/ecal/.config/nvim
 - /home/ecal/projects/modelling-project-remaster
 - /home/ecal/projects/bauhaus
-- /home/ecal/.config/nvim
 - /home/ecal/projects/logical-path
 - /home/ecal/projects/nvim
-startuppopupversion: 3
+startuppopupversion: 5

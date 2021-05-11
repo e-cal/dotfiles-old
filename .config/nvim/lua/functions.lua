@@ -1,8 +1,7 @@
 local api = vim.api
 
 -- Trim whitespace
-api.nvim_exec(
-[[
+api.nvim_exec([[
 fun! TrimWhitespace()
     let l:save = winsaveview()
     keeppatterns %s/\s\+$//e
@@ -10,8 +9,8 @@ fun! TrimWhitespace()
 endfun
 ]], false)
 
-api.nvim_exec(
-[[
+-- Folds in markdown
+api.nvim_exec([[
 function! MarkdownLevel()
     if getline(v:lnum) =~ '^# .*$'
         return ">1"
@@ -36,39 +35,52 @@ endfunction
 ]], false)
 
 -- Paste images
-local paste_cmd = 'xclip -selection clipboard -t image/png -o > %s'
+local paste_cmd = Markdown.imagePasteCommand
 
-local create_dir = function (dir)
-	if vim.fn.isdirectory(dir) == 0 then
-		vim.fn.mkdir(dir, 'p')
-	end
+local create_dir = function(dir)
+    if vim.fn.isdirectory(dir) == 0 then vim.fn.mkdir(dir, 'p') end
 end
 
-local get_name = function ()
-	local index = 1
-	for output in io.popen('ls img'):lines() do
-		if output == 'image'..index..'.png' then
-			index = index + 1
-		else
-			break
-		end
-	end
-	return 'image'..index
+local get_name = function()
+    local index = 1
+    for output in io.popen('ls img'):lines() do
+        if output == 'image' .. index .. '.png' then
+            index = index + 1
+        else
+            break
+        end
+    end
+    return 'image' .. index
 end
 
-PasteImg = function ()
-	-- image
-	create_dir('img')
-	local name = get_name()
-	local path = 'img/' .. name .. '.png'
-	os.execute(string.format(paste_cmd, path))
+PasteImg = function()
+    create_dir(Markdown.imageDir)
+    local name = get_name()
+    local path = string.format(Markdown.imageDir .. '/%s.png', name)
+    os.execute(string.format(paste_cmd, path))
 
-	-- text
-    local template = '<img src="%s" width=600px />'
-	local pasted_txt = string.format(template, path)
-    vim.cmd("normal a"..pasted_txt)
+    local template
+    local size = Markdown.imageDefaultWidth
+    if Markdown.imagePasteSyntax == 'html' then
+        if size ~= nil then
+            template = '<img src="%s" width=' .. size .. 'px />'
+        else
+            template = '<img src="%s" />'
+        end
+    elseif Markdown.imagePasteSyntax == 'obsidian' then
+        if size ~= nil then
+            template = '![[%s|' .. size .. ']]'
+        else
+            template = '![[%s]]'
+        end
+    else
+        template = Markdown.imagePasteSyntax
+    end
+    local pasted_txt = string.format(template, path)
+    vim.cmd("normal a" .. pasted_txt)
 end
 
+Utils.make_command("PasteImg") -- need to be str
 api.nvim_command("command! PasteImg :lua PasteImg()")
 
 api.nvim_command("command! LspFormatting :lua vim.lsp.buf.formatting()")
