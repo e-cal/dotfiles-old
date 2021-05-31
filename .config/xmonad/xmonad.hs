@@ -121,7 +121,7 @@ horizontal  = renamed [Replace "horizontal"]
             $ minimize . BW.boringWindows
             $ mySpacing 5
         -- params: windows in master, increment on resize, proportion for master
-            $ ResizableTall 1 (3/100) (1/2) []
+            $ ResizableTall 1 (3/100) (55/100) []
 full    = renamed [Replace "full"]
             $ noBorders Full
 vertical  = renamed [Replace "vertical"]
@@ -129,7 +129,7 @@ vertical  = renamed [Replace "vertical"]
 			$ minimize . BW.boringWindows
 			$ mySpacing 5
             $ Mirror
-			$ ResizableTall 1 (3/100) (80/100) []
+			$ ResizableTall 1 (3/100) (75/100) []
 
 -- Not using
 accordion = renamed [Replace "Accordion"]

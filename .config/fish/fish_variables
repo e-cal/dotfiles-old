@@ -2,6 +2,7 @@
 # VERSION: 3.0
 SETUVAR --export BW_SESSION:Cx\x2bd4\x2b7MW1wJXhluhdrL9xZLnRlKlfNA/dyRmqNX49lT8zVwKRMRS2i/UaMCg2/Vps/vCTkEVvpKT3\x2bH2wwBGg\x3d\x3d
 SETUVAR --export EDITOR:/usr/bin/nvim
+SETUVAR --export KAGGLE_CONFIG_DIR:/home/ecal/projects/kaggle
 SETUVAR --export LC_ALL:en_US\x2eUTF\x2d8
 SETUVAR --export LC_CTYPE:en_US\x2eUTF\x2d8
 SETUVAR --export --path PATH:/home/ecal/scripts\x1e/usr/local/sbin\x1e/usr/local/bin\x1e/usr/bin\x1e/usr/bin/site_perl\x1e/usr/bin/vendor_perl\x1e/usr/bin/core_perl\x1e/var/lib/snapd/snap/bin

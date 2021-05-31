@@ -41,6 +41,8 @@ return require('packer').startup(function(use)
     use 'blackCauldron7/surround.nvim'
     use 'akinsho/nvim-toggleterm.lua'
     use 'windwp/nvim-ts-autotag'
+    use 'bfredl/nvim-ipy'
+    use {'kkoomen/vim-doge', run = ':call doge#install()'}
     -- Debugging
     use 'mfussenegger/nvim-dap'
     use 'rcarriga/nvim-dap-ui' -- temporary while nvim-dap lacks a built-in ui

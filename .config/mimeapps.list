@@ -1,6 +1,6 @@
 [Default Applications]
 x-scheme-handler/webcal=firefox.desktop
-x-scheme-handler/mailspring=mailspring.desktop
+x-scheme-handler/mailspring=Mailspring.desktop
 x-scheme-handler/kite=kite-copilot.desktop
 x-scheme-handler/msteams=teams.desktop
 application/vnd.oasis.opendocument.text=libreoffice-writer.desktop

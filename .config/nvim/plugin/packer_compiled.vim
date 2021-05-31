@@ -139,6 +139,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/ecal/.local/share/nvim/site/pack/packer/start/nvim-deus"
   },
+  ["nvim-ipy"] = {
+    loaded = true,
+    path = "/home/ecal/.local/share/nvim/site/pack/packer/start/nvim-ipy"
+  },
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/home/ecal/.local/share/nvim/site/pack/packer/start/nvim-lspconfig"
@@ -202,6 +206,10 @@ _G.packer_plugins = {
   ultisnips = {
     loaded = true,
     path = "/home/ecal/.local/share/nvim/site/pack/packer/start/ultisnips"
+  },
+  ["vim-doge"] = {
+    loaded = true,
+    path = "/home/ecal/.local/share/nvim/site/pack/packer/start/vim-doge"
   },
   ["vim-printer"] = {
     loaded = true,

@@ -72,6 +72,7 @@ local nmappings = {
     i = {'<cmd>PasteImg<cr>', 'paste image'},
     T = {'<cmd>ToggleTerm<cr>', 'toggle terminal'},
     n = {'<cmd>enew<cr>', 'new buffer'},
+    R = {'<cmd>e<cr>', 'reload buffer'},
 
     b = {
         name = '+buffer',
@@ -208,7 +209,18 @@ local nmappings = {
         c = {'<Plug>SnipClose', 'clear output'},
         x = {'<Plug>SnipReset', 'reset'},
         d = {'<Plug>SnipReplMemoryClean', 'clear memory'},
-        i = {'<Plug>SnipInfo', 'info'}
+        i = {'<Plug>SnipInfo', 'info'},
+        p = {
+            name = "+ipython",
+            p = {'<cmd>IPython<cr>', 'start kernel'},
+            r = {'<Plug>(IPy-RunOp)', 'run'},
+            c = {'<Plug>(IPy-RunCell)', 'run cell'},
+            a = {'<Plug>(IPy-RunAll)', 'run all'},
+            l = {'<Plug>(IPy-Run)', 'run line'},
+            i = {'<Plug>(IPy-WordObjInfo)', 'inspect'},
+            x = {'<Plug>(IPy-Interrupt)', 'interrupt kernel'},
+            q = {'<Plug>(IPy-Terminate)', 'terminate kernel'}
+        }
     }
 
 }
@@ -227,6 +239,7 @@ local vopts = {
 
 local vmappings = {
     r = {'<Plug>SnipRun', 'run selection'},
+    p = {'<Plug>(IPy-Run)', 'ipython run selection'},
 
     d = {
         name = '+debug',
