@@ -13,6 +13,8 @@
 # Home Directory
 .local
 .BurpSuite
+.fastai
+.pythonhist
 .john
 .cfg
 .cache
@@ -42,6 +44,7 @@ screenshots/
 change.txt
 tmp
 images
+scikit_learn_data
 
 # Directories
 projects/

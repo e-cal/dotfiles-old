@@ -59,6 +59,7 @@ import XMonad.Layout.MultiToggle
 import XMonad.Layout.MultiToggle.Instances
 import XMonad.Layout.Minimize
 import XMonad.Layout.ThreeColumns
+import XMonad.Layout.Column
 import qualified XMonad.Layout.BoringWindows as BW
 
 
@@ -128,8 +129,7 @@ vertical  = renamed [Replace "vertical"]
 			$ smartBorders
 			$ minimize . BW.boringWindows
 			$ mySpacing 5
-            $ Mirror
-			$ ResizableTall 1 (3/100) (75/100) []
+			$ Column 1.6
 
 -- Not using
 accordion = renamed [Replace "Accordion"]
@@ -343,6 +343,10 @@ myKeys = [
     , ("M-<Tab>", nextWS) -- Next workspace
     , ("M-S-<Tab>", shiftToNext >> nextWS) -- Move window to next workspace
     , ("M-C-<Tab>", shiftToPrev >> prevWS) -- Move window to prev workspace
+	-- , ("M-<F1>", windows $ W.greedyView "1")
+	-- , ("M-<F2>", windows $ W.greedyView "2")
+	-- , ("M-<F3>", windows $ W.greedyView "3")
+
 
     -- XMonad
     , ("C-M1-<Delete>", io (exitWith ExitSuccess)) -- Quit
@@ -350,18 +354,18 @@ myKeys = [
 
     -- Function Keys
     , ("<XF86AudioMute>", spawn "volume mute")
-    , ("M-<F1>", spawn "volume mute")
+    -- , ("M-<F1>", spawn "volume mute")
     , ("<XF86AudioLowerVolume>", spawn "volume down")
-    , ("M-<F2>", spawn "volume down")
+    -- , ("M-<F2>", spawn "volume down")
     , ("<XF86AudioRaiseVolume>", spawn "volume up")
-    , ("M-<F3>", spawn "volume up")
+    -- , ("M-<F3>", spawn "volume up")
 
     , ("<XF86AudioPrev>", spawn "playerctl previous")
-    , ("M-<F4>", spawn "playerctl previous")
+    -- , ("M-<F4>", spawn "playerctl previous")
     , ("<XF86AudioPlay>", spawn "playerctl play-pause")
-    , ("M-<F5>", spawn "playerctl play-pause")
+    -- , ("M-<F5>", spawn "playerctl play-pause")
     , ("<XF86AudioNext>", spawn "playerctl next")
-    , ("M-<F6>", spawn "playerctl next")
+    -- , ("M-<F6>", spawn "playerctl next")
 
     , ("<XF86MonBrightnessDown>", spawn "brightness down")
     , ("M-<F11>", spawn "brightness down")
@@ -369,6 +373,13 @@ myKeys = [
     , ("<XF86MonBrightnessUp>", spawn "brightness up")
     , ("M-<F12>", spawn "brightness up")
     , ("M-C-<F12>", spawn "brightness set 70")
+    ]
+	-- Change workspace with function keys
+	++
+    [ (otherModMasks ++ "M-" ++ key, action tag)
+        | (tag, key)  <- zip myWorkspaces (map (\x -> "<F" ++ show x ++ ">") [1..12])
+        , (otherModMasks, action) <- [ ("", windows . W.greedyView) -- or W.view
+                                     , ("S-", windows . W.shift)]
     ]
 
 myWindowNavigation = withWindowNavigationKeys ([
@@ -449,10 +460,8 @@ myConfig = def
 myLogHook :: D.Client -> PP
 myLogHook dbus = def
     { ppOutput = dbusOutput dbus
-    , ppHidden = noScratchPad
-    , ppSort = fmap (.namedScratchpadFilterOutWorkspace) $ ppSort def
-    } where
-        noScratchPad ws = if ws == "NSP" then "" else ws
+    , ppSort = fmap (.namedScratchpadFilterOutWorkspace) getSortByTag
+    }
 
 dbusOutput :: D.Client -> String -> IO ()
 dbusOutput dbus str = do
