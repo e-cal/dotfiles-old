@@ -30,6 +30,7 @@ export VIRTUALFISH_HOME="$HOME"/.local/share/virtualenvs
 export WGETRC="$XDG_CONFIG_HOME"/wgetrc
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
 export KAGGLE_CONFIG_DIR="$HOME"/projects/kaggle
+export npm_config_nodedir="$XDG_DATA_HOME"/node
 
 # Other env variables
 export FZF_DEFAULT_COMMAND='rg -l ""'

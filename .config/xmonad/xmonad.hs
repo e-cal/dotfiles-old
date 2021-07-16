@@ -318,7 +318,7 @@ myKeys = [
     , ("M-,", sendMessage (IncMasterN 1)) -- Add a window to master area
     , ("M-.", sendMessage (IncMasterN (-1))) -- Remove a window from master area
     , ("M--", withFocused minimizeWindow) -- Minimize
-    , ("M-=", withLastMinimized maximizeWindowAndFocus) -- Maximize
+    , ("M-+", withLastMinimized maximizeWindowAndFocus) -- Maximize
 
     -- Floating Layout
     , ("M-C-<Up>", sendMessage Arrange) -- Floating Mode

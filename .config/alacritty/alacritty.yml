@@ -61,10 +61,10 @@ key_bindings:
     - { key: Key0, mods: Control, action: ResetFontSize }
     # - { key: Equals, mods: Control, action: IncreaseFontSize }
     - { key: Equals, mods: Control, action: ReceiveChar }
-    # - { key: Plus, mods: Control, action: IncreaseFontSize }
-    - { key: Plus, mods: Control, action: ReceiveChar }
-    # - { key: Minus, mods: Control, action: DecreaseFontSize }
-    - { key: Minus, mods: Control, action: ReceiveChar }
+    - { key: Plus, mods: Control, action: IncreaseFontSize }
+    # - { key: Plus, mods: Control, action: ReceiveChar }
+    - { key: Minus, mods: Control, action: DecreaseFontSize }
+    # - { key: Minus, mods: Control, action: ReceiveChar }
 
     - { key: Paste, action: Paste }
     - { key: Copy, action: Copy }
