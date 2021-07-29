@@ -13,6 +13,8 @@ scrolling:
 
 selection:
     save_to_clipboard: true
+    background: "#EEFFFF"
+    text: "#EEFFFF"
 
 mouse:
     hide_when_typing: true
@@ -28,7 +30,6 @@ font:
 special:
     background: "#212121"
     foreground: "#EEFFFF"
-    cursor: "#EEFFFF"
 
 colors:
     color0: "#212121"
@@ -49,8 +50,12 @@ colors:
     color15: "#FFFFFF"
 
     cursor:
-        cursor: "#E0E0E0"
+        cursor: "#BEC2C5"
         text: "#212121"
+
+    selection:
+        text: "#EEFFFF"
+        background: "#EEFFFF"
 
 # Key bindings
 

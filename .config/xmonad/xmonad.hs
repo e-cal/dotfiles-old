@@ -105,7 +105,7 @@ focusMouse = True
 -- Workspaces
 --------------------------------------------------------------------------------
 myExtraWorkspaces = ["NSP"]
-myWorkspaces = map show [1..5] ++ myExtraWorkspaces
+myWorkspaces = map show [1..6] ++ myExtraWorkspaces
 
 getSortByIndexNoNSP = fmap (. filter (\(W.Workspace tag _ _) -> not (tag `elem` myExtraWorkspaces))) getSortByIndex
 
@@ -164,16 +164,18 @@ myManageHook = composeAll
     , className =? "feh"            --> doFloat
     , className =? "Gpick"          --> doFloat
     , className =? "MATLAB R2020b - academic use" --> doFloat
-    , role      =? "pop-up"         --> doFloat
-    , className =? "Slack"          --> doShift "3"
-    , className =? "discord"        --> doShift "3"
-    , className =? "microsoft teams - preview" --> doShift "3"
-    , className =? "Mailspring"     --> doShift "4"
+    , role      =? "pop-up"         --> doFloat -- most popups
+    , role      =? "AlarmWindow"    --> doFloat -- thunderbird calendar
+    , className =? "Slack"          --> doShift "4"
+    , className =? "discord"        --> doShift "4"
+    , className =? "Microsoft Teams - Preview" --> doShift "4"
+    , className =? "Thunderbird"    --> doShift "5"
     , className =? "barrier"        --> doShift "5"
     , manageDocks
     ]
   where
     role = stringProperty "WM_WINDOW_ROLE"
+
 
 --------------------------------------------------------------------------------
 -- Startup Hook
@@ -255,7 +257,7 @@ myKeys = [
     , ("M-<Esc> <Return>", spawn "$HOME/.config/polybar/scripts/powermenu.sh") -- Powermenu
     , ("M-S-s", spawn "flameshot gui") -- Screenshot GUI
     , ("M1-S-s", spawn "flameshot full -p ~/screenshots") -- Screenshot
-    , ("M-S-m", spawn "mailspring")
+    , ("M-S-m", spawn "thunderbird")
     , ("M-t", spawn "teams")
     , ("M-S-t", spawn "slack")
     , ("M-S-n", spawn "notion")
@@ -439,9 +441,7 @@ myConfig = def
         -- <+> fullscreenEventHook
     -- Move Spotify to workspace 5
         <+> dynamicPropertyChange "WM_NAME"
-            (className =? "Spotify" --> doShift "5")
-        <+> dynamicPropertyChange "WM_NAME"
-            (className =? "microsoft teams - preview" --> doShift "3")
+            (className =? "Spotify" --> doShift "6")
     , startupHook        = myStartupHook
     , focusFollowsMouse  = focusMouse
     , clickJustFocuses   = False

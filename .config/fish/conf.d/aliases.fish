@@ -4,7 +4,7 @@ alias configstat="config status -u"
 alias triangles="yes '△▽' | head -n (math --scale=0 (tput cols) / 2) | tr '\n' ',' | sed 's/,//g' | lolcat -F 0.03"
 alias clear="/bin/clear;triangles"
 alias vim=nvim
-alias v=nvim
+alias v="nvim_temp"
 alias la="exa -la --color=always --group-directories-first"
 alias battery="acpi"
 alias bat-stat="sudo tlp-stat"

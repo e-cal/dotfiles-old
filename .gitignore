@@ -11,6 +11,7 @@
 # ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀        ▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀         ▀  ▀▀▀▀▀▀▀▀▀▀▀
 
 # Home Directory
+.thunderbird
 .local
 .BurpSuite
 .fastai
@@ -88,6 +89,7 @@ Dropbox/
 .config/obsidian
 .config/gatsby
 .config/nvim-old
+.config/lazygit
 
 # Other
 .config/nvim/autoload/

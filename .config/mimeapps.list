@@ -14,6 +14,22 @@ image/png=eog.desktop
 text/plain=nvim.desktop
 text/html=nvim.desktop
 text/markdown=nvim.desktop
+x-scheme-handler/mailto=userapp-Thunderbird-OA7360.desktop
+message/rfc822=userapp-Thunderbird-OA7360.desktop
+x-scheme-handler/news=userapp-Thunderbird-BFUM60.desktop
+x-scheme-handler/snews=userapp-Thunderbird-BFUM60.desktop
+x-scheme-handler/nntp=userapp-Thunderbird-BFUM60.desktop
+x-scheme-handler/feed=userapp-Thunderbird-X12L60.desktop
+application/rss+xml=userapp-Thunderbird-X12L60.desktop
+application/x-extension-rss=userapp-Thunderbird-X12L60.desktop
 
 [Added Associations]
 application/pdf=org.pwmt.zathura.desktop;
+x-scheme-handler/mailto=userapp-Thunderbird-OA7360.desktop;
+message/rfc822=userapp-Thunderbird-OA7360.desktop;
+x-scheme-handler/news=userapp-Thunderbird-BFUM60.desktop;
+x-scheme-handler/snews=userapp-Thunderbird-BFUM60.desktop;
+x-scheme-handler/nntp=userapp-Thunderbird-BFUM60.desktop;
+x-scheme-handler/feed=userapp-Thunderbird-X12L60.desktop;
+application/rss+xml=userapp-Thunderbird-X12L60.desktop;
+application/x-extension-rss=userapp-Thunderbird-X12L60.desktop;

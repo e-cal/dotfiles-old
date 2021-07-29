@@ -28,6 +28,7 @@ require('lsp.efm')
 
 -- Plugin configs
 require('plugins.autopairs')
+require('plugins.barbar')
 require('plugins.colorizer')
 require('plugins.comment')
 require('plugins.compe')

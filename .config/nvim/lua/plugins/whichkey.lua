@@ -39,7 +39,7 @@ wk.setup {
 }
 
 -- vim.api.nvim_set_keymap('n', '<Space>', '<NOP>', {noremap = true, silent = true})
-vim.g.mapleader = ' '
+vim.g.mapleader = LeaderKey
 
 -- NORMAL mode
 local nopts = {
@@ -80,7 +80,8 @@ local nmappings = {
         ['>'] = {'<cmd>BufferMoveNext<cr>', 'move right'},
         ['<'] = {'<cmd>BufferMovePrevious<cr>', 'move left'},
         b = {'<cmd>BufferPick<cr>', 'pick buffer'},
-        c = {'<cmd>BufferClose<cr>', 'close buffer'},
+        x = {'<cmd>BufferClose<cr>', 'close buffer'},
+        c = {'<cmd>BufferCloseAllButCurrent<cr>', 'close all other buffers'},
         n = {'<cmd>BufferNext<cr>', 'next buffer'},
         p = {'<cmd>BufferPrevious<cr>', 'prev buffer'},
         t = {
@@ -211,7 +212,9 @@ local nmappings = {
         ['='] = {'<C-w>=', 'reset window'},
         h = {'<cmd>split<cr>', 'split horizontal'},
         v = {'<cmd>vsplit<cr>', 'split vertical'},
-        d = {'<cmd>close<cr>', 'close split window'}
+        d = {'<cmd>close<cr>', 'close split window'},
+        j = {'<C-w>J', 'move to bottom'},
+        H = {'<C-w>J<C-w>k<C-w>H<C-w>l<C-w>j', 'move under'}
     },
 
     r = {
