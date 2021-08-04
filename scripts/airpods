@@ -15,9 +15,15 @@ else
 		connect)
 			bluetoothctl connect E4:90:FD:90:2B:52
 			;;
+        c)
+            airpods connect
+            ;;
 		disconnect)
 			bluetoothctl disconnect E4:90:FD:90:2B:52
 			;;
+        d)
+            airpods disconnect
+            ;;
 	esac
 fi
 

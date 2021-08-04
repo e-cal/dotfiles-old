@@ -1,1 +1,1 @@
-bind \cw 'cd /home/ecal/Dropbox/education/planning;redraw'
+bind \cw 'cd /home/ecal/projects/macq;redraw'

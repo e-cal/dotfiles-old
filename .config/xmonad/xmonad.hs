@@ -242,7 +242,7 @@ myKeys = [
     ("M-<Return>", spawn myTerminal) -- Terminal
     , ("M-S-<Return>", spawn "rofi -show drun -config $HOME/.config/rofi/main.rasi") -- Run Prompt
     , ("M-f", spawn "nemo") -- files
-    , ("M-c", spawn "firefox -P ecal") -- Firefox
+    , ("M-c", spawn "firefox -P default-release") -- Firefox
     , ("M-g", spawn "firefox https://github.com") -- Github
     , ("M-d", spawn "firefox https://drive.google.com/drive/my-drive") -- Google Drive
     , ("M-S-c", spawn "firefox https://calendar.google.com") -- Calendar

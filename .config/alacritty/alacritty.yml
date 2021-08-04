@@ -17,8 +17,12 @@ selection:
 mouse:
     hide_when_typing: true
 
+cursor:
+  style:
+    blinking: Off
+
 font:
-    size: 14.0
+    size: 11.0
     offset:
         y: 1
     normal:

@@ -15,14 +15,13 @@ end
 local _global = {
     {'BufWritePre', '*', ':call TrimWhitespace()'}, {
         'BufWinEnter', '*',
-        'setlocal formatoptions-=c formatoptions-=r formatoptions-=o'
-    },
-    {
+        'setlocal formatoptions-=c formatoptions-=r formatoptions-=o formatoptions-=t'
+    }, {
         'BufRead', '*',
-        'setlocal formatoptions-=c formatoptions-=r formatoptions-=o'
+        'setlocal formatoptions-=c formatoptions-=r formatoptions-=o formatoptions-=t'
     }, {
         'BufNewFile', '*',
-        'setlocal formatoptions-=c formatoptions-=r formatoptions-=o'
+        'setlocal formatoptions-=c formatoptions-=r formatoptions-=o formatoptions-=t'
     }
 }
 
@@ -43,13 +42,17 @@ augroups({
         }, {
             'FileType', 'dashboard',
             'set showtabline=0 | autocmd BufLeave <buffer> set showtabline=2'
-        }, {'FileType', 'dashboard', 'nnoremap <silent> <buffer> q :q<CR>'}
+        }, {'FileType', 'dashboard', 'nnoremap <silent> <buffer> q :q<CR>'}, {
+            'FileType', 'dashboard',
+            'call timer_start(50, { tid -> execute("IndentBlanklineDisable")})'
+        }
     },
     _markdown = {
         {
             'FileType', 'markdown',
             'setlocal spell foldexpr=MarkdownLevel() foldmethod=expr nofoldenable'
-        }
+        }, {'FileType', 'markdown', 'syntax match markdownIgnore "\\v\\w_\\w"'}
+
     },
     _python = {
         -- Don't mess up my indents

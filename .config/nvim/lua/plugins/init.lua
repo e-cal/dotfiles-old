@@ -38,17 +38,17 @@ return require('packer').startup(function(use)
     use {'iamcco/markdown-preview.nvim', run = ':call mkdp#util#install()'}
     use 'norcalli/nvim-colorizer.lua'
     use 'lewis6991/gitsigns.nvim'
-    use 'blackCauldron7/surround.nvim'
+    use 'tpope/vim-surround'
     use 'akinsho/nvim-toggleterm.lua'
     use 'windwp/nvim-ts-autotag'
     use 'bfredl/nvim-ipy'
     use {'kkoomen/vim-doge', run = ':call doge#install()'}
+    use 'lukas-reineke/indent-blankline.nvim'
     -- Debugging
     use 'mfussenegger/nvim-dap'
     use 'rcarriga/nvim-dap-ui' -- temporary while nvim-dap lacks a built-in ui
     use 'mfussenegger/nvim-dap-python'
     use {'michaelb/sniprun', run = 'bash ./install.sh'}
-    use 'meain/vim-printer'
     -- Theming
     use 'kyazdani42/nvim-web-devicons'
     use 'glepnir/galaxyline.nvim'

@@ -23,14 +23,17 @@ function notification() {
 case $1 in
   up)
     notification 1
-    sudo ddcutil setvcp 10 + 10
+    xbacklight -inc 2
+    # sudo ddcutil setvcp 10 + 10
+
     ;;
   down)
     notification -1
-    sudo ddcutil setvcp 10 - 10
+    xbacklight -dec 2
+    # sudo ddcutil setvcp 10 - 10
     ;;
   set)
-    sudo ddcutil setvcp 10 $2
+    # sudo ddcutil setvcp 10 $2
     notification
     ;;
 esac

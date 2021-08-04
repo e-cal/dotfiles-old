@@ -39,7 +39,7 @@ wk.setup {
 }
 
 -- vim.api.nvim_set_keymap('n', '<Space>', '<NOP>', {noremap = true, silent = true})
-vim.g.mapleader = ' '
+vim.g.mapleader = LeaderKey
 
 -- NORMAL mode
 local nopts = {
@@ -53,9 +53,8 @@ local nopts = {
 
 local nmappings = {
     [' '] = 'which_key_ignore',
-    p = 'print var below',
-    P = 'print var above',
     f = {'<cmd>Telescope find_files<cr>', 'find files'},
+    p = {'<cmd>Telescope find_files<cr>', 'find files'},
     H = {'<cmd>Dashboard<cr>', 'home'},
     ['/'] = {'<cmd>CommentToggle<cr>', 'toggle comment'},
     ['?'] = {'<cmd>NvimTreeFindFile<cr>', 'find current file'},
@@ -66,22 +65,40 @@ local nmappings = {
     Q = {'<cmd>qa!<cr>', 'force quit'},
     W = {'<cmd>close<cr>', 'close window'},
     x = {'<cmd>BufferClose<cr>', 'close buffer'},
+    X = {'<cmd>BufferClose!<cr>', 'close buffer'},
     ['.'] = {'<cmd>luafile %<cr>', 'source file'},
     h = {'<cmd>sp<cr>', 'split below'},
     v = {'<cmd>vert sp<cr>', 'split right'},
     i = {'<cmd>PasteImg<cr>', 'paste image'},
     T = {'<cmd>ToggleTerm<cr>', 'toggle terminal'},
-    n = {'<cmd>enew<cr>', 'new buffer'},
+    N = {'<cmd>enew<cr>', 'new buffer'},
     R = {'<cmd>e<cr>', 'reload buffer'},
+    I = {'<cmd>IndentBlanklineToggle<cr>', 'toggle indent lines'},
+    -- Quick surround
+    ['"'] = {'ciw"<C-r>""<esc>', '""'},
+    ["'"] = {"ciw'<C-r>\"'<esc>", "''"},
+    ['`'] = {'ciw`<C-r>"`<esc>', '``'},
+    [')'] = {'ciw(<C-r>")<esc>', '()'},
+    ['}'] = {'ciw{<C-r>"}<esc>', '{}'},
+    [']'] = {'ciw[<C-r>"]<esc>', '[]'},
 
     b = {
         name = '+buffer',
         ['>'] = {'<cmd>BufferMoveNext<cr>', 'move right'},
         ['<'] = {'<cmd>BufferMovePrevious<cr>', 'move left'},
         b = {'<cmd>BufferPick<cr>', 'pick buffer'},
-        c = {'<cmd>BufferClose<cr>', 'close buffer'},
+        x = {'<cmd>BufferClose<cr>', 'close buffer'},
+        c = {'<cmd>BufferCloseAllButCurrent<cr>', 'close all other buffers'},
         n = {'<cmd>BufferNext<cr>', 'next buffer'},
-        p = {'<cmd>BufferPrevious<cr>', 'prev buffer'}
+        p = {'<cmd>BufferPrevious<cr>', 'prev buffer'},
+        t = {
+            name = '+tab',
+            t = {'<cmd>tabnew<cr>', 'new tab'},
+            c = {'<cmd>tabclose<cr>', 'close tab'},
+            n = {'<cmd>tabn<cr>', 'next tab'},
+            p = {'<cmd>tabp<cr>', 'prev tab'},
+            l = {'<cmd>tabs<cr>', 'list tabs'}
+        }
     },
 
     d = {
@@ -127,15 +144,19 @@ local nmappings = {
         b = {'<cmd>Telescope buffers<cr>', 'buffers'},
         f = {'<cmd>Telescope find_files<cr>', 'files'},
         h = {'<cmd>Telescope command_history<cr>', 'cmd history'},
-        p = {'<cmd>Telescope media_files<cr>', 'media'},
+        i = {'<cmd>Telescope media_files<cr>', 'media'},
         m = {'<cmd>Telescope marks<cr>', 'marks'},
         M = {'<cmd>Telescope man_pages<cr>', 'manuals'},
         o = {'<cmd>Telescope vim_options<cr>', 'options'},
-        t = {'<cmd>Telescope live_grep<cr>', 'text'},
-        s = {'<cmd>Telescope grep_string<cr>', 'selected string'},
+        t = {
+            '<cmd>Telescope grep_string search="" only_sort_text=true<cr>',
+            'text'
+        },
+        T = {'<cmd>Telescope live_grep<cr>', 'exact text'},
+        s = {'<cmd>Telescope grep_string<cr>', 'selection'},
         r = {'<cmd>Telescope oldfiles<cr>', 'recents'},
-        R = {'<cmd>Telescope registers<cr>', 'registers'},
-        w = {'<cmd>Telescope file_browser<cr>', 'fuzzy find'},
+        p = {'<cmd>Telescope registers<cr>', 'registers'},
+        e = {'<cmd>Telescope file_browser<cr>', 'fuzzy explorer'},
         c = {'<cmd>Telescope colorscheme<cr>', 'colorschemes'}
     },
 
@@ -198,7 +219,9 @@ local nmappings = {
         ['='] = {'<C-w>=', 'reset window'},
         h = {'<cmd>split<cr>', 'split horizontal'},
         v = {'<cmd>vsplit<cr>', 'split vertical'},
-        d = {'<cmd>close<cr>', 'close split window'}
+        d = {'<cmd>close<cr>', 'close split window'},
+        j = {'<C-w>J', 'move to bottom'},
+        H = {'<C-w>J<C-w>k<C-w>H<C-w>l<C-w>j', 'move under'}
     },
 
     r = {
@@ -221,6 +244,12 @@ local nmappings = {
             x = {'<Plug>(IPy-Interrupt)', 'interrupt kernel'},
             q = {'<Plug>(IPy-Terminate)', 'terminate kernel'}
         }
+    },
+
+    n = {
+        name = '+notebook',
+        c = {'<cmd>norm i# %%<cr>o', 'code cell'},
+        m = {'<cmd>norm i# %% [markdown]<cr>o# ', 'markdown cell'}
     }
 
 }
